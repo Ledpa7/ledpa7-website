@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'LINE_Seed_Sans_KR';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2403-2@1.0/LINE_Seed_Sans_KR.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --cursor-size: 24px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: none !important;
+}
+
+@media (max-width: 768px) {
+  * {
+    cursor: auto !important;
+  }
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #000000;
+  overflow-x: hidden;
+  font-family: 'LINE_Seed_Sans_KR', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.te-item {
+  position: relative;
+  background: #FFFFFF;
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: opacity 0.2s;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+}
+
+.te-item:hover {
+  opacity: 1;
+}
+
+.body-font {
+  font-family: 'LINE_Seed_Sans_KR', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
