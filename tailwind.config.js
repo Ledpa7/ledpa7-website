@@ -7,7 +7,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['"LINE Seed Sans KR"', '"Noto Sans KR"', 'Inter', 'Helvetica', 'Arial', 'sans-serif'],
+                sans: ['"LINE Seed Sans KR"', '"Noto Sans KR"', 'sans-serif'],
                 line: ['"LINE Seed Sans KR"', 'sans-serif'],
                 noto: ['"Noto Sans KR"', 'sans-serif'],
                 mono: ['JetBrains Mono', 'IBM Plex Mono', 'monospace'],
