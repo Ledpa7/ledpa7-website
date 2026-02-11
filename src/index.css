@@ -1,8 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap&font-display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* THE MOST STABLE LINE SEED LOADING */
+@font-face {
+  font-family: 'line-seed';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2403-2@1.0/LINE_Seed_Sans_KR.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'line-seed';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2403-2@1.0/LINE_Seed_Sans_KR.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
 
 :root {
   --cursor-size: 24px;
@@ -25,7 +40,7 @@ body {
   background-color: #FFFFFF;
   color: #000000;
   overflow-x: hidden;
-  font-family: 'LINE Seed Sans KR', sans-serif;
+  font-family: 'line-seed', 'LINE Seed Sans estate', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -47,7 +62,7 @@ body {
 }
 
 .body-font {
-  font-family: 'LINE Seed Sans KR', sans-serif;
+  font-family: 'line-seed', sans-serif;
 }
 
 ::-webkit-scrollbar {
