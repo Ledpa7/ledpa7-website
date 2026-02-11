@@ -1,7 +1,7 @@
 import React from 'react';
 import { Cursor } from '../components/Cursor';
 import { VerticalNav } from '../components/VerticalNav';
-import { ShoppingCart, Menu, X } from 'lucide-react';
+import { ShoppingCart, Menu, X, Instagram } from 'lucide-react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 
 interface MainLayoutProps {
@@ -77,6 +77,27 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </div>
             </motion.header>
 
+            {/* Bottom Right Floating Instagram Button (Only when menu is open) */}
+            <AnimatePresence>
+                {isMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        className="fixed bottom-24 right-8 z-[80] pointer-events-auto"
+                    >
+                        <a
+                            href="https://www.instagram.com/ledpa7/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-[#FF0000] transition-all duration-300 transform active:scale-90"
+                        >
+                            <Instagram size={24} strokeWidth={1.5} />
+                        </a>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Bottom Right Floating Menu Button */}
             <div className="fixed bottom-8 right-8 z-[80] pointer-events-auto">
                 <button
@@ -124,13 +145,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                                     </motion.a>
                                 ))}
                             </nav>
-
-                            <div className="absolute bottom-32 right-10 left-10 pt-6 border-t border-black/5">
-                                <p className="text-[7px] font-black text-gray-300 tracking-[0.4em] mb-2 uppercase text-right">Contact</p>
-                                <div className="text-right">
-                                    <a href="mailto:led@kakao.com" className="text-[10px] font-bold hover:text-[#FF0000] transition-colors tracking-tight">led@kakao.com</a>
-                                </div>
-                            </div>
                         </motion.div>
                     </>
                 )}
@@ -142,29 +156,29 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             </main>
 
             {/* Footer */}
-            <footer className="bg-black py-20 border-t border-[#222] text-[11px] leading-relaxed tracking-wide text-gray-400 font-medium font-['LINE_Seed_Sans_KR']">
+            <footer className="bg-black py-20 border-t border-[#111] text-[11px] leading-relaxed tracking-[0.1em] text-gray-500 font-light font-['Noto_Sans_KR']">
                 <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start">
 
                     {/* Left Side: Brand / Email / Copyright / Privacy */}
-                    <div className="flex flex-col space-y-4 mb-12 md:mb-0">
-                        <h4 className="text-white font-bold text-sm tracking-tight mb-2">Led.발광다이오드</h4>
-                        <a href="mailto:led@kakao.com" className="hover:text-white transition-colors">led@kakao.com</a>
-                        <p className="opacity-60">© 2024 Designed by Led</p>
-                        <a href="/privacypolicy" className="hover:text-white transition-colors pt-2 block">개인정보보호방침</a>
+                    <div className="flex flex-col space-y-3 mb-12 md:mb-0">
+                        <h4 className="text-gray-400 font-medium text-[12px] tracking-tight mb-2">Led.발광다이오드</h4>
+                        <a href="mailto:led@kakao.com" className="hover:text-gray-300 transition-colors">led@kakao.com</a>
+                        <p>© 2024 Designed by Led</p>
+                        <a href="/privacypolicy" className="hover:text-gray-300 transition-colors pt-2 block">개인정보보호방침</a>
                     </div>
 
                     {/* Right Side: Business Info & Keywords */}
                     <div className="flex flex-col md:items-end md:text-right space-y-8">
                         {/* Business Info */}
-                        <div className="space-y-1 opacity-80">
-                            <p>상호명 : 발광다이오드 <span className="mx-2 text-gray-700">|</span> 대표자명 : 정지두</p>
-                            <p>연락처 : 010-9077-1261 <span className="mx-2 text-gray-700">|</span> Email : led@kakao.com</p>
-                            <p>사업자 번호 : 781-37-01142 <span className="mx-2 text-gray-700">|</span> 통신판매신고번호 : 2024-안양동안-1692</p>
+                        <div className="space-y-1">
+                            <p>상호명 : 발광다이오드 <span className="mx-2 text-gray-800">|</span> 대표자명 : 정지두</p>
+                            <p>연락처 : 010-9077-1261 <span className="mx-2 text-gray-800">|</span> Email : led@kakao.com</p>
+                            <p>사업자 번호 : 781-37-01142 <span className="mx-2 text-gray-800">|</span> 통신판매신고번호 : 2024-안양동안-1692</p>
                             <p>사업장 주소 : 경기도 안양시 동안구 관악대로 359번길 28-20</p>
                         </div>
 
                         {/* Keywords */}
-                        <div className="flex flex-col md:items-end opacity-40 font-bold uppercase tracking-widest scale-[0.9] origin-right text-white">
+                        <div className="flex flex-col md:items-end uppercase tracking-[0.2em] scale-[0.9] origin-right">
                             <p>aluminum furniture</p>
                             <p>design furniture</p>
                             <p>kit furniture</p>

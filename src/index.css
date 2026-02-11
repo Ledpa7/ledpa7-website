@@ -4,12 +4,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Stabilized LINE Seed Sans KR: Handling all weights with one file to prevent mobile font-swap */
+/* Stabilized LINE Seed Sans KR: Using discrete weights to ensure browser matching */
 @font-face {
   font-family: 'LINE_Seed_Sans_KR';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2403-2@1.0/LINE_Seed_Sans_KR.woff2') format('woff2');
-  font-weight: 100 900;
-  /* Covers all weights from thin to black */
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LINE_Seed_Sans_KR';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2403-2@1.0/LINE_Seed_Sans_KR.woff2') format('woff2');
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }

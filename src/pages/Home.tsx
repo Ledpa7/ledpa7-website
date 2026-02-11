@@ -4,7 +4,7 @@ import { MainLayout } from '../layouts/MainLayout';
 import { FurnitureVideo } from '../components/FurnitureCanvas';
 import { ArrowUpRight } from 'lucide-react';
 
-const GridItemStyle: React.FC<{
+const GridItem = React.memo<{
     title?: string;
     price?: string;
     image?: string;
@@ -17,16 +17,18 @@ const GridItemStyle: React.FC<{
         specs: string[];
         description: string;
     };
-}> = ({ title, price, className = "", children, hoverColor = "bg-[#FF0000]", href, productDetails }) => {
+}>(({ title, price, className = "", children, hoverColor = "bg-[#FF0000]", href, productDetails }) => {
     const [isHovered, setIsHovered] = React.useState(false);
 
-    // Pass isHovered state to children (FurnitureVideo)
-    const childrenWithProps = React.Children.map(children, child => {
-        if (React.isValidElement(child)) {
-            return React.cloneElement(child, { isHovered } as any);
-        }
-        return child;
-    });
+    // Memoize children to prevent re-cloning on every render unless isHovered changes
+    const childrenWithProps = React.useMemo(() => {
+        return React.Children.map(children, child => {
+            if (React.isValidElement(child)) {
+                return React.cloneElement(child, { isHovered } as any);
+            }
+            return child;
+        });
+    }, [children, isHovered]);
 
     return (
         <div
@@ -87,10 +89,9 @@ const GridItemStyle: React.FC<{
             </div>
         </div>
     );
-};
+});
 
-// Aliasing GridItemStyle for use in Home
-const GridItem = GridItemStyle;
+GridItem.displayName = 'GridItem';
 
 export const Home: React.FC = () => {
     const heroRef = React.useRef(null);
@@ -135,7 +136,7 @@ export const Home: React.FC = () => {
                             />
                         </div>
                         <div className="relative z-10 flex flex-col items-center justify-center text-center text-black px-6 py-8 w-full">
-                            <div className="text-[14px] tracking-widest max-w-3xl leading-relaxed font-['Noto_Sans_KR'] font-medium space-y-4">
+                            <div className="text-[12px] tracking-widest max-w-3xl leading-relaxed font-['Noto_Sans_KR'] font-medium space-y-1.5">
                                 <p>Led.발광다이오드는 첫번째 프로젝트로</p>
                                 <p><span className="text-[#FF0000] font-bold">알루미늄프로파일 가구</span>를 만듭니다.</p>
                                 <p><span className="text-[#FF0000] font-bold">모든 디자인은 100개만 완제품으로 판매</span> 됩니다.</p>

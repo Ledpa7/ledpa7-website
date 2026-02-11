@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, memo } from 'react';
 
 interface FurnitureVideoProps {
     videoPath: string;
@@ -6,22 +6,26 @@ interface FurnitureVideoProps {
     isHovered?: boolean;
 }
 
-export const FurnitureVideo: React.FC<FurnitureVideoProps> = ({ videoPath, posterPath, isHovered = false }) => {
+export const FurnitureVideo: React.FC<FurnitureVideoProps> = memo(({ videoPath, posterPath, isHovered = false }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     // Sync play/pause with external isHovered state
     useEffect(() => {
-        if (!videoRef.current) return;
+        const video = videoRef.current;
+        if (!video) return;
 
         if (isHovered) {
-            videoRef.current.play().catch(err => {
-                if (err.name !== 'AbortError') {
-                    console.log("Video play failed:", err);
-                }
-            });
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(err => {
+                    if (err.name !== 'AbortError') {
+                        console.log("Video play failed:", err);
+                    }
+                });
+            }
         } else {
-            videoRef.current.pause();
-            videoRef.current.currentTime = 0;
+            video.pause();
+            video.currentTime = 0;
         }
     }, [isHovered]);
 
@@ -42,11 +46,13 @@ export const FurnitureVideo: React.FC<FurnitureVideoProps> = ({ videoPath, poste
                 muted
                 loop
                 playsInline
-                preload="auto"
+                preload="metadata"
                 className={`w-full h-full object-cover brightness-105 contrast-110 transition-all duration-700 ${isHovered ? 'grayscale-0 blur-0' : 'grayscale'}`}
             />
             {/* 세련된 느낌을 위한 오버레이 */}
             <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent pointer-events-none" />
         </div>
     );
-};
+});
+
+FurnitureVideo.displayName = 'FurnitureVideo';
