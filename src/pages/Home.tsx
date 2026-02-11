@@ -134,12 +134,7 @@ export const Home: React.FC = () => {
                                 className="w-full h-full object-contain"
                             />
                         </div>
-                        <div className="relative z-10 flex flex-col items-center justify-center text-center text-black px-6 py-16 w-full">
-                            <h1 className="text-[36px] font-bold tracking-tighter uppercase leading-none mb-12 flex flex-row items-center justify-center gap-2 font-['LINE_Seed_Sans_KR']">
-                                <span className="text-black">100 - 100 =</span>
-                                <span className="text-[#FF0000] text-[64px] -translate-y-[0.05em] font-['Noto_Sans_KR'] font-black">∞</span>
-                            </h1>
-
+                        <div className="relative z-10 flex flex-col items-center justify-center text-center text-black px-6 py-8 w-full">
                             <div className="text-[14px] tracking-widest max-w-3xl leading-relaxed font-['Noto_Sans_KR'] font-medium space-y-4">
                                 <p>Led.발광다이오드는 첫번째 프로젝트로</p>
                                 <p><span className="text-[#FF0000] font-bold">알루미늄프로파일 가구</span>를 만듭니다.</p>
