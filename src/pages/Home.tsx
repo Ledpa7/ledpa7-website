@@ -118,7 +118,7 @@ export const Home: React.FC = () => {
 
     return (
         <MainLayout>
-            <div className="w-full bg-white min-h-screen relative font-['LINE_Seed_Sans_KR']">
+            <div className="w-full bg-white min-h-screen relative font-['LINE Seed Sans KR']">
 
                 {/* 1. LARGE IMAGE (Hero) - Auto Playing Video with Zoom */}
                 <section ref={heroRef} className="relative h-auto md:h-[200vh] w-full bg-white md:bg-black">
@@ -183,7 +183,7 @@ export const Home: React.FC = () => {
                         <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-6 w-full">
                             <motion.h1
                                 style={{ opacity: text1Opacity, scale: text1Scale, y: text1Y }}
-                                className="text-[110px] font-bold tracking-tighter uppercase leading-none mb-12 flex flex-row items-center justify-center gap-6 drop-shadow-sm font-['LINE_Seed_Sans_KR']"
+                                className="text-[110px] font-bold tracking-tighter uppercase leading-none mb-12 flex flex-row items-center justify-center gap-6 drop-shadow-sm font-['LINE Seed Sans KR']"
                             >
                                 <span className="text-black">100 - 100 =</span>
                                 <span className="text-[#FF0000] text-[160px] -translate-y-[0.05em] drop-shadow-2xl font-['Noto_Sans_KR']">∞</span>
@@ -194,7 +194,7 @@ export const Home: React.FC = () => {
                                     opacity: bodyOpacity,
                                     filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.8)) drop-shadow(0 4px 12px rgba(0,0,0,0.5))"
                                 }}
-                                className="text-lg font-light tracking-widest max-w-3xl mix-blend-difference leading-[2] body-font"
+                                className="text-[16px] font-light tracking-widest max-w-3xl mix-blend-difference leading-[2] body-font"
                             >
                                 <p>
                                     Led.발광다이오드는 첫번째 프로젝트로<br />

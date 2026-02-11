@@ -4,23 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Stabilized LINE Seed Sans KR: Using discrete weights to ensure browser matching */
-@font-face {
-  font-family: 'LINE_Seed_Sans_KR';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2403-2@1.0/LINE_Seed_Sans_KR.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'LINE_Seed_Sans_KR';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2403-2@1.0/LINE_Seed_Sans_KR.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --cursor-size: 24px;
 }
@@ -42,7 +25,7 @@ body {
   background-color: #FFFFFF;
   color: #000000;
   overflow-x: hidden;
-  font-family: 'LINE_Seed_Sans_KR', sans-serif;
+  font-family: 'LINE Seed Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -64,7 +47,7 @@ body {
 }
 
 .body-font {
-  font-family: 'LINE_Seed_Sans_KR', sans-serif;
+  font-family: 'LINE Seed Sans KR', sans-serif;
 }
 
 ::-webkit-scrollbar {
