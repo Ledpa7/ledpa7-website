@@ -1,12 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
-@import url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2403-2@1.0/LINE_Seed_Sans_KR.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap&font-display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --cursor-size: 24px;
+/* Robust LINE Seed Sans KR Loading */
+@font-face {
+  font-family: 'LINE_Seed_Sans_KR';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2403-2@1.0/LINE_Seed_Sans_KR.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LINE_Seed_Sans_KR';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2403-2@1.0/LINE_Seed_Sans_KR.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LINE_Seed_Sans_KR';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2403-2@1.0/LINE_Seed_Sans_KR.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
@@ -26,7 +46,7 @@ body {
   background-color: #FFFFFF;
   color: #000000;
   overflow-x: hidden;
-  font-family: 'LINE Seed Sans KR', 'Noto Sans KR', sans-serif;
+  font-family: 'LINE_Seed_Sans_KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -48,7 +68,7 @@ body {
 }
 
 .body-font {
-  font-family: 'LINE Seed Sans KR', 'Noto Sans KR', sans-serif;
+  font-family: 'LINE_Seed_Sans_KR', sans-serif;
 }
 
 ::-webkit-scrollbar {
