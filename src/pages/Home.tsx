@@ -118,7 +118,7 @@ export const Home: React.FC = () => {
 
     return (
         <MainLayout>
-            <div className="w-full bg-white min-h-screen relative font-['line-seed']">
+            <div className="w-full bg-white min-h-screen relative font-line">
 
                 {/* 1. LARGE IMAGE (Hero) - Auto Playing Video with Zoom */}
                 <section ref={heroRef} className="relative h-auto md:h-[200vh] w-full bg-white md:bg-black">
@@ -183,10 +183,10 @@ export const Home: React.FC = () => {
                         <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-6 w-full">
                             <motion.h1
                                 style={{ opacity: text1Opacity, scale: text1Scale, y: text1Y }}
-                                className="text-[110px] font-bold tracking-tighter uppercase leading-none mb-12 flex flex-row items-center justify-center gap-6 drop-shadow-sm font-['line-seed']"
+                                className="text-[110px] font-bold tracking-tighter uppercase leading-none mb-12 flex flex-row items-center justify-center gap-6 drop-shadow-sm font-line"
                             >
                                 <span className="text-black">100 - 100 =</span>
-                                <span className="text-[#FF0000] text-[160px] -translate-y-[0.05em] drop-shadow-2xl font-['Noto Sans KR']">∞</span>
+                                <span className="text-[#FF0000] text-[160px] -translate-y-[0.05em] drop-shadow-2xl font-noto">∞</span>
                             </motion.h1>
 
                             <motion.div
