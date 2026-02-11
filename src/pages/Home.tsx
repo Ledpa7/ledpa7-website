@@ -202,12 +202,11 @@ export const Home: React.FC = () => {
                             >
                                 <p>
                                     Led.발광다이오드는 첫번째 프로젝트로<br />
-                                    산업에서 쓰이는 <span className="text-[#FF0000] font-medium">알루미늄프로파일로 가구</span>를 만듭니다.<br /><br />
-                                    모든 <span className="text-[#FF0000] font-medium">디자인은 100개만 완제품으로 판매</span> 됩니다.<br /><br />
+                                    산업에서 쓰이는 <span className="text-[#FF0000] font-medium">알루미늄프로파일로 가구</span>를 만듭니다.<br />
+                                    모든 <span className="text-[#FF0000] font-medium">디자인은 100개만 완제품으로 판매</span> 됩니다.<br />
                                     모두 판매되면 만드는 방법을 공유하고,<br />
                                     알루미늄프로파일을 구하여 만들거나,<br />
-                                    판매되는 키트를 구매하여 <br />
-                                    직접 만들 수 있습니다.
+                                    판매되는 키트를 구매하여 직접 만들 수 있습니다.
                                 </p>
                             </motion.div>
                         </div>
