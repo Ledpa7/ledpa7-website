@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Oswald:wght@500;700&display=swap');
+
 .jd-portfolio-wrapper {
   /* Core Colors */
   --background: #0a0a0a;
@@ -33,6 +35,7 @@
   cursor: none !important;
   padding: 0;
   margin: 0;
+  line-height: normal;
 }
 
 .jd-portfolio-wrapper a {
@@ -54,4 +57,9 @@
 .jd-portfolio-wrapper ::-moz-selection {
   background: var(--accent-primary);
   color: #ffffff;
+}
+
+.jd-portfolio-wrapper ul,
+.jd-portfolio-wrapper ol {
+  list-style: revert;
 }

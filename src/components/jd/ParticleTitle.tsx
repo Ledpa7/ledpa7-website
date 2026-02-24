@@ -86,8 +86,8 @@ const ParticleTitle = () => {
         ctx.save();
         ctx.scale(dpr, dpr);
         ctx.fillStyle = "white";
-        // Retrieve the font family from the CSS variable
-        const fontFamily = getComputedStyle(document.body).getPropertyValue('--font-oswald').replaceAll('"', '') || "Arial Black";
+        // Retrieve the font family from the CSS variable, fallback to explicit Google Font name
+        const fontFamily = getComputedStyle(document.body).getPropertyValue('--font-oswald').replaceAll('"', '').trim() || "Oswald";
         ctx.font = `900 ${fontSize}px "${fontFamily}", "Arial Narrow", sans-serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
