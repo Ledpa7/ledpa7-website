@@ -1,0 +1,55 @@
+.container {
+    position: relative;
+    display: block;
+    cursor: none;
+    /* Hide default cursor to simulate magnifier as cursor */
+    /* overflow: hidden; REMOVED to allow magnifier to extend beyond image edges if needed */
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Ensure the image doesn't have pointer events blocked by parent if any */
+    pointer-events: auto;
+}
+
+.magnifier {
+    position: fixed;
+    /* Changed to fixed for Portal usage */
+    width: 150px;
+    /* Default, overridden by inline style */
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    /* Stronger shadow */
+    background-color: #000;
+    overflow: hidden;
+    /* Keep image inside lens clipped */
+    pointer-events: none;
+    z-index: 99999;
+    /* Higher than modal (2001) */
+    /* Extremely high to sit on top of everything */
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    /* Force GPU */
+    display: none;
+    /* Hidden by default */
+}
+
+.magnifierVisible {
+    display: block;
+}
+
+.magnifierImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* width/height set via inline style based on zoom */
+    will-change: transform;
+    transform-origin: top left;
+    max-width: none;
+    /* Allow image to exceed container */
+    max-height: none;
+}

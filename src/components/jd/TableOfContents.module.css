@@ -1,0 +1,86 @@
+/* Mobile First: Hidden by default */
+.toc {
+    display: none;
+}
+
+/* Desktop: Visible and fixed on the left */
+@media (min-width: 1024px) {
+    .toc {
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 40px;
+        transform: translateY(-50%);
+        z-index: 50;
+    }
+
+    .line {
+        position: absolute;
+        left: 7px;
+        /* Align with dots center */
+        top: 10px;
+        bottom: 10px;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: -1;
+    }
+
+    .list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .item {
+        position: relative;
+    }
+
+    .link {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all 0.3s ease;
+        opacity: 0.5;
+    }
+
+    .link:hover {
+        opacity: 1;
+        color: var(--text-primary);
+    }
+
+    .dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 1px solid var(--text-secondary);
+        background: var(--background);
+        transition: all 0.3s ease;
+    }
+
+    /* Active State */
+    .active .link {
+        opacity: 1;
+        color: var(--text-primary);
+    }
+
+    .active .dot {
+        background: var(--text-primary);
+        border-color: var(--text-primary);
+        box-shadow: 0 0 10px var(--accent-glow);
+        transform: scale(1.2);
+    }
+
+    .active .label {
+        transform: translateX(5px);
+    }
+
+    .label {
+        display: none;
+    }
+}

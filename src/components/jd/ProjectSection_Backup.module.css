@@ -1,0 +1,247 @@
+/* Copying styles from projects/page.module.css to components/ProjectSection.module.css */
+
+/* Remove .container .header .main as they are not needed in component */
+
+/* Category Section */
+.categorySection {
+    margin-bottom: 80px;
+    padding-left: 0;
+    /* Titles align with main layout */
+    /* If main layout has padding, we might not need this, or we rely on full width horizontal scroll */
+    scroll-margin-top: 100px;
+    /* Helper for anchor links */
+    scroll-snap-align: start;
+    /* Snap to start of category */
+}
+
+/* 
+   We want the horizontal scroll to go edge-to-edge if possible, 
+   but the titles should align with content. 
+   The main layout (.section) has padding: 60px 24px.
+   So if we put this inside .section, it will be constrained.
+   To make horizontal scroll edge-to-edge while keeping title aligned:
+   - Use negative margin on scroll container?
+*/
+
+.categoryHeader {
+    position: sticky;
+    top: 80px;
+    /* Height of main fixed header */
+    background: rgba(10, 10, 10, 0.95);
+    /* Match background to hide scrolling content */
+    z-index: 10;
+    padding: 16px 0;
+    backdrop-filter: blur(8px);
+}
+
+.categoryTitle {
+    font-size: 1.5rem;
+    /* Match mobile .sectionTitle */
+    font-weight: 800;
+    color: var(--accent-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.categoryDesc {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    /* Match body text */
+    max-width: 600px;
+}
+
+/* Subcategory Row */
+.subcategoryRow {
+    margin-bottom: 48px;
+    scroll-snap-align: start;
+    /* Snap to start of subcategory */
+    scroll-margin-top: 180px;
+    /* Offset for sticky headers (Main Header 80 + Cat Header ~60 + Gap) */
+}
+
+.subcategoryTitle {
+    font-size: 1.15rem;
+    /* Match Group Titles */
+    margin-bottom: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Horizontal Scroll Container */
+.horizontalScroll {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding-bottom: 24px;
+    /* Space for scrollbar or shadow */
+    padding-right: 24px;
+    /* Right padding */
+
+    /* Hide Scrollbar but keep functionality */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+
+    /* Break out of container to be full width on mobile/desktop? */
+    /* If parent has padding 24px, we can do negative margin */
+    margin-left: -24px;
+    margin-right: -24px;
+    padding-left: 24px;
+    /* Restore padding so content starts aligned */
+    width: calc(100% + 48px);
+
+    /* Drag Interaction Cursors */
+    cursor: grab;
+    user-select: none;
+    /* Prevent text selection while dragging */
+
+    /* Mask Fade Effect */
+    --mask-left: 0px;
+    --mask-right: 60px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black var(--mask-left), black calc(100% - var(--mask-right)), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, black var(--mask-left), black calc(100% - var(--mask-right)), transparent 100%);
+}
+
+.horizontalScroll:active {
+    cursor: grabbing;
+}
+
+.horizontalScroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Cards */
+.projectCard {
+    flex: 0 0 320px;
+    /* Fixed width cards */
+    background: var(--surface-1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    /* For Shine */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    will-change: transform;
+    /* Optimize for JS animation */
+}
+
+/* Spotlight Reflection blended with Neon Glow - STRONG */
+.cardReflect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Strong Spotlight Gradient */
+    background: radial-gradient(400px circle at var(--x, 50%) var(--y, 50%),
+            rgba(255, 255, 255, 0.5),
+            transparent 60%);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    z-index: 3;
+    mix-blend-mode: overlay;
+    /* Essential for "lighting" feel */
+}
+
+.projectCard:hover {
+    border-color: var(--accent-primary);
+    box-shadow:
+        0 0 20px rgba(232, 33, 39, 0.4),
+        /* Outer Neon Glow */
+        inset 0 0 10px rgba(232, 33, 39, 0.1);
+    /* Inner subtle glow */
+    transform: translateY(-5px);
+}
+
+.projectCard:hover .cardReflect {
+    opacity: 1;
+}
+
+.projectCard:hover .cardTitle {
+    color: var(--accent-primary);
+}
+
+.cardImagePlaceholder {
+    width: 100%;
+    height: 180px;
+    background: var(--surface-2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cardContent {
+    padding: 20px;
+    background-color: var(--surface-1);
+    transition: background-color 0.3s ease;
+}
+
+.projectCard:hover .cardContent {
+    background-color: #1a1a1a;
+    /* Almost black but slightly lighter */
+}
+
+.cardTitle {
+    font-size: 1rem;
+    /* Match H4/Job titles */
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.cardDesc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cardMeta {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tags span {
+    font-size: 0.75rem;
+    color: var(--accent-primary);
+    background: rgba(240, 40, 40, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.emptyCard {
+    flex: 0 0 320px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .projectCard {
+        flex: 0 0 280px;
+        /* Smaller cards on mobile */
+    }
+}
+
+@media (min-width: 768px) {
+    .categoryTitle {
+        font-size: 1.8rem;
+        /* Match Desktop .sectionTitle */
+    }
+}

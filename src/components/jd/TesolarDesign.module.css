@@ -1,0 +1,490 @@
+/* ... Base Layout Preserved ... */
+/* Dark Mode Container */
+.container {
+    padding: 0;
+    color: #e0e0e0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Header */
+.header {
+    margin-bottom: 60px;
+    border-left: 4px solid #e82127;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.topLabel {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0;
+    margin-bottom: 24px;
+    color: #fff;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e82127;
+}
+
+/* Text */
+.introText,
+.text,
+.list,
+.quoteBox,
+.keywordRow,
+.goalBox {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.introText {
+    max-width: 800px;
+    margin-bottom: 16px;
+}
+
+.text {
+    margin-bottom: 16px;
+}
+
+.list {
+    padding-left: 5px;
+    list-style: none;
+    margin-bottom: 24px;
+}
+
+.list li {
+    margin-bottom: 12px;
+    padding-left: 24px;
+    position: relative;
+}
+
+.keywordRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+/* Highlights */
+.highlight,
+.redText,
+.list strong,
+.caption {
+    font-weight: 700;
+}
+
+.highlight,
+.redText,
+.caption {
+    color: #e82127;
+}
+
+.list strong {
+    color: #fff;
+}
+
+/* Grid Layout */
+.sectionGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-bottom: 60px;
+    padding-left: 28px;
+    padding-right: 24px;
+}
+
+@media (max-width: 1024px) {
+    .sectionGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .sectionGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.gridItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.colTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    color: #888;
+}
+
+@media (min-width: 601px) {
+    .colTitle {
+        min-height: 2.5rem;
+    }
+
+    .text {
+        min-height: 130px;
+    }
+}
+
+/* --- SVG GRAPHICS CONTAINER --- */
+.infogContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    /* No card bg */
+}
+
+.svgGraphic {
+    max-width: 100%;
+    height: auto;
+    overflow: visible;
+    /* Allow target labels to be seen */
+}
+
+/* 2. Tesla: Quote Box */
+.quoteBox {
+    position: relative;
+    background: transparent;
+    border: none;
+    border-left: 2px solid #e82127;
+    padding: 0 0 0 20px;
+    margin-top: 16px;
+}
+
+/* 6. Keyword */
+.redDot {
+    width: 6px;
+    height: 6px;
+    background-color: #e82127;
+    border-radius: 50%;
+}
+
+/* 7. Lighting: Segment Bar (Keep CSS version as it is simple text) */
+.diagramLightingBar {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #555;
+    border-radius: 0;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.lightSeg {
+    flex: 1;
+    border-right: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.6rem;
+    color: #aaa;
+    background: #111;
+    line-height: 1.2;
+}
+
+.lightSeg:last-child {
+    border-right: none;
+    background: rgba(232, 33, 39, 0.2);
+    color: #fff;
+    font-weight: 700;
+}
+
+/* 8. User (Quadrant in SVG via .infogContainer) */
+
+/* Process Grid */
+.processGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.processImg {
+    aspect-ratio: 1;
+    border-radius: 0;
+    background-color: #111;
+    border: 1px solid #333;
+    background-size: cover;
+    background-position: center;
+}
+
+.divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 40px 28px 40px 28px;
+}
+
+.fullSection {
+    margin-bottom: 40px;
+    padding-left: 28px;
+    padding-right: 24px;
+}
+
+.sectionHeader {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+    display: inline-block;
+    border-bottom: 2px solid #e82127;
+}
+
+.finalSection {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.finalTitle {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #e82127;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.finalImage {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.pagesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 40px;
+
+    /* Full Bleed / Full Screen Width */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    padding: 0 24px;
+    /* Added side padding */
+    box-sizing: border-box;
+    /* Prevent scrollbar */
+}
+
+.pageImage {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+
+    padding: 0;
+}
+
+/* --- Discover Section (New HTML/CSS Content) --- */
+.discoverTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #888;
+    margin-bottom: 24px;
+    padding-left: 28px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.discoverGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 0 28px;
+    margin-bottom: 80px;
+    align-items: start;
+}
+
+@media (max-width: 1200px) {
+    .discoverGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .discoverGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.colHeader {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+    border-bottom: 2px solid #333;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.bodyText {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 24px;
+    word-break: keep-all;
+}
+
+.missionBox {
+    margin-top: 24px;
+    padding-left: 12px;
+    border-left: 2px solid #e82127;
+}
+
+.englishMission {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.koreanMission {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #e82127;
+}
+
+/* Diagrams */
+.diagramCircleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    position: relative;
+    margin: 20px 0;
+}
+
+.circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.circleLeft {
+    border: 2px solid #e82127;
+    color: #e82127;
+    left: 50%;
+    transform: translateX(-80%);
+    z-index: 1;
+}
+
+.circleRight {
+    border: 2px solid #fff;
+    color: #fff;
+    left: 50%;
+    transform: translateX(-20%);
+    z-index: 2;
+}
+
+.diagramTriangle {
+    width: 100%;
+    height: 120px;
+    position: relative;
+    margin: 20px 0;
+}
+
+.triNode {
+    position: absolute;
+    background: #111;
+    border: 1px solid #444;
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    border-radius: 12px;
+    color: #aaa;
+}
+
+.triLine {
+    position: absolute;
+    background: #444;
+    height: 1px;
+    transform-origin: left center;
+}
+
+.carImageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.carPlaceholder {
+    width: 100%;
+    height: 120px;
+    background: #222;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-size: 0.8rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.carPlaceholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.keywords {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 16px;
+}
+
+.uxDiagram {
+    margin: 16px 0 24px 0;
+    border-top: 1px dashed #333;
+    padding-top: 12px;
+}
+
+.arcDiagram {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #444;
+    border-bottom: none;
+    border-radius: 60px 60px 0 0;
+    position: relative;
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.arcLabel {
+    font-size: 0.7rem;
+    color: #666;
+    margin-bottom: -20px;
+}

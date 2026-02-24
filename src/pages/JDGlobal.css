@@ -1,0 +1,57 @@
+.jd-portfolio-wrapper {
+  /* Core Colors */
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --accent-primary: rgb(240, 40, 40);
+  --accent-glow: rgba(240, 40, 40, 0.5);
+  --surface-1: #171717;
+  --surface-2: #262626;
+  --text-primary: #ededed;
+  --text-secondary: #a1a1aa;
+
+  --text-base: 0.8rem;
+  --text-sm: 0.75rem;
+
+  --max-width: 1200px;
+  --header-height: 80px;
+
+  /* Font */
+  --font-geist-sans: "Geist", "Helvetica Neue", sans-serif;
+  --font-geist-mono: "Geist Mono", monospace;
+  --font-oswald: "Oswald", sans-serif;
+
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+.jd-portfolio-wrapper * {
+  box-sizing: border-box;
+  cursor: none !important;
+  padding: 0;
+  margin: 0;
+}
+
+.jd-portfolio-wrapper a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.jd-portfolio-wrapper button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.jd-portfolio-wrapper ::selection {
+  background: var(--accent-primary);
+  color: #ffffff;
+}
+
+.jd-portfolio-wrapper ::-moz-selection {
+  background: var(--accent-primary);
+  color: #ffffff;
+}
