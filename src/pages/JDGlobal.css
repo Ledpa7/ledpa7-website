@@ -30,12 +30,23 @@
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
-.jd-portfolio-wrapper * {
+:where(.jd-portfolio-wrapper *) {
   box-sizing: border-box;
-  cursor: none !important;
   padding: 0;
   margin: 0;
   line-height: normal;
+}
+
+.jd-portfolio-wrapper * {
+  cursor: none !important;
+}
+
+:where(.jd-portfolio-wrapper h1, .jd-portfolio-wrapper h2, .jd-portfolio-wrapper h3, .jd-portfolio-wrapper h4, .jd-portfolio-wrapper h5, .jd-portfolio-wrapper h6) {
+  font-weight: bold;
+}
+
+:where(.jd-portfolio-wrapper strong, .jd-portfolio-wrapper b) {
+  font-weight: bold;
 }
 
 .jd-portfolio-wrapper a {
