@@ -278,8 +278,8 @@
 }
 
 .aboutSection {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
   scroll-margin-top: 0;
   padding-top: 30px !important;
   /* 50px에서 30px로 줄여 조금 더 위로 밀착 */
