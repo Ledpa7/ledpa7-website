@@ -163,7 +163,10 @@ const InstagramClone = () => {
                         key={item.id}
                         className={styles.feedItem}
                         style={{ backgroundColor: item.color || '#000' }}
-                        onClick={() => window.open("https://www.instagram.com/microwave.30/", "_blank")}
+                        onClick={() => {
+                            const win = window.open("https://www.instagram.com/microwave.30/", "_blank", "noopener,noreferrer");
+                            if (win) win.opener = null;
+                        }}
                     >
                         {item.image && (
                             <img src={item.image} alt="feed" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
