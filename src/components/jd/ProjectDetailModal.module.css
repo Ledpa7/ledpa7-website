@@ -159,17 +159,48 @@
 
 .imagePlaceholder {
     width: 100%;
-    height: 300px;
-    background: var(--surface-2);
-    border-radius: 8px;
+    height: 400px;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
     margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagePlaceholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Cinematic Video Section */
+.cinematicContainer {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    overflow: hidden;
+    background: #000;
+    margin-bottom: 32px;
+    border-radius: 12px;
+}
+
+.cinematicMainVideo {
+    position: relative;
+    display: block;
+    width: auto;
+    height: 100%;
+    max-height: 700px;
+    margin: 0 auto;
+    z-index: 1;
 }
 
 /* Video Grid Styles */
 .videoGrid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
+    gap: 4px;
     width: 100%;
     margin-top: 2rem;
 }
@@ -177,7 +208,7 @@
 .videoTile {
     aspect-ratio: 1 / 1;
     background: #000;
-    border-radius: 0;
+    border-radius: 8px;
     overflow: hidden;
     position: relative;
 }
@@ -187,14 +218,6 @@
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-/* Media Query for Mobile (falls back to 2 columns or 1 if needed, but keeping 4 as requested or responsive) */
-@media (max-width: 768px) {
-    .videoGrid {
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 columns on mobile for better visibility */
-    }
 }
 
 .closeButton {
@@ -235,7 +258,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    /* standard property */
 }
 
 .meta {
@@ -295,6 +317,7 @@
     background: linear-gradient(to right, #fff, #aaa);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin: 0;
 }
 
@@ -353,4 +376,81 @@
     width: 100%;
     height: auto;
     display: block;
+}
+
+/* 
+   --------------------------------------------------------------
+   Mobile Optimization Overrides
+   --------------------------------------------------------------
+*/
+@media (max-width: 768px) {
+    .modalContent {
+        padding: 80px 20px 40px;
+    }
+
+    .title {
+        font-size: 1.8rem;
+        word-break: keep-all;
+    }
+
+    .meta {
+        font-size: 0.85rem;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .description {
+        font-size: 0.875rem;
+        margin-bottom: 30px;
+    }
+
+    /* Cinematic Video for Mobile (1:1 for LED project) */
+    .cinematicContainer {
+        height: auto;
+        aspect-ratio: 1 / 1;
+        margin-bottom: 24px;
+    }
+
+    .cinematicMainVideo {
+        width: 100%;
+        height: auto;
+        max-height: none;
+    }
+
+    .imagePlaceholder {
+        height: 250px;
+    }
+
+    .videoGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2px;
+    }
+
+    /* Design Showcase Mobile */
+    .bigTitle {
+        font-size: 2rem;
+    }
+
+    .designDescription {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .designShowcase {
+        gap: 40px;
+    }
+
+    .imageStack {
+        gap: 20px;
+    }
+
+    .closeButton {
+        top: 16px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+    }
 }

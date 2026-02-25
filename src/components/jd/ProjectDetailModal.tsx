@@ -296,15 +296,7 @@ const ProjectDetailModal = ({ project, initialRect, onClose }: Props) => {
                                 {(displayProject.video || displayProject.image) && (
                                     displayProject.title === 'Led.발광다이오드' && displayProject.video && !videoError ? (
                                         /* 발광다이오드 전용: 시네마틱 블러 배경 비디오 */
-                                        <div style={{
-                                            position: 'relative',
-                                            width: '100%',
-                                            height: '700px',
-                                            overflow: 'hidden',
-                                            background: '#000',
-                                            marginBottom: '32px',
-                                            borderRadius: '12px',
-                                        }}>
+                                        <div className={styles.cinematicContainer}>
                                             {/* 블러 배경 비디오 (동기 재생) */}
                                             <video
                                                 ref={blurVideoRef}
@@ -337,15 +329,7 @@ const ProjectDetailModal = ({ project, initialRect, onClose }: Props) => {
                                                 muted
                                                 loop
                                                 playsInline
-                                                style={{
-                                                    position: 'relative',
-                                                    display: 'block',
-                                                    width: 'auto',
-                                                    height: '100%',
-                                                    maxHeight: '700px',
-                                                    margin: '0 auto',
-                                                    zIndex: 1,
-                                                }}
+                                                className={styles.cinematicMainVideo}
                                                 onTimeUpdate={() => {
                                                     if (blurVideoRef.current && mainVideoRef.current) {
                                                         const diff = Math.abs(blurVideoRef.current.currentTime - mainVideoRef.current.currentTime);
@@ -407,7 +391,7 @@ const ProjectDetailModal = ({ project, initialRect, onClose }: Props) => {
                                                     />
                                                 )
                                             ) : (
-                                                <div className={styles.imagePlaceholder} style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', background: '#000' }}>
+                                                <div className={styles.imagePlaceholder}>
                                                     {displayProject.image && (
                                                         <img
                                                             src={displayProject.image}

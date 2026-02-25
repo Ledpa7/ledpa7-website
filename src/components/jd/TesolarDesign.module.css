@@ -489,3 +489,51 @@
     color: #666;
     margin-bottom: -20px;
 }
+
+/* 
+   --------------------------------------------------------------
+   Mobile Optimization
+   --------------------------------------------------------------
+*/
+@media (max-width: 768px) {
+    .header {
+        padding-left: 16px;
+        margin-bottom: 32px;
+    }
+
+    .title {
+        font-size: 1.6rem;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .introText {
+        font-size: 0.85rem;
+    }
+
+    .fullSection {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .divider {
+        margin: 32px 16px;
+    }
+
+    .sectionGrid {
+        padding-left: 16px;
+        padding-right: 16px;
+        gap: 20px;
+    }
+
+    .discoverGrid {
+        padding: 0 16px;
+        gap: 40px;
+    }
+
+    .discoverTitle {
+        padding-left: 16px;
+    }
+}
