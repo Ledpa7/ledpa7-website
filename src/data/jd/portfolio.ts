@@ -80,7 +80,7 @@ export const portfolioData = {
                             description: "알루미늄프로파일 가구",
                             period: "2020 ~",
                             tags: ["Product", "Furniture"],
-                            detailDescription: "발광다이오드는 사람들이 가지고 싶은 가구를\n[최소한의 재료 MINIMAL], [단순한 형태 SIMPLE], [사용자가 쉽게 EASY]\n알루미늄프로파일로 만드는 것을 추구하는 브랜드 입니다.",
+                            detailDescription: "발광다이오드는 사람들이 가지고 싶은 가구를\n[최소한의 재료 MINIMAL], [단순한 형태 SIMPLE], [사용자가 쉽게 EASY]\n*알루미늄프로파일로 가구*를 만드는 것을 추구하는 브랜드 입니다.\n모든 *디자인은 100개만 완제품으로 판매* 됩니다.",
                             image: "/jd/images/1.brand.jpg",
                             video: "/jd/videos/Led_video.mp4",
                             galleryVideos: [
