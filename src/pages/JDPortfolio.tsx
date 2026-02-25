@@ -24,9 +24,7 @@ export default function Home() {
         <main className={styles.main}>
           {/* Hero Section */}
           <section id="hero" className={styles.hero}>
-            <div style={{ width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <ParticleTitle />
-            </div>
+            <ParticleTitle />
           </section>
 
           {/* About Section */}

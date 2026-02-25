@@ -66,10 +66,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  /* Left align is often better for mobile readability */
-  text-align: left;
-  padding: 80px 24px 40px;
+  align-items: center;
+  text-align: center;
+  padding: 80px 0 40px;
+  /* Removed horizontal padding */
 }
 
 .heroTitle {
@@ -85,14 +85,6 @@
   line-height: 1.1;
   word-break: keep-all;
   /* Prevent awkward word breaks in Korean */
-}
-
-.heroSubtitle {
-  font-size: 1.125rem;
-  color: var(--text-secondary);
-  max-width: 500px;
-  margin-bottom: 32px;
-  line-height: 1.6;
 }
 
 .ctaButton {
@@ -177,7 +169,8 @@
 }
 
 .profileName {
-  font-size: 1.3rem;
+  font-size: 1.15rem;
+  font-weight: 800;
   margin-bottom: 8px;
 }
 

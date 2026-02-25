@@ -1,7 +1,7 @@
 export const portfolioData = {
     about: {
         name: "Jung Jidu",
-        koreanName: "정지두",
+        koreanName: "정 지 두",
         birthDate: "1991.04.20",
         phone: "+82 10 9077 1261",
         email: "wjdwlen@naver.com",

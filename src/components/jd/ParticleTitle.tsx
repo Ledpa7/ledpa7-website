@@ -171,7 +171,7 @@ const ParticleTitle = () => {
         ctx.save();
         ctx.scale(dpr, dpr * verticalScale);
         const scaledCanvasHeight = dimensions.height / verticalScale;
-        const startY = (scaledCanvasHeight - (lineHeight * textLines.length)) / 2 + (lineHeight / 2) + (isMobile ? -10 : 10);
+        const startY = (scaledCanvasHeight - (lineHeight * textLines.length)) / 2 + (lineHeight / 2) + (isMobile ? -60 : 10);
         textLines.forEach((line, index) => {
             ctx.fillText(line, dimensions.width / 2, startY + (index * lineHeight));
         });
