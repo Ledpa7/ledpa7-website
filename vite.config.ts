@@ -22,7 +22,7 @@ export default defineConfig({
             proxyReq.path = `/api/v1/users/web_profile_info/?username=${username}`;
           });
 
-          proxy.on('proxyRes', (proxyRes, req, res) => {
+          proxy.on('proxyRes', (proxyRes) => {
             if (proxyRes.statusCode !== 200) {
               console.log('Instagram Proxy failed, providing fallback.');
             }
