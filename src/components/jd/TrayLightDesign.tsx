@@ -20,11 +20,11 @@ const TrayLightDesign = () => {
 
             {/* Portfolio Pages */}
             <div className={styles.pagesContainer}>
-                <MagnifiedImage src="/images/traylight_page_11.jpg" alt="Tray Light Page 11" className={styles.pageImage} magSize={250} zoom={2} />
-                <MagnifiedImage src="/images/traylight_page_12.jpg" alt="Tray Light Page 12" className={styles.pageImage} magSize={250} zoom={2} />
-                <MagnifiedImage src="/images/traylight_page_13.jpg" alt="Tray Light Page 13" className={styles.pageImage} magSize={250} zoom={2} />
-                <MagnifiedImage src="/images/traylight_page_14.jpg" alt="Tray Light Page 14" className={styles.pageImage} magSize={250} zoom={2} />
-                <MagnifiedImage src="/images/traylight_page_15.jpg" alt="Tray Light Page 15" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/traylight_page_11.jpg" alt="Tray Light Page 11" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/traylight_page_12.jpg" alt="Tray Light Page 12" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/traylight_page_13.jpg" alt="Tray Light Page 13" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/traylight_page_14.jpg" alt="Tray Light Page 14" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/traylight_page_15.jpg" alt="Tray Light Page 15" className={styles.pageImage} magSize={250} zoom={2} />
             </div>
         </div>
     );

@@ -23,11 +23,11 @@ const TesolarDesign = () => {
             {/* Portfolio Pages */}
             <div className={styles.pagesContainer}>
 
-                <MagnifiedImage src="/images/tesolar_page_03.jpg" alt="Tesolar Page 3" className={styles.pageImage} magSize={250} zoom={2} />
-                <MagnifiedImage src="/images/tesolar_page_04.jpg" alt="Tesolar Page 4" className={styles.pageImage} magSize={250} zoom={2} />
-                <MagnifiedImage src="/images/tesolar_page_05.jpg" alt="Tesolar Page 5" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/tesolar_page_03.jpg" alt="Tesolar Page 3" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/tesolar_page_04.jpg" alt="Tesolar Page 4" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/tesolar_page_05.jpg" alt="Tesolar Page 5" className={styles.pageImage} magSize={250} zoom={2} />
                 <a href="https://youtu.be/MqtvQ8aDk6U" target="_blank" rel="noopener noreferrer" style={{ display: 'block', cursor: 'pointer' }}>
-                    <MagnifiedImage src="/images/tesolar_page_06.jpg" alt="Tesolar Page 6" className={styles.pageImage} magSize={250} zoom={2} />
+                    <MagnifiedImage src="/jd/images/tesolar_page_06.jpg" alt="Tesolar Page 6" className={styles.pageImage} magSize={250} zoom={2} />
                 </a>
             </div>
         </div>

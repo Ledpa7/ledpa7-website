@@ -56,97 +56,67 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
         const tilt = { x: 0, y: 0 };
 
         // ANIMATION TICKER - The Studio MX Engine
-        const update = () => {
-            const cw = gallery.offsetWidth || window.innerWidth;
-            const isMobile = cw <= 768;
+        // Pre-calculated values to optimize ticker performance
+        let cw = gallery.offsetWidth || window.innerWidth;
+        let isMobile = cw <= 768;
+        const totalItems = projects.length;
+        const angleStep = 360 / totalItems;
+        let radiusX = isMobile ? cw * 0.88 : Math.min(cw * 0.45, 520);
+        let radiusY = isMobile ? 110 : 115;
 
+        const updateLayoutValues = () => {
+            cw = gallery.offsetWidth || window.innerWidth;
+            isMobile = cw <= 768;
+            radiusX = isMobile ? cw * 0.88 : Math.min(cw * 0.45, 520);
+            radiusY = isMobile ? 110 : 115;
+            console.log("3D Gallery layout values updated");
+        };
+
+        window.addEventListener('resize', updateLayoutValues);
+
+        // ANIMATION TICKER - The Studio MX Engine (Optimized)
+        const update = () => {
             if (!isDragging.current) {
-                // Continuous slow rotation like Studio MX
-                const baseSpeed = isMobile ? 0.05 : 0.08; // 모바일에서는 기본 속도를 조금 낮춰 부드럽게
+                const baseSpeed = isMobile ? 0.05 : 0.08;
                 rotation.current += velocity.current;
 
-                // Apply friction if moving fast after a drag, otherwise maintain a base speed
                 if (Math.abs(velocity.current) > baseSpeed) {
-                    velocity.current *= 0.94; // 0.96 -> 0.94로 마찰력을 조정하여 너무 오래 미끄러지지 않고 '쫀득하게' 감속
+                    velocity.current *= 0.94;
                 } else {
                     velocity.current = velocity.current > 0 ? baseSpeed : -baseSpeed;
                 }
             }
 
-            // Smooth parallax tilt towards mouse
             tilt.x += (mouse.x - tilt.x) * 0.05;
             tilt.y += (mouse.y - tilt.y) * 0.05;
-
-            // Optional: Tilt the entire scene slightly (Disabled to fix "strange movement" feeling)
-            if (gallery.firstElementChild) {
-                (gallery.firstElementChild as HTMLElement).style.transform = `
-                    translate(-50%, -50%)
-                `;
-            }
-
-            // ==========================================
-            // CONNECTED RING ENGINE: CLEAN TILTED ELLIPSE
-            // ==========================================
-            const totalItems = projects.length;
-            const angleStep = 360 / totalItems; // Map ALL items to ONE loop
-
-            // Dimensions for a wide, organized oval track
-            // 모바일 겹침 현상 해결: 가로 반경을 0.88로 확장하여 카드 간 간격을 넓힘
-            const radiusX = isMobile ? cw * 0.88 : Math.min(cw * 0.45, 520);
-            // 세로 반경도 살짝 줄여서 앞뒷줄 간격을 타이트하게 조임 (120 -> 110)
-            const radiusY = isMobile ? 110 : 115;
 
             cardsRef.current.forEach((card, i) => {
                 if (!card) return;
 
                 const angle = (i * angleStep) + rotation.current;
                 const rad = (angle * Math.PI) / 180;
-
                 const sinVal = Math.sin(rad);
                 const cosVal = Math.cos(rad);
 
-                // 1. Mathematics of a Clean Elliptical Ring
-                // 모바일에서는 뒷줄 Squeeze를 더 강하게 줘서 양옆 여백을 확보
                 const bottomSqueeze = 1 - (Math.max(0, cosVal) * (isMobile ? 0.35 : 0.10));
                 const tx = sinVal * radiusX * bottomSqueeze;
-                // 모바일은 화면이 좁으므로 세로축 상단도 살짝 올려줌
-                // 모바일은 타이틀과의 거리를 어느정도 두면서도 너무 멀어지지 않게 조절 (+50)
                 const ty = (cosVal * radiusY) + (isMobile ? 50 : 30);
-
-                // 2. Clean Z-Tilt 
-                // 원근감 조절: 너무 멀지도 겹치지도 않게 적정선 타협 (420 -> 380)
                 const tz = -cosVal * (isMobile ? 380 : 500);
-
-                // 3. True Cylinder Rotation
                 const rotateY = 180 - angle;
-
-                // 4. Clean Scaling & Opacity
-                // 모바일 카드 크기 살짝 증폭: 너무 작아보이지 않도록 0.50 -> 0.55
                 const baseScale = isMobile ? 0.55 : 0.70;
                 const scale = baseScale - (cosVal * 0.15);
-
                 const opacity = 0.60 - (cosVal * 0.40);
 
-                card.style.display = "flex"; // All cards always visible
                 card.style.transform = `translate3d(${tx}px, ${ty}px, ${tz}px) rotateY(${rotateY}deg) scale(${scale})`;
                 card.style.opacity = opacity.toString();
                 card.style.zIndex = Math.round(tz + 2000).toString();
 
-                // Allow clicking everywhere
-                card.style.pointerEvents = "auto";
-
-                // 5. Video Performance Optimization (Lazy View)
-                // 카드가 앞쪽(tz > -150)에 위치할 때만 비디오 재생, 뒤로 넘어가면 일시정지하여 리소스 최적화
                 const video = videoRefs.current[i];
                 if (video) {
                     if (tz > -150) {
-                        if (video.paused) {
-                            video.play().catch(() => { }); // 자동재생 정책에 의한 오류 방지
-                        }
+                        if (video.paused) video.play().catch(() => { });
                     } else {
-                        if (!video.paused) {
-                            video.pause();
-                        }
+                        if (!video.paused) video.pause();
                     }
                 }
             });
@@ -262,7 +232,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                     disablePictureInPicture
                                 />
                             ) : (
-                                proj.image && <img src={proj.image} alt={proj.title} style={{ width: '100%', height: '100%', objectFit: proj.imageFit || 'cover', objectPosition: proj.imagePosition || 'center', padding: isMobileRender && proj.imageFit === 'contain' ? '24px' : (proj.imagePadding || '0') }} draggable={false} />
+                                proj.image && <img src={proj.image} alt={proj.title} style={{ width: '100%', height: '100%', objectFit: proj.imageFit || 'cover', objectPosition: proj.imagePosition || 'center', padding: isMobileRender && proj.imageFit === 'contain' ? '24px' : (proj.imagePadding || '0') }} draggable={false} loading="lazy" decoding="async" />
                             )}
                         </div>
                         <div className={styles.cardContent}>

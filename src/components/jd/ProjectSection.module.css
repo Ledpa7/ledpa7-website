@@ -78,6 +78,7 @@
     user-select: none;
     -webkit-user-select: none;
     -webkit-user-drag: none;
+    will-change: transform;
 }
 
 
@@ -151,7 +152,7 @@
     font-size: 0.9rem;
     font-weight: 300;
     color: #000;
-    /* 번호를 검은색으로 변경 */
+    /* 번호를 검은색으로 원복 */
     font-family: var(--font-oswald), sans-serif;
     opacity: 0.8;
     z-index: 10;

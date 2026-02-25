@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Oswald:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Oswald:wght@500;700&family=Inter:wght@900&display=swap');
 
 .jd-portfolio-wrapper {
   /* Core Colors */
-  --background: #0a0a0a;
+  --background: black;
   --foreground: #ededed;
   --accent-primary: rgb(240, 40, 40);
   --accent-glow: rgba(240, 40, 40, 0.5);
-  --surface-1: #171717;
-  --surface-2: #262626;
+  --surface-1: #080808;
+  --surface-2: #111111;
   --text-primary: #ededed;
   --text-secondary: #a1a1aa;
 
@@ -28,6 +28,13 @@
   background: transparent;
   color: var(--text-primary);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+  background: black !important;
+  margin: 0;
+  padding: 0;
 }
 
 :where(.jd-portfolio-wrapper *) {

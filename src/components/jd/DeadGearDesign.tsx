@@ -22,9 +22,9 @@ const DeadGearDesign = () => {
 
             {/* Portfolio Pages */}
             <div className={styles.pagesContainer}>
-                <MagnifiedImage src="/images/deadgear_page_08.jpg" alt="Dead Gear Page 8" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/deadgear_page_08.jpg" alt="Dead Gear Page 8" className={styles.pageImage} magSize={250} zoom={2} />
                 <a href="https://www.youtube.com/watch?v=LACadr9oxiQ" target="_blank" rel="noopener noreferrer" style={{ display: 'block', cursor: 'pointer' }}>
-                    <MagnifiedImage src="/images/deadgear_page_09.jpg" alt="Dead Gear Page 9" className={styles.pageImage} magSize={250} zoom={2} />
+                    <MagnifiedImage src="/jd/images/deadgear_page_09.jpg" alt="Dead Gear Page 9" className={styles.pageImage} magSize={250} zoom={2} />
                 </a>
             </div>
         </div>

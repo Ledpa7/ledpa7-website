@@ -15,9 +15,9 @@ import InteractiveStarBackground from "../components/jd/InteractiveStarBackgroun
 export default function Home() {
   return (
     <div className="jd-portfolio-wrapper">
+      <InteractiveStarBackground />
       <div className={styles.container}>
         <CustomCursor />
-        <InteractiveStarBackground />
         <ClickSpark />
         <TableOfContents />
 
@@ -47,7 +47,7 @@ export default function Home() {
                     <img
                       src="/jd/profile.jpg"
                       alt="Jung Jidu"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }}
                     />
                   </TiltCard>
                 </FadeIn>
@@ -81,17 +81,25 @@ export default function Home() {
             {/* Skills & Awards Mini Grid */}
             <div style={{ marginTop: '48px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px' }}>
               <FadeIn delay={0.6}>
-                <h4 style={{ fontSize: '1rem', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '8px', color: 'var(--accent-primary)' }}>Skills</h4>
+                <h4 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '8px', color: 'var(--accent-primary)' }}>Skills</h4>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                   {portfolioData.skills.map((skill) => (
-                    <span key={skill} style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', background: 'rgba(255,255,255,0.05)', padding: '4px 8px', borderRadius: '4px' }}>
+                    <span key={skill} style={{
+                      fontSize: '0.75rem',
+                      color: 'var(--text-secondary)',
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      padding: '4px 12px',
+                      borderRadius: '100px',
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      backdropFilter: 'blur(4px)'
+                    }}>
                       {skill}
                     </span>
                   ))}
                 </div>
               </FadeIn>
               <FadeIn delay={0.7}>
-                <h4 style={{ fontSize: '1rem', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '8px', color: 'var(--accent-primary)' }}>Awards & Certificates</h4>
+                <h4 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '8px', color: 'var(--accent-primary)' }}>Awards & Certificates</h4>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {portfolioData.awards.map((award, i) => (
                     <li key={i} style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
@@ -114,7 +122,7 @@ export default function Home() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'start' }}>
               {/* Education Group */}
               <FadeIn delay={0.2}>
-                <h3 style={{ fontSize: '1rem', marginBottom: '20px', color: 'var(--accent-primary)' }}>Education</h3>
+                <h3 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '20px', color: 'var(--accent-primary)' }}>Education</h3>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   {portfolioData.education.map((edu, index) => (
                     <li key={index} style={{ paddingBottom: '16px', borderBottom: index !== portfolioData.education.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
@@ -132,7 +140,7 @@ export default function Home() {
 
               {/* Experience Group */}
               <FadeIn delay={0.4}>
-                <h3 style={{ fontSize: '1rem', marginBottom: '20px', color: 'var(--accent-primary)' }}>Work Experience</h3>
+                <h3 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '20px', color: 'var(--accent-primary)' }}>Work Experience</h3>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   {portfolioData.experience.map((exp, index) => (
                     <li key={index} style={{ paddingBottom: '16px', borderBottom: index !== portfolioData.experience.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
@@ -180,7 +188,7 @@ export default function Home() {
                 새로운 가치를 만드는 일에 언제나 열려있습니다.<br />
                 +82 10 9077 1261 / wjdwlen@naver.com
               </p>
-              <a href={`mailto:${portfolioData.about.email}`} className={styles.ctaButton}>
+              <a href={`mailto:${portfolioData.about.email}`} className={styles.ctaButton} style={{ color: '#1a1a1a' }}>
                 Send Email
               </a>
             </FadeIn>

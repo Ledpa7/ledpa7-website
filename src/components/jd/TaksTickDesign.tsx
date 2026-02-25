@@ -20,11 +20,11 @@ const TaksTickDesign = () => {
 
             {/* Portfolio Pages */}
             <div className={styles.pagesContainer}>
-                <MagnifiedImage src="/images/takstick_page_17.jpg" alt="Taks Tick Page 17" className={styles.pageImage} magSize={250} zoom={2} />
-                <MagnifiedImage src="/images/takstick_page_18.jpg" alt="Taks Tick Page 18" className={styles.pageImage} magSize={250} zoom={2} />
-                <MagnifiedImage src="/images/takstick_page_19.jpg" alt="Taks Tick Page 19" className={styles.pageImage} magSize={250} zoom={2} />
-                <MagnifiedImage src="/images/takstick_page_20.jpg" alt="Taks Tick Page 20" className={styles.pageImage} magSize={250} zoom={2} />
-                <MagnifiedImage src="/images/takstick_page_21.jpg" alt="Taks Tick Page 21" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/takstick_page_17.jpg" alt="Taks Tick Page 17" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/takstick_page_18.jpg" alt="Taks Tick Page 18" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/takstick_page_19.jpg" alt="Taks Tick Page 19" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/takstick_page_20.jpg" alt="Taks Tick Page 20" className={styles.pageImage} magSize={250} zoom={2} />
+                <MagnifiedImage src="/jd/images/takstick_page_21.jpg" alt="Taks Tick Page 21" className={styles.pageImage} magSize={250} zoom={2} />
             </div>
         </div>
     );

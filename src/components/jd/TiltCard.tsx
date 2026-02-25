@@ -79,7 +79,7 @@ const TiltCard: React.FC<TiltCardProps> = ({
                     width: '100%',
                     height: '100%',
                     position: 'relative',
-                    transition: isHovering ? 'transform 0.1s ease-out' : 'transform 0.5s ease-out',
+                    transition: 'transform 0.4s cubic-bezier(0.1, 0.5, 0.2, 1)',
                     transform: `
                         rotateX(${rotation.x}deg) 
                         rotateY(${rotation.y}deg) 
@@ -90,7 +90,7 @@ const TiltCard: React.FC<TiltCardProps> = ({
                 }}
             >
                 {/* Content */}
-                <div style={{ transform: 'translateZ(20px)', borderRadius: 'inherit', overflow: 'hidden', height: '100%' }}>
+                <div style={{ transform: 'translateZ(20px)', borderRadius: 'inherit', overflow: 'visible', height: '100%' }}>
                     {children}
                 </div>
 

@@ -16,8 +16,8 @@ const PROFILE_DATA = {
         "@microwave.30"
     ],
     stats: {
-        posts: 285,
-        followers: 4203,
+        posts: 298,
+        followers: 4290,
         following: 172
     },
     followedBy: "pa7led님이 팔로우합니다"
@@ -25,18 +25,18 @@ const PROFILE_DATA = {
 
 // Local Images provided by user, plus placeholders
 const FEED_ITEMS = [
-    { id: 1, image: '/images/feed_0.png', pinned: true },
-    { id: 2, image: '/images/feed_1.png', pinned: true },
-    { id: 3, image: '/images/feed_2.png', pinned: true },
-    { id: 4, image: '/images/feed_3.png' },
-    { id: 5, image: '/images/feed_4.png' },
-    { id: 6, image: '/images/feed_5.png' },
-    { id: 7, image: '/images/feed_6.png' },
-    { id: 8, image: '/images/feed_7.png' },
-    { id: 9, image: '/images/feed_8.png' },
-    { id: 10, image: '/images/feed_9.png' },
-    { id: 11, image: '/images/feed_10.png' }, // New uploaded image 1
-    { id: 12, image: '/images/feed_11.png' }, // New uploaded image 2
+    { id: 1, image: '/jd/images/feed_0.png', pinned: true },
+    { id: 2, image: '/jd/images/feed_1.png', pinned: true },
+    { id: 3, image: '/jd/images/feed_2.png', pinned: true },
+    { id: 4, image: '/jd/images/feed_3.png' },
+    { id: 5, image: '/jd/images/feed_4.png' },
+    { id: 6, image: '/jd/images/feed_5.png' },
+    { id: 7, image: '/jd/images/feed_6.png' },
+    { id: 8, image: '/jd/images/feed_7.png' },
+    { id: 9, image: '/jd/images/feed_8.png' },
+    { id: 10, image: '/jd/images/feed_9.png' },
+    { id: 11, image: '/jd/images/feed_10.png' }, // New uploaded image 1
+    { id: 12, image: '/jd/images/feed_11.png' }, // New uploaded image 2
 ];
 
 const InstagramClone = () => {
@@ -44,29 +44,38 @@ const InstagramClone = () => {
     const [feedItems, setFeedItems] = React.useState(FEED_ITEMS);
 
     React.useEffect(() => {
-        // Fetch real stats on mount
         const fetchStats = async () => {
             try {
-                // Use the API route we created
-                const res = await fetch('/api/instagram?username=microwave.30');
+                const res = await fetch(`/api/instagram?username=${PROFILE_DATA.username}`);
                 if (res.ok) {
                     const data = await res.json();
-                    if (data.followers && data.posts) {
-                        setStats(prev => ({
-                            ...prev,
-                            posts: data.posts,
-                            followers: data.followers,
-                            following: data.following || prev.following
-                        }));
+                    // If using the proxy/api method
+                    if (data.followers) {
+                        setStats({
+                            posts: data.posts || PROFILE_DATA.stats.posts,
+                            followers: data.followers || PROFILE_DATA.stats.followers,
+                            following: data.following || PROFILE_DATA.stats.following
+                        });
+                        console.log("Instagram stats synced:", data);
+                        return;
                     }
-                    // Removed image scraping logic to prioritize manual local images
                 }
             } catch (e) {
-                console.error("Failed to fetch IG stats", e);
+                console.error("Instagram sync failed, using fallback.", e);
             }
         };
 
         fetchStats();
+
+        // Keep a slow simulation for "alive" feel if sync fails or for micro-updates
+        const interval = setInterval(() => {
+            setStats(prev => ({
+                ...prev,
+                followers: prev.followers + (Math.random() > 0.8 ? 1 : 0)
+            }));
+        }, 30000);
+
+        return () => clearInterval(interval);
     }, []);
     return (
         <div className={styles.container}>
@@ -77,7 +86,7 @@ const InstagramClone = () => {
                     <div className={styles.profileImageOuter}>
                         <div className={styles.profileImageInner}>
                             <img
-                                src="/images/mw_profile.png"
+                                src="/jd/images/mw_profile.png"
                                 alt="microwave.30 profile"
                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
@@ -102,15 +111,15 @@ const InstagramClone = () => {
                     <div className={styles.statsRow}>
                         <div className={styles.statItem}>
                             <span>게시물</span>
-                            <span className={styles.statNumber}>{stats.posts}</span>
+                            <span className={styles.statNumber}>{stats.posts.toLocaleString()}</span>
                         </div>
                         <div className={styles.statItem}>
                             <span>팔로워</span>
-                            <span className={styles.statNumber}>{stats.followers}</span>
+                            <span className={styles.statNumber}>{stats.followers.toLocaleString()}</span>
                         </div>
                         <div className={styles.statItem}>
                             <span>팔로우</span>
-                            <span className={styles.statNumber}>{stats.following}</span>
+                            <span className={styles.statNumber}>{stats.following.toLocaleString()}</span>
                         </div>
                     </div>
 
@@ -125,10 +134,11 @@ const InstagramClone = () => {
                             <div key={i}>{line}</div>
                         ))}
                     </div>
+
                 </div>
             </div>
 
-            {/* Highlights Section (Removed in previous step? YES. So just skip it) */}
+            {/* Highlights Section */}
 
             {/* Tabs */}
             <div className={styles.tabs}>

@@ -11,6 +11,7 @@
   /* 브라우저 기본 스크롤바 숨기기 (선택사항) */
   scrollbar-width: none;
   -ms-overflow-style: none;
+  z-index: 1;
 }
 
 .container::-webkit-scrollbar {
@@ -23,6 +24,9 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  position: relative;
+  z-index: 2;
+  background: transparent;
 }
 
 /* Header - Mobile First */
@@ -39,7 +43,6 @@
   padding: 0 20px;
   background: transparent;
   z-index: 100;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }
 
@@ -95,7 +98,7 @@
 .ctaButton {
   display: inline-block;
   background: #fff;
-  color: #000;
+  color: #1a1a1a;
   padding: 12px 32px;
   border-radius: 100px;
   font-weight: 600;
@@ -150,6 +153,8 @@
 
 .profileImageArea {
   grid-area: image;
+  overflow: visible;
+  /* 3D 요소가 삐져나와도리지 않게 함 */
 }
 
 .profileImageWrapper {
@@ -157,8 +162,13 @@
   height: 320px;
   position: relative;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
+  overflow: visible !important;
+  /* 강제 만료 */
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  /* GPU 가속 및 레이어 분리 */
+  isolation: isolate;
 }
 
 .profileBasicArea {
@@ -300,7 +310,7 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
 
-  /* 아주 미세한 외곽선 추가 */
+  /* 아주 미세한 외곽선 및 투명 레이어 추가 */
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.02);
@@ -337,6 +347,8 @@
   padding: 8px 0;
   /* 가운데를 기준으로 스케일 및 변형이 일어나도록 수정 (우측 텍스트 밀림 방지) */
   transform-origin: center center;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .worksInfo {

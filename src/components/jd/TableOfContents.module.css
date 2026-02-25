@@ -27,13 +27,20 @@
 
     .list {
         list-style: none;
+        list-style-type: none;
         display: flex;
         flex-direction: column;
         gap: 32px;
+        margin: 0;
+        padding: 0;
     }
 
     .item {
         position: relative;
+        list-style: none;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
     }
 
     .link {
