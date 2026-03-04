@@ -18,6 +18,8 @@ export type Project = {
     imagePosition?: string;
     backgroundColor?: string;
     cardTitle?: string;
+    externalLink?: string;
+    imageScale?: number;
 };
 
 type EllipseGalleryProps = {
@@ -207,7 +209,11 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                             if (hasDragged.current) {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                return; // 드래그 중이었다면 클릭 무시
+                                return;
+                            }
+                            if (proj.externalLink) {
+                                window.open(proj.externalLink, '_blank', 'noopener,noreferrer');
+                                return;
                             }
                             onProjectSelect?.(proj, e.currentTarget.getBoundingClientRect());
                         }}
@@ -220,19 +226,24 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                     {proj.category}
                                 </div>
                             )}
-                            {proj.cardVideo ? (
+                            {proj.title === "두들로그" ? (
+                                <div className={styles.doodleLogCard}>
+                                    <div className={styles.doodleLogLogo}>Doodle Log</div>
+                                </div>
+
+                            ) : proj.cardVideo ? (
                                 <video
                                     ref={el => { if (el) videoRefs.current[i] = el; }}
                                     src={encodeURI(proj.cardVideo)}
                                     muted
                                     loop
                                     playsInline
-                                    preload="auto" // auto로 변경하여 사용자가 도달하기 직전에 알아서 미리 로드하도록 최적화
+                                    preload="auto"
                                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                     disablePictureInPicture
                                 />
                             ) : (
-                                proj.image && <img src={proj.image} alt={proj.title} style={{ width: '100%', height: '100%', objectFit: proj.imageFit || 'cover', objectPosition: proj.imagePosition || 'center', padding: isMobileRender && proj.imageFit === 'contain' ? '24px' : (proj.imagePadding || '0') }} draggable={false} loading="lazy" decoding="async" />
+                                proj.image && <img src={proj.image} alt={proj.title} style={{ width: '100%', height: '100%', objectFit: proj.imageFit || 'cover', objectPosition: proj.imagePosition || 'center', padding: isMobileRender && proj.imageFit === 'contain' ? '24px' : (proj.imagePadding || '0'), transform: proj.imageScale ? `scale(${proj.imageScale})` : 'none' }} draggable={false} loading="lazy" decoding="async" />
                             )}
                         </div>
                         <div className={styles.cardContent}>

@@ -21,6 +21,7 @@ type Project = {
     imagePadding?: string;
     imagePosition?: string;
     backgroundColor?: string;
+    imageScale?: number;
 };
 
 type Subcategory = {
@@ -86,7 +87,8 @@ const ProjectSection = () => {
         categories.forEach(cat => {
             cat.subcategories.forEach(sub => {
                 sub.projects.forEach(proj => {
-                    flattened.push({ ...proj, category: cat.title });
+                    // @ts-ignore
+                    flattened.push({ ...proj, category: proj.category || cat.title });
                 });
             });
         });
