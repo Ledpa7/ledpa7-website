@@ -203,89 +203,98 @@ export default function Home() {
 
 const WorksList = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollTop, setScrollTop] = useState(0);
+  const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    setScrollTop(e.currentTarget.scrollTop);
-  };
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
+    let frameId: number;
+    const updateItems = () => {
+      const containerHeight = container.offsetHeight;
+      const containerTop = container.scrollTop;
+      const containerCenter = containerTop + containerHeight / 2;
+
+      itemsRef.current.forEach((item) => {
+        if (!item) return;
+        
+        const itemCenter = item.offsetTop - container.offsetTop + (item.offsetHeight / 2);
+        const dist = Math.abs(containerCenter - itemCenter);
+        const maxDist = containerHeight / 1.5;
+        
+        const factor = Math.min(1, dist / maxDist);
+        const active = 1 - factor;
+        
+        // CSS 변수만 직접 업데이트하여 React 리렌더링을 피함
+        item.style.setProperty('--active', active.toString());
+      });
+      
+      frameId = requestAnimationFrame(updateItems);
+    };
+
+    frameId = requestAnimationFrame(updateItems);
+    return () => cancelAnimationFrame(frameId);
+  }, []);
+
+  let projectIdx = 0;
   return (
-    <div
-      className={styles.worksList}
-      ref={containerRef}
-      onScroll={handleScroll}
-    >
+    <div className={styles.worksList} ref={containerRef}>
       {worksData.map((sub, sIdx) => (
-          <div key={sIdx} className={styles.worksCategory}>
-            <h3 className={styles.worksCategoryTitle}>{sub.title}</h3>
-            {sub.projects.map((proj, pIdx) => (
+        <div key={sIdx} className={styles.worksCategory}>
+          <h3 className={styles.worksCategoryTitle}>{sub.title}</h3>
+          {sub.projects.map((proj, pIdx) => {
+            const currentIdx = projectIdx++;
+            return (
               <WorksListItem
                 key={pIdx}
                 proj={proj}
-                containerRef={containerRef}
-                scrollTop={scrollTop}
+                ref={(el: HTMLDivElement | null) => { itemsRef.current[currentIdx] = el; }}
               />
-            ))}
-          </div>
-        ))}
+            );
+          })}
+        </div>
+      ))}
     </div>
   );
 };
 
-const WorksListItem = ({ proj, containerRef, scrollTop }: any) => {
-  const itemRef = useRef<HTMLDivElement>(null);
-  const [style, setStyle] = useState<React.CSSProperties>({});
-  const [leftStyle, setLeftStyle] = useState<React.CSSProperties>({});
-  const [rightStyle, setRightStyle] = useState<React.CSSProperties>({});
-
-  useEffect(() => {
-    if (!containerRef.current || !itemRef.current) return;
-
-    const container = containerRef.current;
-    const item = itemRef.current;
-
-    const containerHeight = container.offsetHeight;
-    const itemCenter = item.offsetTop - container.offsetTop + (item.offsetHeight / 2);
-    const containerCenter = container.scrollTop + (containerHeight / 2);
-
-    const dist = Math.abs(containerCenter - itemCenter);
-    const maxDist = containerHeight / 1.5;
-
-    const factor = Math.min(1, dist / maxDist);
-    const active = 1 - factor;
-
-    const grayVal = Math.round(68 + (255 - 68) * active);
-    const colorStr = `rgb(${grayVal}, ${grayVal}, ${grayVal})`;
-
-    setStyle({
-      transform: `scale(${0.9 + (active * 0.1)})`, // 전체 스케일 유지
-      opacity: 0.4 + (active * 0.6),
-      color: colorStr,
-      transition: 'transform 0.3s ease, opacity 0.3s ease, color 0.2s ease'
-    });
-
-    const isMobile = window.innerWidth < 768;
-    // 모바일은 세로로 합쳐졌으므로 수평 수렴 효과를 0으로 (정렬 유지), 데스크탑은 40px 유지
-    const moveDist = isMobile ? 0 : 40;
-
-    // 센터 기준으로 텍스트들이 서로를 향해 모여드는 효과 (수렴)
-    setLeftStyle({
-      transform: `translateX(${active * moveDist}px)`,
-      transition: 'transform 0.4s ease'
-    });
-    setRightStyle({
-      transform: `translateX(${-active * moveDist}px)`,
-      transition: 'transform 0.4s ease'
-    });
-  }, [scrollTop, containerRef]);
+const WorksListItem = React.forwardRef(({ proj }: any, ref: any) => {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const moveDist = isMobile ? '0px' : '40px';
 
   return (
-    <div ref={itemRef} className={styles.worksItem} style={style}>
-      <div className={styles.worksInfo} style={leftStyle}>
+    <div 
+      ref={ref} 
+      className={styles.worksItem}
+      style={{
+        // CSS 변수를 활용한 선언적 애니메이션 (CPU 점유율 급감)
+        transform: `scale(calc(0.9 + var(--active, 0) * 0.1))`,
+        opacity: `calc(0.4 + var(--active, 0) * 0.6)`,
+        color: `rgb(
+          calc(68 + (255 - 68) * var(--active, 0)),
+          calc(68 + (255 - 68) * var(--active, 0)),
+          calc(68 + (255 - 68) * var(--active, 0))
+        )`,
+        transition: 'transform 0.3s ease, opacity 0.3s ease, color 0.2s ease'
+      } as React.CSSProperties}
+    >
+      <div 
+        className={styles.worksInfo} 
+        style={{ transform: `translateX(calc(var(--active, 0) * ${moveDist}))`, transition: 'transform 0.4s ease' }}
+      >
         <span className={styles.worksProjectTitle} style={{ color: 'inherit' }}>{proj.title}</span>
         <span className={styles.worksRole} style={{ color: 'inherit', opacity: 0.8 }}>{proj.description}</span>
       </div>
-      <span className={styles.worksDate} style={{ ...rightStyle, color: 'inherit' }}>{proj.period}</span>
+      <span 
+        className={styles.worksDate} 
+        style={{ 
+          transform: `translateX(calc(var(--active, 0) * -${moveDist}))`, 
+          color: 'inherit',
+          transition: 'transform 0.4s ease' 
+        }}
+      >
+        {proj.period}
+      </span>
     </div>
   );
-};
+});
