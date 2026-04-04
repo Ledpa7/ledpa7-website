@@ -21,6 +21,8 @@ export type Project = {
     cardTitle?: string;
     externalLink?: string;
     imageScale?: number;
+    galleryVideos?: string[];
+    galleryImages?: string[];
 };
 
 type EllipseGalleryProps = {
@@ -214,12 +216,22 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                 e.stopPropagation();
                                 return;
                             }
+                            
+                            // Block popup ONLY for numbers 10 to 15
+                            const isBlockedRange = i >= 9 && i <= 14;
+                                
+                            if (isBlockedRange) {
+                                console.log(`No content for project number ${i + 1}, blocking popup.`);
+                                return;
+                            }
+                            
                             if (proj.externalLink) {
                                 window.open(proj.externalLink, '_blank', 'noopener,noreferrer');
                                 return;
                             }
                             onProjectSelect?.(proj, e.currentTarget.getBoundingClientRect());
                         }}
+                        style={{ cursor: (i >= 9 && i <= 14) ? 'default' : 'pointer' }}
                     >
                         <div className={styles.cardNumber}>{(i + 1).toString().padStart(2, '0')}</div>
                         <div className={styles.cardReflect} />
@@ -250,7 +262,11 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                             )}
                         </div>
                         <div className={styles.cardContent}>
-                            <h4 className={styles.cardTitle}>{proj.cardTitle || proj.title}</h4>
+                            <h4 className={styles.cardTitle}>
+                                {(i >= 9 && i <= 14) // Numbers 10 to 15
+                                    ? (i + 1).toString().padStart(2, '0') 
+                                    : (proj.cardTitle || proj.title)}
+                            </h4>
                             <p className={styles.cardDesc}>{proj.description}</p>
                         </div>
                     </div>

@@ -22,6 +22,8 @@ type Project = {
     imagePosition?: string;
     backgroundColor?: string;
     imageScale?: number;
+    galleryVideos?: string[];
+    galleryImages?: string[];
 };
 
 type Subcategory = {
@@ -77,6 +79,7 @@ const ProjectSection = () => {
     };
 
     const handleCloseModal = () => {
+        setSelectedProject(null); // Force-close UI immediately
         const params = new URLSearchParams(searchParams.toString());
         params.delete('project');
         navigate(`${location.pathname}?${params.toString()}`, { replace: true });

@@ -294,13 +294,14 @@ const ProjectDetailModal = ({ project, initialRect, onClose }: Props) => {
 
     return createPortal(
         <div className={overlayClass} onClick={onClose}>
-            {/* 1. Close Button - Moved outside the sliding card to the Portal root for absolute reliability */}
+            {/* 1. Close Button - Absolute Surface Level Priority */}
             {isMounted && (
                 <button 
                 className={styles.closeButton} 
                 onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
+                    console.log("FORCE CLOSE TRIGGERED");
                     onClose();
                 }}
                 title="Close (Esc)" 
@@ -308,35 +309,37 @@ const ProjectDetailModal = ({ project, initialRect, onClose }: Props) => {
                     position: 'fixed',
                     top: '32px',
                     right: '32px',
-                    zIndex: 2500, // Highest priority
-                    width: '54px',
-                    height: '54px',
-                    background: 'rgba(20, 20, 20, 0.7)',
-                    backdropFilter: 'blur(20px)',
+                    zIndex: 99999, // Ultimate priority
+                    width: '60px', // Slightly larger for easier hit
+                    height: '60px',
+                    background: 'rgba(10, 10, 10, 0.8)', // Darker for contrast
+                    backdropFilter: 'blur(30px)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     borderRadius: '50%',
-                    border: '1px solid rgba(255, 255, 255, 0.25)',
+                    border: '2px solid rgba(255, 255, 255, 0.4)', // Thicker border
                     cursor: 'pointer',
                     color: 'white',
-                    fontSize: '36px',
+                    fontSize: '40px',
                     transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                    boxShadow: '0 10px 40px rgba(0,0,0,0.6)',
+                    boxShadow: '0 10px 40px rgba(0,0,0,0.8)',
                     pointerEvents: 'auto',
-                    opacity: isAnimating ? 1 : 0, // Fade with the modal
-                    transform: isAnimating ? 'scale(1)' : 'scale(0.8)',
+                    opacity: 1, // ALWAYS VISIBLE IF MOUNTED
+                    transform: isAnimating ? 'scale(1)' : 'scale(0.5)',
                 }}
                 onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(255, 60, 60, 0.9)';
+                    e.currentTarget.style.background = 'rgba(255, 60, 60, 1)';
                     e.currentTarget.style.transform = 'scale(1.1)';
+                    e.currentTarget.style.borderColor = 'white';
                 }}
                 onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(20, 20, 20, 0.7)';
+                    e.currentTarget.style.background = 'rgba(10, 10, 10, 0.8)';
                     e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)';
                 }}
                 >
-                    <span style={{ display: 'block', transform: 'translateY(3px)' }}>×</span>
+                    <span style={{ display: 'block', transform: 'translateY(4px)', lineHeight: 1 }}>×</span>
                 </button>
             )}
 
