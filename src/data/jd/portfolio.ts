@@ -202,11 +202,11 @@ export const portfolioData = {
             subcategories: [
                 // 🚀 3D 갤러리 07, 08번을 위해 Service를 최상단에 배치
                 {
-                    title: "Service",
+                    title: "Development",
                     projects: [
                         {
-                            title: "두들로그",
-                            cardTitle: "AI그림일기 서비스",
+                            title: "DoodleLog : AI 그림일기",
+                            cardTitle: "DoodleLog : AI 그림일기",
                             description: "일기를 적으면 AI가 그려주는 서비스",
                             period: "2024.11 ~ 2024.12",
                             tags: ["AI", "React", "Service"],
@@ -215,8 +215,8 @@ export const portfolioData = {
                             backgroundColor: "#121212",
                         },
                         {
-                            title: "프리즘 multi LLM",
-                            cardTitle: "멀티 AI 서비스",
+                            title: "Priesm : 멀티 AI",
+                            cardTitle: "Priesm : 멀티 AI",
                             description: "한번의 질문에 AI들이 동시답변하는 확장 프로그램 서비스",
                             period: "2024.12 ~ 2025.02",
                             tags: ["AI", "LLM", "Productivity"],
@@ -227,6 +227,20 @@ export const portfolioData = {
                             imagePadding: "25px",
                             imageScale: 0.9,
                             backgroundColor: "#FFFFFF",
+                        },
+                        {
+                            title: "Vibe Gallery",
+                            cardTitle: "Vibe Gallery",
+                            description: "바이브 코더들을 위한 프로젝트를 소개하는 갤러리 공간",
+                            period: "2025.02 ~",
+                            tags: ["Gallery", "Community", "Service"],
+                            category: "Development",
+                            externalLink: "https://vibegallery.ledpa7.com/main",
+                            image: "/jd/images/vibeGallery.svg",
+                            imageScale: 0.5,
+                            imageFit: "contain",
+                            imagePadding: "30px",
+                            backgroundColor: "#1a0b2e",
                         },
                     ],
                 },
@@ -305,7 +319,7 @@ export const worksData = [
         projects: portfolioData.categories.find(c => c.id === 'development')!.subcategories.find(s => s.title === 'Exhibition & Craft')!.projects
     },
     {
-        title: "Service",
-        projects: portfolioData.categories.find(c => c.id === 'development')!.subcategories.find(s => s.title === 'Service')!.projects
+        title: "Development",
+        projects: portfolioData.categories.find(c => c.id === 'development')!.subcategories.find(s => s.title === 'Development')!.projects
     }
 ];

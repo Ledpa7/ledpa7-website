@@ -229,7 +229,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                     {proj.category}
                                 </div>
                             )}
-                            {proj.title === "두들로그" ? (
+                            {proj.title === "DoodleLog : AI 그림일기" ? (
                                 <div className={styles.doodleLogCard}>
                                     <div className={styles.doodleLogLogo}>Doodle Log</div>
                                 </div>

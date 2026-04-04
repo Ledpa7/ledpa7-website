@@ -24,21 +24,104 @@ export const prefetchProject = (title: string) => {
     prefetchMap[title]?.();
 };
 
-// Simple Premium Loader Fallback
-const LoadingFallback = () => (
-    <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '300px',
-        color: 'var(--accent-primary)',
-        fontSize: '0.9rem',
-        letterSpacing: '0.2em',
-        fontFamily: 'var(--font-oswald), sans-serif'
-    }}>
-        LOADING...
-    </div>
-);
+// Premium Orbital Loading Animation
+const LoadingFallback = () => {
+    const keyframes = `
+        @keyframes orbitSpin1 {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes orbitSpin2 {
+            0% { transform: rotate(120deg); }
+            100% { transform: rotate(480deg); }
+        }
+        @keyframes orbitSpin3 {
+            0% { transform: rotate(240deg); }
+            100% { transform: rotate(600deg); }
+        }
+        @keyframes corePulse {
+            0%, 100% { transform: scale(0.6); opacity: 0.3; box-shadow: 0 0 8px rgba(255,60,60,0.2); }
+            50% { transform: scale(1); opacity: 1; box-shadow: 0 0 20px rgba(255,60,60,0.6), 0 0 40px rgba(255,60,60,0.2); }
+        }
+        @keyframes textReveal {
+            0% { opacity: 0; letter-spacing: 0.6em; }
+            50% { opacity: 1; letter-spacing: 0.3em; }
+            100% { opacity: 0.4; letter-spacing: 0.25em; }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    `;
+    const ringBase: React.CSSProperties = {
+        position: 'absolute',
+        borderRadius: '50%',
+        border: '1.5px solid transparent',
+    };
+    return (
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            minHeight: '70vh',
+            paddingBottom: '10vh',
+            gap: '28px',
+            animation: 'fadeUp 0.5s ease-out',
+        }}>
+            <style>{keyframes}</style>
+            {/* 오비탈 컨테이너 */}
+            <div style={{ position: 'relative', width: '64px', height: '64px' }}>
+                {/* 링 1 - 바깥 */}
+                <div style={{
+                    ...ringBase,
+                    width: '64px', height: '64px',
+                    borderTopColor: 'rgba(255,60,60,0.8)',
+                    borderRightColor: 'rgba(255,60,60,0.15)',
+                    animation: 'orbitSpin1 1.8s cubic-bezier(0.45,0.05,0.55,0.95) infinite',
+                }} />
+                {/* 링 2 - 중간 */}
+                <div style={{
+                    ...ringBase,
+                    width: '44px', height: '44px',
+                    top: '10px', left: '10px',
+                    borderTopColor: 'rgba(255,120,80,0.7)',
+                    borderLeftColor: 'rgba(255,120,80,0.1)',
+                    animation: 'orbitSpin2 1.4s cubic-bezier(0.45,0.05,0.55,0.95) infinite',
+                }} />
+                {/* 링 3 - 안쪽 */}
+                <div style={{
+                    ...ringBase,
+                    width: '26px', height: '26px',
+                    top: '19px', left: '19px',
+                    borderBottomColor: 'rgba(255,180,120,0.6)',
+                    borderRightColor: 'rgba(255,180,120,0.1)',
+                    animation: 'orbitSpin3 1.0s cubic-bezier(0.45,0.05,0.55,0.95) infinite',
+                }} />
+                {/* 코어 닷 */}
+                <div style={{
+                    position: 'absolute',
+                    width: '6px', height: '6px',
+                    top: '29px', left: '29px',
+                    borderRadius: '50%',
+                    backgroundColor: '#ff3c3c',
+                    animation: 'corePulse 1.8s ease-in-out infinite',
+                }} />
+            </div>
+            {/* 텍스트 */}
+            <span style={{
+                color: 'rgba(255,255,255,0.3)',
+                fontSize: '0.65rem',
+                letterSpacing: '0.25em',
+                fontFamily: 'var(--font-oswald), sans-serif',
+                textTransform: 'uppercase',
+                animation: 'textReveal 2.4s ease-in-out infinite',
+            }}>
+                loading
+            </span>
+        </div>
+    );
+};
 
 const getYoutubeId = (url: string) => {
     if (!url) return null;
@@ -211,12 +294,58 @@ const ProjectDetailModal = ({ project, initialRect, onClose }: Props) => {
 
     return createPortal(
         <div className={overlayClass} onClick={onClose}>
+            {/* 1. Close Button - Moved outside the sliding card to the Portal root for absolute reliability */}
+            {isMounted && (
+                <button 
+                className={styles.closeButton} 
+                onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onClose();
+                }}
+                title="Close (Esc)" 
+                style={{
+                    position: 'fixed',
+                    top: '32px',
+                    right: '32px',
+                    zIndex: 2500, // Highest priority
+                    width: '54px',
+                    height: '54px',
+                    background: 'rgba(20, 20, 20, 0.7)',
+                    backdropFilter: 'blur(20px)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '50%',
+                    border: '1px solid rgba(255, 255, 255, 0.25)',
+                    cursor: 'pointer',
+                    color: 'white',
+                    fontSize: '36px',
+                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                    boxShadow: '0 10px 40px rgba(0,0,0,0.6)',
+                    pointerEvents: 'auto',
+                    opacity: isAnimating ? 1 : 0, // Fade with the modal
+                    transform: isAnimating ? 'scale(1)' : 'scale(0.8)',
+                }}
+                onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 60, 60, 0.9)';
+                    e.currentTarget.style.transform = 'scale(1.1)';
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(20, 20, 20, 0.7)';
+                    e.currentTarget.style.transform = 'scale(1)';
+                }}
+                >
+                    <span style={{ display: 'block', transform: 'translateY(3px)' }}>×</span>
+                </button>
+            )}
+
+            {/* 2. Expanded Modal Card */}
             <div
                 className={cardClass}
                 style={initialStyles}
                 onClick={(e) => e.stopPropagation()}
             >
-                <button className={styles.closeButton} onClick={onClose}>×</button>
                 <div className={styles.modalContent}>
                     {/* === 제목/설명을 즉시 렌더링 (Suspense 밖) === */}
                     {displayProject.title === "전자렌지 30초" ? (
