@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
+import { prefetchProject } from "./ProjectDetailModal";
 import styles from "./ProjectSection.module.css";
 
 export type Project = {
@@ -205,6 +206,8 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                         className={styles.projectCard}
                         ref={el => { if (el) cardsRef.current[i] = el; }}
                         onDragStart={(e) => e.preventDefault()}
+                        onMouseEnter={() => prefetchProject(proj.title)}
+                        onTouchStart={() => prefetchProject(proj.title)}
                         onClick={(e) => {
                             if (hasDragged.current) {
                                 e.preventDefault();
@@ -238,7 +241,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                     muted
                                     loop
                                     playsInline
-                                    preload="metadata"
+                                    preload="auto"
                                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                     disablePictureInPicture
                                 />

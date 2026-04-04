@@ -11,6 +11,19 @@ const DeadGearDesign = React.lazy(() => import('./DeadGearDesign'));
 const TrayLightDesign = React.lazy(() => import('./TrayLightDesign'));
 const TaksTickDesign = React.lazy(() => import('./TaksTickDesign'));
 
+// Prefetch: 카드 hover 시 해당 프로젝트의 JS 번들을 미리 다운로드
+const prefetchMap: Record<string, () => void> = {
+    '전자렌지 30초': () => import('./InstagramClone'),
+    'Tesolar': () => import('./TesolarDesign'),
+    'Dead Gear': () => import('./DeadGearDesign'),
+    'Tray Light': () => import('./TrayLightDesign'),
+    'Taks Tick': () => import('./TaksTickDesign'),
+};
+
+export const prefetchProject = (title: string) => {
+    prefetchMap[title]?.();
+};
+
 // Simple Premium Loader Fallback
 const LoadingFallback = () => (
     <div style={{
@@ -118,11 +131,9 @@ const ProjectDetailModal = ({ project, initialRect, onClose }: Props) => {
             setIsMounted(true);
             setVideoError(false); // Reset error state on new project
 
-            // Trigger animation next frame
+            // Trigger animation next frame (단일 rAF로 16ms 절약)
             requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    setIsAnimating(true);
-                });
+                setIsAnimating(true);
             });
         } else {
             // Closing
@@ -207,215 +218,184 @@ const ProjectDetailModal = ({ project, initialRect, onClose }: Props) => {
             >
                 <button className={styles.closeButton} onClick={onClose}>×</button>
                 <div className={styles.modalContent}>
-                    <React.Suspense fallback={<LoadingFallback />}>
-                        {/* Special Case: Instagram Project */}
-                        {displayProject.title === "전자렌지 30초" ? (
-                            <div style={{ marginBottom: '40px' }}>
-                                <FadeIn>
-                                    <h2 className={styles.title} style={{ textAlign: 'center', marginBottom: '8px' }}>{displayProject.title}</h2>
-                                    <p style={{ textAlign: 'center', color: '#ffffff', marginBottom: '32px' }}>{displayProject.description}</p>
-                                    <InstagramClone />
-                                </FadeIn>
-                            </div>
-                        ) : displayProject.title === "Tesolar" ? (
-                            /* Special Case: Tesolar Design Study */
+                    {/* === 제목/설명을 즉시 렌더링 (Suspense 밖) === */}
+                    {displayProject.title === "전자렌지 30초" ? (
+                        <div style={{ marginBottom: '40px' }}>
                             <FadeIn>
-                                <TesolarDesign />
+                                <h2 className={styles.title} style={{ textAlign: 'center', marginBottom: '8px' }}>{displayProject.title}</h2>
+                                <p style={{ textAlign: 'center', color: '#ffffff', marginBottom: '32px' }}>{displayProject.description}</p>
                             </FadeIn>
-                        ) : displayProject.title === "Dead Gear" ? (
-                            <FadeIn>
-                                <DeadGearDesign />
-                            </FadeIn>
-                        ) : displayProject.title === "Tray Light" ? (
-                            <FadeIn>
-                                <TrayLightDesign />
-                            </FadeIn>
-                        ) : displayProject.title === "Taks Tick" ? (
-                            <FadeIn>
-                                <TaksTickDesign />
-                            </FadeIn>
-                        ) : displayProject.galleryImages && displayProject.galleryImages.length > 0 ? (
-                            /* Special Case: Design Showcase Project */
-                            <div className={styles.designShowcase}>
-                                {/* Magazine Header */}
-                                <div className={styles.designHeader}>
-                                    <h2 className={styles.bigTitle}>{displayProject.title}</h2>
-                                    <div className={styles.designMeta}>
-                                        <span className={styles.period}>{displayProject.period}</span>
-                                        <div className={styles.tags}>
-                                            {displayProject.tags?.map(tag => (
-                                                <span key={tag} className={styles.tagBadge}>{tag}</span>
-                                            ))}
-                                        </div>
+                            <React.Suspense fallback={<LoadingFallback />}>
+                                <InstagramClone />
+                            </React.Suspense>
+                        </div>
+                    ) : displayProject.title === "Tesolar" ? (
+                        <React.Suspense fallback={<LoadingFallback />}>
+                            <FadeIn><TesolarDesign /></FadeIn>
+                        </React.Suspense>
+                    ) : displayProject.title === "Dead Gear" ? (
+                        <React.Suspense fallback={<LoadingFallback />}>
+                            <FadeIn><DeadGearDesign /></FadeIn>
+                        </React.Suspense>
+                    ) : displayProject.title === "Tray Light" ? (
+                        <React.Suspense fallback={<LoadingFallback />}>
+                            <FadeIn><TrayLightDesign /></FadeIn>
+                        </React.Suspense>
+                    ) : displayProject.title === "Taks Tick" ? (
+                        <React.Suspense fallback={<LoadingFallback />}>
+                            <FadeIn><TaksTickDesign /></FadeIn>
+                        </React.Suspense>
+                    ) : displayProject.galleryImages && displayProject.galleryImages.length > 0 ? (
+                        /* Design Showcase: 헤더 텍스트 즉시 표시, 이미지는 뒤에서 로딩 */
+                        <div className={styles.designShowcase}>
+                            <div className={styles.designHeader}>
+                                <h2 className={styles.bigTitle}>{displayProject.title}</h2>
+                                <div className={styles.designMeta}>
+                                    <span className={styles.period}>{displayProject.period}</span>
+                                    <div className={styles.tags}>
+                                        {displayProject.tags?.map(tag => (
+                                            <span key={tag} className={styles.tagBadge}>{tag}</span>
+                                        ))}
                                     </div>
-                                    <p className={styles.designDescription}>
-                                        {formatDescription(displayProject.detailDescription || displayProject.description)}
-                                    </p>
                                 </div>
+                                <p className={styles.designDescription}>
+                                    {formatDescription(displayProject.detailDescription || displayProject.description)}
+                                </p>
+                            </div>
 
-                                {/* Hero Image */}
-                                {displayProject.image && (
-                                    <div className={styles.heroImageContainer} style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
+                            {/* Hero Image */}
+                            {displayProject.image && (
+                                <div className={styles.heroImageContainer} style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
+                                    <img
+                                        src={displayProject.image}
+                                        alt={displayProject.title}
+                                        className={styles.heroImage}
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                        loading="eager"
+                                    />
+                                </div>
+                            )}
+
+                            {/* Vertical Image Gallery */}
+                            <div className={styles.imageStack}>
+                                {displayProject.galleryImages.map((img, idx) => (
+                                    <div key={idx} className={styles.stackItem} style={{ position: 'relative', width: '100%', marginBottom: '20px' }}>
                                         <img
-                                            src={displayProject.image}
-                                            alt={displayProject.title}
-                                            className={styles.heroImage}
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                            src={img}
+                                            alt={`${displayProject.title} detail ${idx}`}
+                                            style={{ width: '100%', height: 'auto', display: 'block' }}
                                             loading="lazy"
                                         />
                                     </div>
-                                )}
+                                ))}
+                            </div>
+                        </div>
+                    ) : (
+                        /* Standard Layout: 제목/메타 즉시 표시, 미디어는 프로그레시브 로딩 */
+                        <>
+                            <h2 className={styles.title}>{displayProject.title}</h2>
+                            <div className={styles.meta}>
+                                <span style={{ color: 'var(--accent-primary)' }}>{displayProject.period}</span>
+                                <span>{displayProject.tags?.join(', ')}</span>
+                            </div>
 
-                                {/* Vertical Image Gallery */}
-                                <div className={styles.imageStack}>
-                                    {displayProject.galleryImages.map((img, idx) => (
-                                        <div key={idx} className={styles.stackItem} style={{ position: 'relative', width: '100%', marginBottom: '20px' }}>
-                                            <img
-                                                src={img}
-                                                alt={`${displayProject.title} detail ${idx}`}
-                                                style={{ width: '100%', height: 'auto', display: 'block' }}
-                                                loading="lazy"
-                                            />
-                                        </div>
+                            <p className={styles.description}>
+                                {formatDescription(displayProject.detailDescription || displayProject.description)}
+                            </p>
+
+                            {(displayProject.video || displayProject.image) && (
+                                displayProject.title === 'Led.발광다이오드' && displayProject.video && !videoError ? (
+                                    <div className={styles.cinematicContainer}>
+                                        <video
+                                            ref={blurVideoRef}
+                                            src={displayProject.video}
+                                            autoPlay muted loop playsInline
+                                            style={{
+                                                position: 'absolute', top: '50%', left: '50%',
+                                                transform: 'translate(-50%, -50%) scale(1.3)',
+                                                width: '100%', height: '100%', objectFit: 'cover',
+                                                filter: 'blur(40px) brightness(0.5)',
+                                                zIndex: 0, pointerEvents: 'none',
+                                            }}
+                                        />
+                                        <video
+                                            ref={mainVideoRef}
+                                            key={displayProject.video}
+                                            src={displayProject.video}
+                                            poster={displayProject.image}
+                                            controls autoPlay muted loop playsInline
+                                            className={styles.cinematicMainVideo}
+                                            onTimeUpdate={() => {
+                                                if (blurVideoRef.current && mainVideoRef.current) {
+                                                    const diff = Math.abs(blurVideoRef.current.currentTime - mainVideoRef.current.currentTime);
+                                                    if (diff > 0.05) {
+                                                        blurVideoRef.current.currentTime = mainVideoRef.current.currentTime;
+                                                    }
+                                                }
+                                            }}
+                                            onPlay={() => { blurVideoRef.current?.play().catch(() => { }); }}
+                                            onPause={() => { blurVideoRef.current?.pause(); }}
+                                            onError={(e) => {
+                                                const error = (e.target as HTMLVideoElement).error;
+                                                console.error("Video Error:", error?.code, error?.message);
+                                                setVideoError(true);
+                                            }}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className={styles.mediaContainer}>
+                                        {displayProject.video && !videoError ? (
+                                            getYoutubeId(displayProject.video) ? (
+                                                <iframe
+                                                    width="100%"
+                                                    style={{
+                                                        aspectRatio: displayProject.video.includes('shorts/') ? '9/16' : '16/9',
+                                                        width: '100%', height: 'auto',
+                                                        borderRadius: '12px', border: 'none', display: 'block'
+                                                    }}
+                                                    src={`https://www.youtube.com/embed/${getYoutubeId(displayProject.video)}?autoplay=1&mute=1&loop=1&playlist=${getYoutubeId(displayProject.video)}`}
+                                                    title="YouTube video player"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                    allowFullScreen
+                                                />
+                                            ) : (
+                                                <video
+                                                    key={displayProject.video}
+                                                    src={displayProject.video}
+                                                    poster={displayProject.image}
+                                                    controls autoPlay muted loop playsInline
+                                                    className={styles.projectVideo}
+                                                    onError={(e) => {
+                                                        const error = (e.target as HTMLVideoElement).error;
+                                                        console.error("Video Error:", error?.code, error?.message);
+                                                        setVideoError(true);
+                                                    }}
+                                                />
+                                            )
+                                        ) : (
+                                            <div className={styles.imagePlaceholder}>
+                                                {displayProject.image && (
+                                                    <img
+                                                        src={displayProject.image}
+                                                        alt={displayProject.title}
+                                                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                                                    />
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                )
+                            )}
+
+                            {displayProject.galleryVideos && displayProject.galleryVideos.length > 0 && (
+                                <div className={styles.videoGrid}>
+                                    {displayProject.galleryVideos.map((videoSrc, idx) => (
+                                        <VideoTile key={idx} src={videoSrc} />
                                     ))}
                                 </div>
-                            </div>
-                        ) : (
-                            /* Standard Layout (Video/General) */
-                            <>
-                                <h2 className={styles.title}>{displayProject.title}</h2>
-                                <div className={styles.meta}>
-                                    <span style={{ color: 'var(--accent-primary)' }}>{displayProject.period}</span>
-                                    <span>{displayProject.tags?.join(', ')}</span>
-                                </div>
-
-                                <p className={styles.description}>
-                                    {formatDescription(displayProject.detailDescription || displayProject.description)}
-                                </p>
-
-                                {(displayProject.video || displayProject.image) && (
-                                    displayProject.title === 'Led.발광다이오드' && displayProject.video && !videoError ? (
-                                        /* 발광다이오드 전용: 시네마틱 블러 배경 비디오 */
-                                        <div className={styles.cinematicContainer}>
-                                            {/* 블러 배경 비디오 (동기 재생) */}
-                                            <video
-                                                ref={blurVideoRef}
-                                                src={displayProject.video}
-                                                autoPlay
-                                                muted
-                                                loop
-                                                playsInline
-                                                style={{
-                                                    position: 'absolute',
-                                                    top: '50%',
-                                                    left: '50%',
-                                                    transform: 'translate(-50%, -50%) scale(1.3)',
-                                                    width: '100%',
-                                                    height: '100%',
-                                                    objectFit: 'cover',
-                                                    filter: 'blur(40px) brightness(0.5)',
-                                                    zIndex: 0,
-                                                    pointerEvents: 'none',
-                                                }}
-                                            />
-                                            {/* 메인 비디오 */}
-                                            <video
-                                                ref={mainVideoRef}
-                                                key={displayProject.video}
-                                                src={displayProject.video}
-                                                poster={displayProject.image}
-                                                controls
-                                                autoPlay
-                                                muted
-                                                loop
-                                                playsInline
-                                                className={styles.cinematicMainVideo}
-                                                onTimeUpdate={() => {
-                                                    if (blurVideoRef.current && mainVideoRef.current) {
-                                                        const diff = Math.abs(blurVideoRef.current.currentTime - mainVideoRef.current.currentTime);
-                                                        // More aggressive sync if drift is detected
-                                                        if (diff > 0.05) {
-                                                            blurVideoRef.current.currentTime = mainVideoRef.current.currentTime;
-                                                        }
-                                                    }
-                                                }}
-                                                onPlay={() => {
-                                                    blurVideoRef.current?.play().catch(() => { });
-                                                }}
-                                                onPause={() => {
-                                                    blurVideoRef.current?.pause();
-                                                }}
-                                                onError={(e) => {
-                                                    const error = (e.target as HTMLVideoElement).error;
-                                                    console.error("Video Error:", error?.code, error?.message);
-                                                    setVideoError(true);
-                                                }}
-                                            />
-                                        </div>
-
-                                    ) : (
-                                        <div className={styles.mediaContainer}>
-                                            {displayProject.video && !videoError ? (
-                                                getYoutubeId(displayProject.video) ? (
-                                                    <iframe
-                                                        width="100%"
-                                                        style={{
-                                                            aspectRatio: displayProject.video.includes('shorts/') ? '9/16' : '16/9',
-                                                            width: '100%',
-                                                            height: 'auto',
-                                                            borderRadius: '12px',
-                                                            border: 'none',
-                                                            display: 'block'
-                                                        }}
-                                                        src={`https://www.youtube.com/embed/${getYoutubeId(displayProject.video)}?autoplay=1&mute=1&loop=1&playlist=${getYoutubeId(displayProject.video)}`}
-                                                        title="YouTube video player"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                        allowFullScreen
-                                                    />
-                                                ) : (
-                                                    <video
-                                                        key={displayProject.video}
-                                                        src={displayProject.video}
-                                                        poster={displayProject.image}
-                                                        controls
-                                                        autoPlay
-                                                        muted
-                                                        loop
-                                                        playsInline
-                                                        className={styles.projectVideo}
-                                                        onError={(e) => {
-                                                            const error = (e.target as HTMLVideoElement).error;
-                                                            console.error("Video Error:", error?.code, error?.message);
-                                                            setVideoError(true);
-                                                        }}
-                                                    />
-                                                )
-                                            ) : (
-                                                <div className={styles.imagePlaceholder}>
-                                                    {displayProject.image && (
-                                                        <img
-                                                            src={displayProject.image}
-                                                            alt={displayProject.title}
-                                                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                                                        />
-                                                    )}
-                                                </div>
-                                            )}
-                                        </div>
-                                    )
-                                )}
-
-
-                                {displayProject.galleryVideos && displayProject.galleryVideos.length > 0 && (
-                                    <div className={styles.videoGrid}>
-                                        {displayProject.galleryVideos.map((videoSrc, idx) => (
-                                            <VideoTile key={idx} src={videoSrc} />
-                                        ))}
-                                    </div>
-                                )}
-                            </>
-                        )}
-                    </React.Suspense>
+                            )}
+                        </>
+                    )}
                 </div>
             </div>
         </div>,
