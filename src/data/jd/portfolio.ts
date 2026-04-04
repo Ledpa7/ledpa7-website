@@ -189,7 +189,7 @@ export const portfolioData = {
                             image: "/jd/images/microwave_card.png",
                             imageFit: "contain",
                             imagePadding: "60px",
-                            backgroundColor: "#EE5B34", // 전자렌지 안의 쨍한 주황색 
+                            backgroundColor: "#EE5B34",
                         },
                     ],
                 },
@@ -200,8 +200,9 @@ export const portfolioData = {
             title: "Development",
             description: "Interactive Web, Creative Coding, HMI, and System Engineering",
             subcategories: [
+                // 🚀 3D 갤러리 07, 08번을 위해 Service를 최상단에 배치
                 {
-                    title: "HMI (Human Machine Interface)",
+                    title: "Service",
                     projects: [
                         {
                             title: "두들로그",
@@ -214,9 +215,9 @@ export const portfolioData = {
                             backgroundColor: "#121212",
                         },
                         {
-                            title: "Merlin AI Lab",
+                            title: "프리즘 multi LLM",
                             cardTitle: "멀티 AI LLM 서비스",
-                            description: "한번의 질문에 AI들이 동시답변",
+                            description: "한번의 질문에 AI들이 동시답변하는 확장 프로그램 서비스",
                             period: "2024.12 ~ 2025.02",
                             tags: ["AI", "LLM", "Productivity"],
                             category: "AI Service",
@@ -227,6 +228,11 @@ export const portfolioData = {
                             imageScale: 0.8,
                             backgroundColor: "#FFFFFF",
                         },
+                    ],
+                },
+                {
+                    title: "HMI (Human Machine Interface)",
+                    projects: [
                         {
                             title: "농심 녹산공장",
                             cardTitle: "09",
@@ -279,11 +285,27 @@ export const portfolioData = {
                         },
                     ],
                 },
-                {
-                    title: "Service",
-                    projects: [],
-                }
             ],
         },
     ],
 };
+
+// 🚀 Works 섹션을 위해 분리된 독립 데이터 (Service가 맨 하단에 위치)
+export const worksData = [
+    {
+        title: "HMI (Human Machine Interface)",
+        projects: portfolioData.categories.find(c => c.id === 'development')!.subcategories.find(s => s.title === 'HMI (Human Machine Interface)')!.projects
+    },
+    {
+        title: "System & PM",
+        projects: portfolioData.categories.find(c => c.id === 'development')!.subcategories.find(s => s.title === 'System & PM')!.projects
+    },
+    {
+        title: "Exhibition & Craft",
+        projects: portfolioData.categories.find(c => c.id === 'development')!.subcategories.find(s => s.title === 'Exhibition & Craft')!.projects
+    },
+    {
+        title: "Service",
+        projects: portfolioData.categories.find(c => c.id === 'development')!.subcategories.find(s => s.title === 'Service')!.projects
+    }
+];

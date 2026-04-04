@@ -84,6 +84,7 @@ const ProjectSection = () => {
 
     const allProjects = React.useMemo(() => {
         const flattened: any[] = [];
+        
         categories.forEach(cat => {
             cat.subcategories.forEach(sub => {
                 sub.projects.forEach(proj => {

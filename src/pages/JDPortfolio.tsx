@@ -7,7 +7,7 @@ const TableOfContents = lazy(() => import("../components/jd/TableOfContents"));
 const ProjectSection = lazy(() => import("../components/jd/ProjectSection"));
 const ClickSpark = lazy(() => import("../components/jd/ClickSpark"));
 const TiltCard = lazy(() => import("../components/jd/TiltCard"));
-import { portfolioData } from "../data/jd/portfolio";
+import { portfolioData, worksData } from "../data/jd/portfolio";
 import "./JDGlobal.css";
 import CustomCursor from "../components/jd/CustomCursor";
 import InteractiveStarBackground from "../components/jd/InteractiveStarBackground";
@@ -215,9 +215,7 @@ const WorksList = () => {
       ref={containerRef}
       onScroll={handleScroll}
     >
-      {portfolioData.categories
-        .find(cat => cat.id === 'development')
-        ?.subcategories.map((sub, sIdx) => (
+      {worksData.map((sub, sIdx) => (
           <div key={sIdx} className={styles.worksCategory}>
             <h3 className={styles.worksCategoryTitle}>{sub.title}</h3>
             {sub.projects.map((proj, pIdx) => (
