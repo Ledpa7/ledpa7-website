@@ -196,7 +196,7 @@ export default function Home() {
                 새로운 가치를 만드는 일에 언제나 열려있습니다.<br />
                 +82 10 9077 1261 / wjdwlen@naver.com
               </p>
-              <a href={`mailto:${portfolioData.about.email}`} className={styles.ctaButton} style={{ color: '#1a1a1a' }}>
+              <a href={`mailto:${portfolioData.about.email}`} className={styles.ctaButton} style={{ color: '#000000' }}>
                 Send Email
               </a>
             </FadeIn>

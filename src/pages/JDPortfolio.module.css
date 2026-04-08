@@ -82,8 +82,8 @@
 
 .ctaButton {
   display: inline-block;
-  background: #fff;
-  color: #1a1a1a;
+  background: #ffffff !important;
+  color: #000000 !important;
   padding: 12px 32px;
   border-radius: 100px;
   font-weight: 600;

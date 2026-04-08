@@ -106,14 +106,16 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                 const bottomSqueeze = 1 - (Math.max(0, cosVal) * (isMobile ? 0.35 : 0.10));
                 const tx = sinVal * radiusX * bottomSqueeze;
                 const ty = (cosVal * radiusY) + (isMobile ? 50 : 30);
-                const tz = -cosVal * (isMobile ? 380 : 500);
+                const tz = -cosVal * (isMobile ? 550 : 500); // Increased Z-depth for mobile
                 const rotateY = 180 - angle;
-                const baseScale = isMobile ? 0.55 : 0.70;
-                const scale = baseScale - (cosVal * 0.15);
-                const opacity = 0.60 - (cosVal * 0.40);
+                const baseScale = isMobile ? 0.65 : 0.70;
+                const scale = baseScale - (cosVal * (isMobile ? 0.35 : 0.15)); // More dramatic scale on mobile
+                const opacity = isMobile 
+                    ? (0.50 - (cosVal * 0.70)) // Higher contrast opacity for mobile
+                    : (0.60 - (cosVal * 0.40));
 
                 card.style.transform = `translate3d(${tx}px, ${ty}px, ${tz}px) rotateY(${rotateY}deg) scale(${scale})`;
-                card.style.opacity = opacity.toString();
+                card.style.opacity = Math.max(0.1, Math.min(1, opacity)).toString();
                 card.style.zIndex = Math.round(tz + 2000).toString();
 
                 const video = videoRefs.current[i];
@@ -145,6 +147,11 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
             const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
             const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
 
+            if (isDragging.current && 'touches' in e) {
+                // Prevent browser jump/scroll during active gallery manipulation
+                if (e.cancelable) e.preventDefault();
+            }
+
             // Global mouse position normalized for parallax (-1 to 1)
             const cw = window.innerWidth;
             const ch = window.innerHeight;
@@ -174,9 +181,9 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
         };
 
         gallery.addEventListener("mousedown", onDown);
-        gallery.addEventListener("touchstart", onDown, { passive: true });
+        gallery.addEventListener("touchstart", onDown, { passive: false });
         window.addEventListener("mousemove", onMove);
-        window.addEventListener("touchmove", onMove, { passive: true });
+        window.addEventListener("touchmove", onMove, { passive: false });
         window.addEventListener("mouseup", onUp);
         window.addEventListener("touchend", onUp);
 

@@ -213,6 +213,8 @@
         height: 70vh;
         /* 갤러리 높이 축소 */
         min-height: 500px;
+        touch-action: pan-y;
+        /* Allow vertical scrolling, but reserve horizontal for the gallery */
     }
 
     .ellipseRow {
