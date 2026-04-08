@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Oswald:wght@500;700&family=Inter:wght@900&display=swap');
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  max-width: 100vw;
+}
+
 .jd-portfolio-wrapper {
   /* Core Colors */
   --background: black;
@@ -22,9 +29,10 @@
   --font-geist-mono: "Geist Mono", monospace;
   --font-oswald: "Oswald", sans-serif;
 
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
   background: transparent;
   color: var(--text-primary);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
@@ -35,10 +43,14 @@ body {
   background: black !important;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
+  overflow-x: hidden !important;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
 }
 
 :where(.jd-portfolio-wrapper *) {
-  box-sizing: border-box;
   padding: 0;
   margin: 0;
   line-height: normal;

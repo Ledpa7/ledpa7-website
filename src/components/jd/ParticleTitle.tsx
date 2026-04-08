@@ -39,6 +39,7 @@ class ParticleClass implements Particle {
     vortexRadius: number;
     vortexSpeed: number;
     isBackground: boolean;
+    isMobile: boolean;
     floatOffset: number;
 
     constructor(x: number, y: number, dpr: number, isMobile: boolean, canvasWidth: number, isBackground = false) {
@@ -47,11 +48,12 @@ class ParticleClass implements Particle {
         this.baseX = x;
         this.baseY = y;
         this.isBackground = isBackground;
+        this.isMobile = isMobile;
         this.size = isBackground ? (Math.random() * 1.5 + 0.5) * dpr : (isMobile ? 1.6 * dpr : 2.2);
         this.density = isBackground ? 0 : Math.random() * 40 + 5;
         this.vx = (Math.random() - 0.5) * 15;
         this.vy = (Math.random() - 0.5) * 15;
-        this.baseAlpha = isBackground ? Math.random() * 0.5 + 0.1 : Math.random() * 0.4 + 0.1;
+        this.baseAlpha = isBackground ? Math.random() * 0.5 + 0.1 : (isMobile ? Math.random() * 0.4 + 0.3 : Math.random() * 0.4 + 0.1);
         this.twinkleSpeed = Math.random() * 0.02 + 0.005;
         this.twinkleOffset = Math.random() * Math.PI * 2;
         this.floatOffset = Math.random() * Math.PI * 2;
@@ -70,7 +72,7 @@ class ParticleClass implements Particle {
             if (mdx * mdx + mdy * mdy < 12000 * dpr * dpr) alpha = 1;
         }
 
-        if (alpha < 0.1) alpha = 0.1;
+        if (alpha < (this.isMobile ? 0.35 : 0.1)) alpha = (this.isMobile ? 0.35 : 0.1);
         if (alpha > 1) alpha = 1;
 
         ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
@@ -186,7 +188,7 @@ const ParticleTitle = () => {
             // Removed redundant background stars to align with global InteractiveStarBackground
 
             // Text particles - Balanced Gap
-            const gap = isMobile ? 4.5 : 4;
+            const gap = isMobile ? 3.2 : 4;
             for (let y = 0; y < textCoordinates.height; y += gap) {
                 for (let x = 0; x < textCoordinates.width; x += gap) {
                     // Sample every gap-th pixel exactly

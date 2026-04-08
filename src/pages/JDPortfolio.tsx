@@ -1,6 +1,7 @@
 import React, { Suspense, useRef, useEffect, useState, lazy } from "react";
 import styles from "./JDPortfolio.module.css";
 import FadeIn from "../components/jd/FadeIn";
+import { ChevronDown } from "lucide-react";
 
 const ParticleTitle = lazy(() => import("../components/jd/ParticleTitle"));
 const TableOfContents = lazy(() => import("../components/jd/TableOfContents"));
@@ -15,7 +16,9 @@ import InteractiveStarBackground from "../components/jd/InteractiveStarBackgroun
 export default function Home() {
   return (
     <div className="jd-portfolio-wrapper">
-      <InteractiveStarBackground />
+      <div style={{ pointerEvents: 'none', position: 'fixed', inset: 0, zIndex: 0 }}>
+        <InteractiveStarBackground />
+      </div>
       <div className={styles.container}>
         <CustomCursor />
         <ClickSpark />
@@ -25,6 +28,13 @@ export default function Home() {
           {/* Hero Section */}
           <section id="hero" className={styles.hero}>
             <ParticleTitle />
+            <button 
+              className={styles.mobileScrollIndicator}
+              onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+              aria-label="Scroll to about"
+            >
+              <ChevronDown size={32} />
+            </button>
           </section>
 
           {/* About Section */}

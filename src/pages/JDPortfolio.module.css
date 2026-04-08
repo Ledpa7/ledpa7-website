@@ -1,21 +1,10 @@
 /* Layout Containers - Mobile First */
 .container {
-  height: 100vh;
   width: 100%;
-  overflow-y: scroll;
+  max-width: 100vw;
   overflow-x: hidden;
-  scroll-snap-type: y proximity;
-  /* 자석 효과를 약하게 조절 (proximity) */
-  scroll-behavior: smooth;
   position: relative;
-  /* 브라우저 기본 스크롤바 숨기기 (선택사항) */
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   z-index: 1;
-}
-
-.container::-webkit-scrollbar {
-  display: none;
 }
 
 .main {
@@ -60,21 +49,25 @@
 
 /* Hero Section - Mobile First */
 .hero {
-  min-height: 100vh;
-  /* Full viewport height */
+  position: relative;
+  height: 100dvh;
+  /* Precisely one viewport height */
   width: 100%;
+  max-width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 80px 0 40px;
-  /* Removed horizontal padding */
+  padding: 0;
+  /* Removed padding to ensure button is relative to 100dvh */
+  overflow: hidden;
+  /* Prevent content overflow from expanding height */
 }
 
 .heroTitle {
-  font-size: 3rem;
-  /* Mobile friendly size */
+  font-size: clamp(2rem, 12vw, 3rem);
+  /* Responsive font size */
   font-weight: 800;
   letter-spacing: -0.03em;
   background: linear-gradient(to right, #fff, #999);
@@ -107,6 +100,51 @@
 .ctaButton:active {
   transform: scale(0.98);
   /* Touch feedback */
+}
+
+/* Mobile Scroll Indicator */
+.mobileScrollIndicator {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: max-content;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 15px;
+  /* Area for better touch */
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 9999;
+  pointer-events: auto !important;
+  animation: bounce 2s infinite;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.mobileScrollIndicator:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@media (min-width: 768px) {
+  .mobileScrollIndicator {
+    display: none;
+  }
 }
 
 /* Sections - Mobile First */
@@ -203,7 +241,8 @@
 
 @media (max-width: 768px) {
   .aboutContent {
-    grid-template-columns: 130px 1fr;
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr);
     grid-template-areas:
       "image basic"
       "desc desc";
@@ -234,6 +273,7 @@
 
   .profileDetails {
     font-size: 0.75rem;
+    align-items: flex-start;
   }
 
   .profileDescArea {
