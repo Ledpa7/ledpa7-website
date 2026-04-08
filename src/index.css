@@ -28,7 +28,6 @@
 body {
   background-color: black;
   color: #000000;
-  overflow-x: hidden;
   font-family: "LINE Seed Sans KR", "Noto Sans KR", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -121,36 +121,11 @@ export const Home: React.FC = () => {
             <div className="w-full bg-white min-h-screen relative font-['LINE_Seed_Sans_KR']">
 
                 {/* 1. LARGE IMAGE (Hero) - Auto Playing Video with Zoom */}
-                <section ref={heroRef} className="relative h-auto md:h-[200vh] w-full bg-white md:bg-black">
+                <section ref={heroRef} className="relative h-[180vh] w-full bg-white md:bg-white">
 
-                    {/* MOBILE VERSION: Vertical Stack, Non-overlapping */}
-                    <div className="flex flex-col md:hidden w-full bg-white pt-12">
-                        <div className="w-full aspect-square flex items-center justify-center bg-white">
-                            <video
-                                src="/videos/Led_video.mp4"
-                                autoPlay
-                                muted
-                                loop
-                                playsInline
-                                className="w-full h-full object-contain"
-                            />
-                        </div>
-                        <div className="relative z-10 flex flex-col items-center justify-center text-center text-black px-6 py-8 w-full">
-                            <div className="text-[12px] tracking-widest max-w-3xl leading-relaxed font-['Noto_Sans_KR'] font-medium space-y-1.5">
-                                <p>Led.발광다이오드는 첫번째 프로젝트로</p>
-                                <p><span className="text-[#FF0000] font-bold">알루미늄프로파일 가구</span>를 만듭니다.</p>
-                                <p><span className="text-[#FF0000] font-bold">모든 디자인은 100개만 완제품으로 판매</span> 됩니다.</p>
-                                <p>모두 판매되면 만드는 방법을 공유하고,</p>
-                                <p>알루미늄프로파일을 구하여 만들거나,</p>
-                                <p>판매되는 키트를 구매하여</p>
-                                <p>직접 만들 수 있습니다.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* DESKTOP VERSION: Sticky Overlap (Preserved exactly as before) */}
+                    {/* UNIFIED RESPONSIVE VERSION: Sticky Overlap for both Mobile and Desktop */}
                     <div
-                        className="sticky top-0 h-screen w-full hidden md:flex items-center justify-center overflow-hidden"
+                        className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-white"
                     >
                         {/* LAYER 1: Standard Video Background with Saturation Transform */}
                         <motion.div
@@ -166,7 +141,7 @@ export const Home: React.FC = () => {
                                 muted
                                 loop
                                 playsInline
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover md:object-cover sm:object-contain" // object-contain for mobile to avoid cropping, cover for desktop
                             />
                         </motion.div>
 
@@ -180,29 +155,45 @@ export const Home: React.FC = () => {
                         />
 
                         {/* LAYER 3: Text Overlay Layer */}
-                        <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-6 w-full">
+                        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 w-full">
+                            {/* DESKTOP H1 */}
                             <motion.h1
                                 style={{ opacity: text1Opacity, scale: text1Scale, y: text1Y }}
-                                className="text-[110px] font-bold tracking-tighter uppercase leading-none mb-12 flex flex-row items-center justify-center gap-6 drop-shadow-sm font-['LINE_Seed_Sans_KR']"
+                                className="hidden md:flex text-[110px] font-bold tracking-tighter uppercase leading-none mb-12 flex-row items-center justify-center gap-6 drop-shadow-sm font-['LINE_Seed_Sans_KR']"
                             >
                                 <span className="text-black">100 - 100 =</span>
                                 <span className="text-[#FF0000] text-[160px] -translate-y-[0.05em] drop-shadow-2xl font-['Noto_Sans_KR']">∞</span>
                             </motion.h1>
+
+                            {/* MOBILE HEADER (Visible only on small screens) */}
+                            <motion.div
+                                style={{ opacity: text1Opacity, scale: text1Scale, y: text1Y }}
+                                className="flex md:hidden flex-col items-center mb-8"
+                            >
+                                <span className="text-black text-[14vw] font-bold tracking-tighter leading-none mb-2">100-100=</span>
+                                <span className="text-[#FF0000] text-[30vw] font-black leading-none drop-shadow-xl">∞</span>
+                            </motion.div>
 
                             <motion.div
                                 style={{
                                     opacity: bodyOpacity,
                                     filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.8)) drop-shadow(0 4px 12px rgba(0,0,0,0.5))"
                                 }}
-                                className="text-[16px] font-light tracking-widest max-w-3xl mix-blend-difference leading-[2] body-font"
+                                className="text-[12px] md:text-[16px] font-light tracking-[0.2em] md:tracking-widest max-w-3xl mix-blend-difference leading-[2] body-font text-white"
                             >
-                                <p>
+                                <p className="md:block hidden">
                                     Led.발광다이오드는 첫번째 프로젝트로<br />
                                     산업에서 쓰이는 <span className="text-[#FF0000] font-bold">알루미늄프로파일로 가구</span>를 만듭니다.<br />
                                     모든 <span className="text-[#FF0000] font-bold">디자인은 100개만 완제품으로 판매</span> 됩니다.<br />
                                     모두 판매되면 만드는 방법을 공유하고,<br />
                                     알루미늄프로파일을 구하여 만들거나,<br />
                                     판매되는 키트를 구매하여 직접 만들 수 있습니다.
+                                </p>
+                                <p className="md:hidden block space-y-1">
+                                    Led.발광다이오드는 첫번째 프로젝트로<br />
+                                    <span className="text-[#FF0000] font-bold">알루미늄프로파일 가구</span>를 만듭니다.<br />
+                                    <span className="text-[#FF0000] font-bold">모든 디자인은 100개만 완제품으로 판매</span> 되며,<br />
+                                    모두 판매되면 만드는 방법을 전격 공개합니다.
                                 </p>
                             </motion.div>
                         </div>

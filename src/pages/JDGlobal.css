@@ -38,17 +38,7 @@
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
-html,
-body {
-  background: black !important;
-  margin: 0;
-  padding: 0;
-  scroll-behavior: smooth;
-  overflow-x: hidden !important;
-  width: 100%;
-  max-width: 100vw;
-  position: relative;
-}
+/* Global html/body modifications removed to prevent site-wide layout interference */
 
 :where(.jd-portfolio-wrapper *) {
   padding: 0;
