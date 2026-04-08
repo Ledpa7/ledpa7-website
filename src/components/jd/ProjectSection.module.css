@@ -194,20 +194,24 @@
 
 @media (max-width: 768px) {
     .projectCard {
-        width: 180px;
-        height: 250px;
-        left: -90px;
-        top: -125px;
+        width: 195px;
+        height: 280px;
+        left: -97.5px;
+        top: -140px;
     }
 
     .mainHeader {
-        margin-bottom: 80px;
+        margin-bottom: 60px;
     }
 
     .ellipseGallery {
-        height: 40vh;
-        min-height: 300px;
+        height: 50vh;
+        min-height: 350px;
         touch-action: pan-y;
+    }
+
+    .cardContent {
+        padding: 20px;
     }
 
     .ellipseRow {

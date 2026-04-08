@@ -66,14 +66,14 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
         let isMobile = cw <= 768;
         const totalItems = projects.length;
         const angleStep = 360 / totalItems;
-        let radiusX = isMobile ? cw * 1.1 : Math.min(cw * 0.45, 520);
-        let radiusY = isMobile ? 60 : 115; // Flattened depth
+        let radiusX = isMobile ? Math.min(cw * 1.2, 440) : Math.min(cw * 0.45, 520); // Balanced width
+        let radiusY = isMobile ? 100 : 115; // Balanced depth
 
         const updateLayoutValues = () => {
             cw = gallery.offsetWidth || window.innerWidth;
             isMobile = cw <= 768;
-            radiusX = isMobile ? cw * 0.95 : Math.min(cw * 0.45, 520);
-            radiusY = isMobile ? 180 : 115;
+            radiusX = isMobile ? Math.min(cw * 1.2, 440) : Math.min(cw * 0.45, 520);
+            radiusY = isMobile ? 100 : 115;
             console.log("3D Gallery layout values updated");
         };
 
@@ -106,10 +106,10 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                 const bottomSqueeze = 1 - (Math.max(0, cosVal) * (isMobile ? 0.20 : 0.10));
                 const tx = sinVal * radiusX * bottomSqueeze;
                 const ty = (cosVal * radiusY) + (isMobile ? 50 : 30);
-                const tz = -cosVal * (isMobile ? 150 : 500); // Very shallow for better scrolling
+                const tz = -cosVal * (isMobile ? 300 : 500); 
                 const rotateY = 180 - angle;
-                const baseScale = isMobile ? 0.50 : 0.70;
-                const scale = baseScale - (cosVal * (isMobile ? 0.10 : 0.15));
+                const baseScale = isMobile ? 0.65 : 0.70;
+                const scale = baseScale - (cosVal * (isMobile ? 0.30 : 0.15));
                 const opacity = isMobile 
                     ? (0.60 - (cosVal * 0.50)) 
                     : (0.60 - (cosVal * 0.40));
@@ -265,7 +265,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                     disablePictureInPicture
                                 />
                             ) : (
-                                proj.image && <img src={proj.image} alt={proj.title} style={{ width: '100%', height: '100%', objectFit: proj.imageFit || 'cover', objectPosition: proj.imagePosition || 'center', padding: isMobileRender && proj.imageFit === 'contain' ? '24px' : (proj.imagePadding || '0'), transform: proj.imageScale ? `scale(${proj.imageScale})` : 'none' }} draggable={false} loading="lazy" decoding="async" />
+                                proj.image && <img src={proj.image} alt={proj.title} style={{ width: '100%', height: '100%', objectFit: proj.imageFit || 'cover', objectPosition: proj.imagePosition || 'center', padding: isMobileRender && proj.imageFit === 'contain' ? '8px' : (proj.imagePadding || '0'), transform: proj.imageScale ? `scale(${proj.imageScale})` : 'none' }} draggable={false} loading="lazy" decoding="async" />
                             )}
                         </div>
                         <div className={styles.cardContent}>
