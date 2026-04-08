@@ -74,6 +74,15 @@ body {
   transition: color 0.2s ease;
 }
 
+/* Fix for mobile auto-detection links (phone, email, date) */
+.jd-portfolio-wrapper a[href^="tel"],
+.jd-portfolio-wrapper a[href^="mailto"],
+.jd-portfolio-wrapper a[href^="sms"],
+.jd-portfolio-wrapper a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
 .jd-portfolio-wrapper button {
   cursor: pointer;
   font-family: inherit;

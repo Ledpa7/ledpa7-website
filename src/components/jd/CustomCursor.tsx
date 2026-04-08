@@ -60,6 +60,11 @@ export default function CustomCursor() {
             opacity: 0.5;
             transform: translate3d(-20px, -20px, 0) !important;
         }
+        @media (max-width: 1024px) {
+            .custom-cursor {
+                display: none !important;
+            }
+        }
       `}} />
             <div
                 ref={cursorRef}
