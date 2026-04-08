@@ -66,14 +66,14 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
         let isMobile = cw <= 768;
         const totalItems = projects.length;
         const angleStep = 360 / totalItems;
-        let radiusX = isMobile ? Math.min(cw * 1.2, 440) : Math.min(cw * 0.45, 520); // Balanced width
-        let radiusY = isMobile ? 100 : 115; // Balanced depth
+        let radiusX = isMobile ? Math.min(cw * 1.5, 500) : Math.min(cw * 0.45, 520); // 1.5x spread as requested
+        let radiusY = isMobile ? 120 : 115; // Adjusted depth
 
         const updateLayoutValues = () => {
             cw = gallery.offsetWidth || window.innerWidth;
             isMobile = cw <= 768;
-            radiusX = isMobile ? Math.min(cw * 1.2, 440) : Math.min(cw * 0.45, 520);
-            radiusY = isMobile ? 100 : 115;
+            radiusX = isMobile ? Math.min(cw * 1.5, 500) : Math.min(cw * 0.45, 520);
+            radiusY = isMobile ? 120 : 115;
             console.log("3D Gallery layout values updated");
         };
 
