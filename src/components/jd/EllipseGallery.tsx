@@ -66,14 +66,14 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
         let isMobile = cw <= 768;
         const totalItems = projects.length;
         const angleStep = 360 / totalItems;
-        let radiusX = isMobile ? cw * 0.88 : Math.min(cw * 0.45, 520);
-        let radiusY = isMobile ? 110 : 115;
+        let radiusX = isMobile ? cw * 1.1 : Math.min(cw * 0.45, 520); // Spaced out more
+        let radiusY = isMobile ? 140 : 115; // Balanced depth
 
         const updateLayoutValues = () => {
             cw = gallery.offsetWidth || window.innerWidth;
             isMobile = cw <= 768;
-            radiusX = isMobile ? cw * 0.88 : Math.min(cw * 0.45, 520);
-            radiusY = isMobile ? 110 : 115;
+            radiusX = isMobile ? cw * 0.95 : Math.min(cw * 0.45, 520);
+            radiusY = isMobile ? 180 : 115;
             console.log("3D Gallery layout values updated");
         };
 
@@ -103,15 +103,15 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                 const sinVal = Math.sin(rad);
                 const cosVal = Math.cos(rad);
 
-                const bottomSqueeze = 1 - (Math.max(0, cosVal) * (isMobile ? 0.35 : 0.10));
+                const bottomSqueeze = 1 - (Math.max(0, cosVal) * (isMobile ? 0.20 : 0.10));
                 const tx = sinVal * radiusX * bottomSqueeze;
                 const ty = (cosVal * radiusY) + (isMobile ? 50 : 30);
-                const tz = -cosVal * (isMobile ? 550 : 500); // Increased Z-depth for mobile
+                const tz = -cosVal * (isMobile ? 350 : 500); // Safer depth
                 const rotateY = 180 - angle;
-                const baseScale = isMobile ? 0.65 : 0.70;
-                const scale = baseScale - (cosVal * (isMobile ? 0.35 : 0.15)); // More dramatic scale on mobile
+                const baseScale = isMobile ? 0.60 : 0.70;
+                const scale = baseScale - (cosVal * (isMobile ? 0.25 : 0.15));
                 const opacity = isMobile 
-                    ? (0.50 - (cosVal * 0.70)) // Higher contrast opacity for mobile
+                    ? (0.50 - (cosVal * 0.70)) 
                     : (0.60 - (cosVal * 0.40));
 
                 card.style.transform = `translate3d(${tx}px, ${ty}px, ${tz}px) rotateY(${rotateY}deg) scale(${scale})`;

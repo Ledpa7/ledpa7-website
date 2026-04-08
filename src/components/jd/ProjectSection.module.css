@@ -205,16 +205,13 @@
     }
 
     .mainHeader {
-        margin-bottom: 24px;
-        /* 타이틀 아래 간격을 적당하게 조절 */
+        margin-bottom: 80px;
     }
 
     .ellipseGallery {
-        height: 70vh;
-        /* 갤러리 높이 축소 */
-        min-height: 500px;
+        height: 60vh;
+        min-height: 400px;
         touch-action: pan-y;
-        /* Allow vertical scrolling, but reserve horizontal for the gallery */
     }
 
     .ellipseRow {
