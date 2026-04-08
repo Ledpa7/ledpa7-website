@@ -195,13 +195,9 @@
 @media (max-width: 768px) {
     .projectCard {
         width: 180px;
-        /* 기존 160px에서 180px로 가로 확장 */
         height: 250px;
-        /* 기존 220px에서 250px로 세로 확장 */
         left: -90px;
-        /* width의 절반 (음수) */
         top: -125px;
-        /* height의 절반 (음수) */
     }
 
     .mainHeader {
@@ -209,8 +205,8 @@
     }
 
     .ellipseGallery {
-        height: 60vh;
-        min-height: 400px;
+        height: 40vh;
+        min-height: 300px;
         touch-action: pan-y;
     }
 
