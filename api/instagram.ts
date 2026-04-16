@@ -7,8 +7,8 @@ export default async function handler(request: Request) {
     const { searchParams } = new URL(request.url);
     const username = searchParams.get('username');
 
-    if (!username) {
-        return new Response(JSON.stringify({ error: 'Username is required' }), {
+    if (!username || username.length > 30 || !/^[a-zA-Z0-9._]+$/.test(username)) {
+        return new Response(JSON.stringify({ error: 'Invalid username' }), {
             status: 400,
             headers: { 'content-type': 'application/json' },
         });
@@ -51,7 +51,8 @@ export default async function handler(request: Request) {
         });
 
     } catch (error) {
-        return new Response(JSON.stringify({ error: 'Internal server error', details: String(error) }), {
+        console.error('Instagram API error:', error);
+        return new Response(JSON.stringify({ error: 'Internal server error' }), {
             status: 500,
             headers: { 'content-type': 'application/json' },
         });
