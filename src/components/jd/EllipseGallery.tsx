@@ -224,8 +224,8 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                 return;
                             }
                             
-                            // Block popup ONLY for numbers 10 to 15
-                            const isBlockedRange = i >= 9 && i <= 14;
+                            // Block popup ONLY for numbers 11 to 15
+                            const isBlockedRange = i >= 10 && i <= 14;
                                 
                             if (isBlockedRange) {
                                 console.log(`No content for project number ${i + 1}, blocking popup.`);
@@ -238,7 +238,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                             }
                             onProjectSelect?.(proj, e.currentTarget.getBoundingClientRect());
                         }}
-                        style={{ cursor: (i >= 9 && i <= 14) ? 'default' : 'pointer' }}
+                        style={{ cursor: (i >= 10 && i <= 14) ? 'default' : 'pointer' }}
                     >
                         <div className={styles.cardNumber}>{(i + 1).toString().padStart(2, '0')}</div>
                         <div className={styles.cardReflect} />
@@ -252,7 +252,10 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                 <div className={styles.doodleLogCard}>
                                     <div className={styles.doodleLogLogo}>Doodle Log</div>
                                 </div>
-
+                            ) : proj.title === "유선생" ? (
+                                <div className={styles.uTeacherCard}>
+                                    <div className={styles.uTeacherLogo}>유선생</div>
+                                </div>
                             ) : proj.cardVideo ? (
                                 <video
                                     ref={el => { if (el) videoRefs.current[i] = el; }}
@@ -270,7 +273,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                         </div>
                         <div className={styles.cardContent}>
                             <h4 className={styles.cardTitle}>
-                                {(i >= 9 && i <= 14) // Numbers 10 to 15
+                                {(i >= 10 && i <= 14) // Numbers 11 to 15
                                     ? (i + 1).toString().padStart(2, '0') 
                                     : (proj.cardTitle || proj.title)}
                             </h4>
