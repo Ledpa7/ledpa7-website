@@ -339,7 +339,7 @@ const ProjectDetailModal = ({ project, initialRect, onClose }: Props) => {
                     e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)';
                 }}
                 >
-                    <span style={{ display: 'block', transform: 'translateY(4px)', lineHeight: 1 }}>×</span>
+                    <span style={{ display: 'block', transform: 'translateY(-2px)', lineHeight: 1 }}>×</span>
                 </button>
             )}
 
