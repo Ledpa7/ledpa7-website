@@ -130,11 +130,11 @@ export const Home: React.FC = () => {
     const text1Y = useTransform(scrollYProgress, [0, 0.25], [0, -120]);
     const bodyOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
 
-    // Backdrop & Video adjustment transforms
-    const heroScale = useTransform(scrollYProgress, [0, 0.4, 1], [1, 1.2, 1.4]);
-    const heroGray = useTransform(scrollYProgress, [0, 0.4, 0.8], [0, 0, 1]); // 0 (normal) to 1 (full grayscale)
-    const heroOpacity = useTransform(scrollYProgress, [0.7, 0.9], [1, 0]); // Fade out at the very end
-    const heroBlur = useTransform(scrollYProgress, [0.4, 0.8], [0, 20]);
+    // Backdrop & Video adjustment transforms - DELAYED for smoother transition
+    const heroScale = useTransform(scrollYProgress, [0, 0.4, 1], [1, 1.1, 1.2]); // Reduced scale slightly for more stability
+    const heroGray = useTransform(scrollYProgress, [0.6, 0.95], [0, 1]); // Grayscale starts later
+    const heroOpacity = useTransform(scrollYProgress, [0.9, 1.0], [1, 0]); // Fades out only at the very end
+    const heroBlur = useTransform(scrollYProgress, [0.6, 0.95], [0, 15]); // Blur starts later
     const heroOverlayOpacity = useTransform(scrollYProgress, [0, 0.3], [0.1, 0]);
 
     return (
