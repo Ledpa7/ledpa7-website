@@ -107,7 +107,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
-                        className="fixed bottom-24 right-8 z-[80] pointer-events-auto"
+                        className="fixed bottom-24 right-6 md:right-12 z-[80] pointer-events-auto"
                     >
                         <a
                             href="https://www.instagram.com/ledpa7/"
@@ -122,7 +122,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             </AnimatePresence>
 
             {/* Bottom Right Floating Menu Button */}
-            <div className="fixed bottom-8 right-8 z-[80] pointer-events-auto">
+            <div className="fixed bottom-8 right-6 md:right-12 z-[80] pointer-events-auto">
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-[#FF0000] transition-all duration-300 transform active:scale-90"
