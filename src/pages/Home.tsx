@@ -130,10 +130,8 @@ export const Home: React.FC = () => {
     const text1Y = useTransform(scrollYProgress, [0, 0.25], [0, -120]);
     const bodyOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
 
-    // Backdrop & Video adjustment transforms - SMOOTH FADE TO BLACK
+    // Backdrop & Video adjustment transforms
     const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]); 
-    // Start fading to black much earlier (at 40% scroll) so it's a slow, cinematic transition
-    const blackOverlayOpacity = useTransform(scrollYProgress, [0.4, 0.95], [0, 1]); 
     const heroOverlayOpacity = useTransform(scrollYProgress, [0, 0.3], [0.1, 0]);
 
     return (
@@ -169,12 +167,6 @@ export const Home: React.FC = () => {
                         <motion.div
                             style={{ backgroundColor: useTransform(heroOverlayOpacity, (o) => `rgba(0,0,0,${o})`) }}
                             className="absolute inset-0 z-0 pointer-events-none"
-                        />
-
-                        {/* LAYER 2.5: Smooth Black Fade Overlay at the end (Replaces heavy CSS filters) */}
-                        <motion.div
-                            style={{ opacity: blackOverlayOpacity }}
-                            className="absolute inset-0 z-10 bg-black pointer-events-none"
                         />
 
                         {/* LAYER 3: Text Overlay Layer */}
