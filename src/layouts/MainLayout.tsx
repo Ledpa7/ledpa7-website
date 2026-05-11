@@ -13,10 +13,16 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     const { scrollY } = useScroll();
     const [hidden, setHidden] = React.useState(false);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-    const { isMuted, toggleMute } = useAudio();
+    const { isMuted, toggleMute, setMuted } = useAudio();
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious() ?? 0;
+        
+        // Unmute on scroll (Browser allows this as it's a user gesture)
+        if (latest > 50 && isMuted) {
+            setMuted(false);
+        }
+
         if (latest > previous && latest > 150) {
             setHidden(true);
         } else {
@@ -79,7 +85,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </div>
             </motion.header>
 
-            {/* Audio Toggle (Positioned below the header bar) */}
+            {/* Audio Toggle (Transparent & Floating) */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: hidden ? 0 : 1 }}
@@ -87,10 +93,14 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             >
                 <button
                     onClick={toggleMute}
-                    className="w-10 h-10 bg-white/80 backdrop-blur-md shadow-lg rounded-full flex items-center justify-center hover:text-[#FF0000] transition-all duration-300 border border-black/5"
+                    className="w-10 h-10 bg-transparent flex items-center justify-center hover:text-[#FF0000] transition-all duration-300 group"
                     title={isMuted ? "Unmute" : "Mute"}
                 >
-                    {isMuted ? <VolumeX size={18} strokeWidth={1.5} /> : <Volume2 size={18} strokeWidth={1.5} />}
+                    <div className="relative flex items-center justify-center">
+                        {isMuted ? <VolumeX size={18} strokeWidth={1.5} /> : <Volume2 size={18} strokeWidth={1.5} />}
+                        {/* Subtle indicator if muted */}
+                        {isMuted && <span className="absolute -bottom-1 text-[8px] font-bold tracking-tighter opacity-40 group-hover:opacity-100 transition-opacity uppercase">Muted</span>}
+                    </div>
                 </button>
             </motion.div>
 

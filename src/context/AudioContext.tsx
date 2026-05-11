@@ -3,17 +3,20 @@ import React, { createContext, useContext, useState, useCallback, useEffect } fr
 interface AudioContextType {
     isMuted: boolean;
     toggleMute: () => void;
+    setMuted: (muted: boolean) => void;
 }
 
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
 export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    // Set to true (muted) by default to comply with browser autoplay policies.
-    // Video will start playing, and user can unmute manually.
     const [isMuted, setIsMuted] = useState(true);
 
     const toggleMute = useCallback(() => {
         setIsMuted(prev => !prev);
+    }, []);
+
+    const setMuted = useCallback((muted: boolean) => {
+        setIsMuted(muted);
     }, []);
 
     // Also handle a global interaction to "unlock" audio if needed
