@@ -101,13 +101,18 @@ export const Home: React.FC = () => {
 
     // Force play on mount or when mute state changes (to handle browser blocks)
     React.useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.muted = isMuted;
-            const playPromise = videoRef.current.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log("Autoplay blocked or interrupted:", error);
-                });
+        const video = videoRef.current;
+        if (video) {
+            video.muted = isMuted;
+            
+            // Explicitly try to play if it's paused
+            if (video.paused) {
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Autoplay blocked or interrupted:", error);
+                    });
+                }
             }
         }
     }, [isMuted]);
@@ -159,7 +164,9 @@ export const Home: React.FC = () => {
                                 muted={isMuted}
                                 loop
                                 playsInline
-                                className="w-full h-full object-cover md:object-cover sm:object-contain" // object-contain for mobile to avoid cropping, cover for desktop
+                                preload="auto"
+                                className="w-full h-full object-cover md:object-cover sm:object-contain will-change-transform" // will-change to force hardware acceleration
+                                style={{ transform: 'translateZ(0)' }} // Extra boost for hardware acceleration
                             />
                         </motion.div>
 
