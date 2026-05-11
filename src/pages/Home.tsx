@@ -131,12 +131,11 @@ export const Home: React.FC = () => {
     const bodyOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
 
     // Backdrop & Video adjustment transforms
-    const heroBlur = useTransform(scrollYProgress, [0, 0.3], [6, 0]);
-    const heroSaturate = useTransform(scrollYProgress, [0, 0.3], [1, 1.5]);
+    const heroScale = useTransform(scrollYProgress, [0, 0.4, 1], [1, 1.2, 1.4]);
+    const heroGray = useTransform(scrollYProgress, [0, 0.4, 0.8], [0, 0, 1]); // 0 (normal) to 1 (full grayscale)
+    const heroOpacity = useTransform(scrollYProgress, [0.7, 0.9], [1, 0]); // Fade out at the very end
+    const heroBlur = useTransform(scrollYProgress, [0.4, 0.8], [0, 20]);
     const heroOverlayOpacity = useTransform(scrollYProgress, [0, 0.3], [0.1, 0]);
-
-    // Hero Image/Video Zoom Sequence
-    const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
     return (
         <MainLayout>
@@ -147,13 +146,14 @@ export const Home: React.FC = () => {
 
                     {/* UNIFIED RESPONSIVE VERSION: Sticky Overlap for both Mobile and Desktop */}
                     <div
-                        className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-white"
+                        className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-black"
                     >
-                        {/* LAYER 1: Standard Video Background - Optimized (No expensive filters) */}
+                        {/* LAYER 1: Standard Video Background - Optimized with Grayscale */}
                         <motion.div
                             style={{
                                 scale: heroScale,
-                                opacity: useTransform(heroSaturate, [0, 1.4], [0, 1]) // Use opacity instead of saturate for performance
+                                filter: useTransform(heroGray, (g) => `grayscale(${g})`),
+                                opacity: heroOpacity
                             }}
                             className="absolute inset-0 z-0 bg-black"
                         >
