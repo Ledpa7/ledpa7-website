@@ -64,30 +64,35 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                         <img src="/logo.png" alt="Led.발광다이오드" className="h-[40px] w-auto object-contain" />
                     </a>
 
-                    {/* Right: Cart & Audio Toggle */}
-                    <div className="pointer-events-auto flex flex-col items-center gap-3 mt-14">
+                    {/* Right: Cart Link */}
+                    <div className="pointer-events-auto flex items-center h-full">
                         <a
                             href="https://smartstore.naver.com/led-"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-10 h-10 bg-white shadow-lg rounded-full flex items-center justify-center hover:text-[#FF0000] transition-all duration-300 border border-gray-100 group"
+                            className="p-2 hover:text-[#FF0000] transition-colors relative"
                         >
-                            <div className="relative">
-                                <ShoppingCart size={18} strokeWidth={1.5} />
-                                <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#FF0000] rounded-full border-2 border-white"></span>
-                            </div>
+                            <ShoppingCart size={20} strokeWidth={1.5} />
+                            <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-[#FF0000] rounded-full"></span>
                         </a>
-                        
-                        <button
-                            onClick={toggleMute}
-                            className="w-10 h-10 bg-white shadow-lg rounded-full flex items-center justify-center hover:text-[#FF0000] transition-all duration-300 border border-gray-100"
-                            title={isMuted ? "Unmute" : "Mute"}
-                        >
-                            {isMuted ? <VolumeX size={18} strokeWidth={1.5} /> : <Volume2 size={18} strokeWidth={1.5} />}
-                        </button>
                     </div>
                 </div>
             </motion.header>
+
+            {/* Audio Toggle (Positioned below the header bar) */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: hidden ? 0 : 1 }}
+                className="fixed top-16 right-6 md:right-12 z-[70] pointer-events-auto"
+            >
+                <button
+                    onClick={toggleMute}
+                    className="w-10 h-10 bg-white/80 backdrop-blur-md shadow-lg rounded-full flex items-center justify-center hover:text-[#FF0000] transition-all duration-300 border border-black/5"
+                    title={isMuted ? "Unmute" : "Mute"}
+                >
+                    {isMuted ? <VolumeX size={18} strokeWidth={1.5} /> : <Volume2 size={18} strokeWidth={1.5} />}
+                </button>
+            </motion.div>
 
             {/* Bottom Right Floating Instagram Button (Only when menu is open) */}
             <AnimatePresence>
