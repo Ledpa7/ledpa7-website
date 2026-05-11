@@ -96,7 +96,22 @@ GridItem.displayName = 'GridItem';
 
 export const Home: React.FC = () => {
     const heroRef = React.useRef(null);
+    const videoRef = React.useRef<HTMLVideoElement>(null);
     const { isMuted } = useAudio();
+
+    // Force play on mount or when mute state changes (to handle browser blocks)
+    React.useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.muted = isMuted;
+            const playPromise = videoRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Autoplay blocked or interrupted:", error);
+                });
+            }
+        }
+    }, [isMuted]);
+
     const { scrollYProgress } = useScroll({
         target: heroRef,
         offset: ["start start", "end end"]
@@ -138,6 +153,7 @@ export const Home: React.FC = () => {
                             className="absolute inset-0 z-0"
                         >
                             <video
+                                ref={videoRef}
                                 src="/videos/Led_video.mp4"
                                 autoPlay
                                 muted={isMuted}

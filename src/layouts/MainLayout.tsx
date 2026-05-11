@@ -65,20 +65,22 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                     </a>
 
                     {/* Right: Cart & Audio Toggle */}
-                    <div className="pointer-events-auto flex flex-col items-center gap-1 translate-y-4">
+                    <div className="pointer-events-auto flex flex-col items-center gap-3 mt-14">
                         <a
                             href="https://smartstore.naver.com/led-"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-2 hover:text-[#FF0000] transition-colors relative"
+                            className="w-10 h-10 bg-white shadow-lg rounded-full flex items-center justify-center hover:text-[#FF0000] transition-all duration-300 border border-gray-100 group"
                         >
-                            <ShoppingCart size={20} strokeWidth={1.5} />
-                            <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-[#FF0000] rounded-full"></span>
+                            <div className="relative">
+                                <ShoppingCart size={18} strokeWidth={1.5} />
+                                <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#FF0000] rounded-full border-2 border-white"></span>
+                            </div>
                         </a>
                         
                         <button
                             onClick={toggleMute}
-                            className="p-2 hover:text-[#FF0000] transition-colors"
+                            className="w-10 h-10 bg-white shadow-lg rounded-full flex items-center justify-center hover:text-[#FF0000] transition-all duration-300 border border-gray-100"
                             title={isMuted ? "Unmute" : "Mute"}
                         >
                             {isMuted ? <VolumeX size={18} strokeWidth={1.5} /> : <Volume2 size={18} strokeWidth={1.5} />}

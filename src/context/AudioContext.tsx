@@ -8,10 +8,9 @@ interface AudioContextType {
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
 export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    // Default to true (muted) for safety with browser policies, 
-    // but the user wants to try playing with sound by default.
-    // We'll set it to false and handle the potential play error.
-    const [isMuted, setIsMuted] = useState(false);
+    // Set to true (muted) by default to comply with browser autoplay policies.
+    // Video will start playing, and user can unmute manually.
+    const [isMuted, setIsMuted] = useState(true);
 
     const toggleMute = useCallback(() => {
         setIsMuted(prev => !prev);
