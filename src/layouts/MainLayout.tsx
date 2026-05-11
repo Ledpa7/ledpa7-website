@@ -1,8 +1,9 @@
 import React from 'react';
 import { Cursor } from '../components/Cursor';
 import { VerticalNav } from '../components/VerticalNav';
-import { ShoppingCart, Menu, X, Instagram } from 'lucide-react';
+import { ShoppingCart, Menu, X, Instagram, Volume2, VolumeX } from 'lucide-react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
+import { useAudio } from '../context/AudioContext';
 
 interface MainLayoutProps {
     children: React.ReactNode;
@@ -12,6 +13,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     const { scrollY } = useScroll();
     const [hidden, setHidden] = React.useState(false);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const { isMuted, toggleMute } = useAudio();
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious() ?? 0;
@@ -62,8 +64,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                         <img src="/logo.png" alt="Led.발광다이오드" className="h-[40px] w-auto object-contain" />
                     </a>
 
-                    {/* Right: Cart Link (Restored to top) */}
-                    <div className="pointer-events-auto flex items-center">
+                    {/* Right: Cart & Audio Toggle */}
+                    <div className="pointer-events-auto flex flex-col items-center gap-1 translate-y-4">
                         <a
                             href="https://smartstore.naver.com/led-"
                             target="_blank"
@@ -73,6 +75,14 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                             <ShoppingCart size={20} strokeWidth={1.5} />
                             <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-[#FF0000] rounded-full"></span>
                         </a>
+                        
+                        <button
+                            onClick={toggleMute}
+                            className="p-2 hover:text-[#FF0000] transition-colors"
+                            title={isMuted ? "Unmute" : "Mute"}
+                        >
+                            {isMuted ? <VolumeX size={18} strokeWidth={1.5} /> : <Volume2 size={18} strokeWidth={1.5} />}
+                        </button>
                     </div>
                 </div>
             </motion.header>

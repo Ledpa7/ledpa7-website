@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { MainLayout } from '../layouts/MainLayout';
 import { FurnitureVideo } from '../components/FurnitureCanvas';
 import { ArrowUpRight } from 'lucide-react';
+import { useAudio } from '../context/AudioContext';
 
 const GridItem = React.memo<{
     title?: string;
@@ -95,6 +96,7 @@ GridItem.displayName = 'GridItem';
 
 export const Home: React.FC = () => {
     const heroRef = React.useRef(null);
+    const { isMuted } = useAudio();
     const { scrollYProgress } = useScroll({
         target: heroRef,
         offset: ["start start", "end end"]
@@ -138,7 +140,7 @@ export const Home: React.FC = () => {
                             <video
                                 src="/videos/Led_video.mp4"
                                 autoPlay
-                                muted
+                                muted={isMuted}
                                 loop
                                 playsInline
                                 className="w-full h-full object-cover md:object-cover sm:object-contain" // object-contain for mobile to avoid cropping, cover for desktop
