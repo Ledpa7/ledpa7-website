@@ -130,11 +130,10 @@ export const Home: React.FC = () => {
     const text1Y = useTransform(scrollYProgress, [0, 0.25], [0, -120]);
     const bodyOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
 
-    // Backdrop & Video adjustment transforms - PINNED TO THE VERY END
+    // Backdrop & Video adjustment transforms - SMOOTH FADE TO BLACK
     const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]); 
-    const heroGray = useTransform(scrollYProgress, [0.98, 1.0], [0, 1]); 
-    const heroOpacity = useTransform(scrollYProgress, [0.99, 1.0], [1, 0]); 
-    const heroBlur = useTransform(scrollYProgress, [0.98, 1.0], [0, 8]); 
+    // Instead of heavy filters, we fade in a pure black overlay smoothly over the last 15% of the scroll
+    const blackOverlayOpacity = useTransform(scrollYProgress, [0.85, 1.0], [0, 1]); 
     const heroOverlayOpacity = useTransform(scrollYProgress, [0, 0.3], [0.1, 0]);
 
     return (
@@ -142,19 +141,15 @@ export const Home: React.FC = () => {
             <div className="w-full bg-white min-h-screen relative font-['LINE_Seed_Sans_KR']">
 
                 {/* 1. LARGE IMAGE (Hero) - Auto Playing Video with Zoom */}
-                <section ref={heroRef} className="relative h-[200vh] w-full bg-white md:bg-white">
+                <section ref={heroRef} className="relative h-[250vh] w-full bg-white md:bg-white">
 
                     {/* UNIFIED RESPONSIVE VERSION: Sticky Overlap for both Mobile and Desktop */}
                     <div
                         className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-black"
                     >
-                        {/* LAYER 1: Standard Video Background - Optimized with Grayscale */}
+                        {/* LAYER 1: Standard Video Background - No CSS Filters for Maximum Performance */}
                         <motion.div
-                            style={{
-                                scale: heroScale,
-                                filter: useTransform(heroGray, (g) => `grayscale(${g})`),
-                                opacity: heroOpacity
-                            }}
+                            style={{ scale: heroScale }}
                             className="absolute inset-0 z-0 bg-black"
                         >
                             <video
@@ -170,13 +165,16 @@ export const Home: React.FC = () => {
                             />
                         </motion.div>
 
-                        {/* LAYER 2: Glassmorphism Blur Overlay with Scroll Transform */}
+                        {/* LAYER 2: Initial Dark Tint */}
                         <motion.div
-                            style={{
-                                backdropFilter: useTransform(heroBlur, (b) => `blur(${b}px)`),
-                                backgroundColor: useTransform(heroOverlayOpacity, (o) => `rgba(0,0,0,${o})`)
-                            }}
-                            className="absolute inset-0 z-0"
+                            style={{ backgroundColor: useTransform(heroOverlayOpacity, (o) => `rgba(0,0,0,${o})`) }}
+                            className="absolute inset-0 z-0 pointer-events-none"
+                        />
+
+                        {/* LAYER 2.5: Smooth Black Fade Overlay at the end (Replaces heavy CSS filters) */}
+                        <motion.div
+                            style={{ opacity: blackOverlayOpacity }}
+                            className="absolute inset-0 z-10 bg-black pointer-events-none"
                         />
 
                         {/* LAYER 3: Text Overlay Layer */}

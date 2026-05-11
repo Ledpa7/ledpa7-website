@@ -17,11 +17,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious() ?? 0;
-        
-        // Unmute on scroll ONLY if user hasn't manually interacted yet
-        if (latest > 50 && isMuted && !userHasInteracted) {
-            setMuted(false);
-        }
 
         if (latest > previous && latest > 150) {
             setHidden(true);
