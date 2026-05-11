@@ -132,8 +132,8 @@ export const Home: React.FC = () => {
 
     // Backdrop & Video adjustment transforms - SMOOTH FADE TO BLACK
     const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]); 
-    // Instead of heavy filters, we fade in a pure black overlay smoothly over the last 15% of the scroll
-    const blackOverlayOpacity = useTransform(scrollYProgress, [0.85, 1.0], [0, 1]); 
+    // Start fading to black much earlier (at 40% scroll) so it's a slow, cinematic transition
+    const blackOverlayOpacity = useTransform(scrollYProgress, [0.4, 0.95], [0, 1]); 
     const heroOverlayOpacity = useTransform(scrollYProgress, [0, 0.3], [0.1, 0]);
 
     return (
