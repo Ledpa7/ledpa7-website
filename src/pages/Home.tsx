@@ -149,13 +149,13 @@ export const Home: React.FC = () => {
                     <div
                         className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-white"
                     >
-                        {/* LAYER 1: Standard Video Background with Saturation Transform */}
+                        {/* LAYER 1: Standard Video Background - Optimized (No expensive filters) */}
                         <motion.div
                             style={{
                                 scale: heroScale,
-                                filter: useTransform(heroSaturate, (s) => `saturate(${s})`)
+                                opacity: useTransform(heroSaturate, [0, 1.4], [0, 1]) // Use opacity instead of saturate for performance
                             }}
-                            className="absolute inset-0 z-0"
+                            className="absolute inset-0 z-0 bg-black"
                         >
                             <video
                                 ref={videoRef}
@@ -165,8 +165,8 @@ export const Home: React.FC = () => {
                                 loop
                                 playsInline
                                 preload="auto"
-                                className="w-full h-full object-cover md:object-cover sm:object-contain will-change-transform" // will-change to force hardware acceleration
-                                style={{ transform: 'translateZ(0)' }} // Extra boost for hardware acceleration
+                                className="w-full h-full object-cover md:object-cover sm:object-contain will-change-transform"
+                                style={{ transform: 'translateZ(0)' }}
                             />
                         </motion.div>
 
