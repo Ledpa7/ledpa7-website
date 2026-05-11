@@ -13,13 +13,13 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     const { scrollY } = useScroll();
     const [hidden, setHidden] = React.useState(false);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-    const { isMuted, toggleMute, setMuted } = useAudio();
+    const { isMuted, toggleMute, setMuted, userHasInteracted } = useAudio();
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious() ?? 0;
         
-        // Unmute on scroll (Browser allows this as it's a user gesture)
-        if (latest > 50 && isMuted) {
+        // Unmute on scroll ONLY if user hasn't manually interacted yet
+        if (latest > 50 && isMuted && !userHasInteracted) {
             setMuted(false);
         }
 

@@ -4,15 +4,18 @@ interface AudioContextType {
     isMuted: boolean;
     toggleMute: () => void;
     setMuted: (muted: boolean) => void;
+    userHasInteracted: boolean;
 }
 
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
 export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isMuted, setIsMuted] = useState(true);
+    const [userHasInteracted, setUserHasInteracted] = useState(false);
 
     const toggleMute = useCallback(() => {
         setIsMuted(prev => !prev);
+        setUserHasInteracted(true); // User manually interacted
     }, []);
 
     const setMuted = useCallback((muted: boolean) => {
@@ -30,7 +33,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }, []);
 
     return (
-        <AudioContext.Provider value={{ isMuted, toggleMute, setMuted }}>
+        <AudioContext.Provider value={{ isMuted, toggleMute, setMuted, userHasInteracted }}>
             {children}
         </AudioContext.Provider>
     );
