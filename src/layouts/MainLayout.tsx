@@ -85,24 +85,20 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </div>
             </motion.header>
 
-            {/* Audio Toggle (Transparent & Floating) */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: hidden ? 0 : 1 }}
-                className="fixed top-16 right-6 md:right-12 z-[70] pointer-events-auto"
-            >
+            {/* Audio Toggle (Always Visible & Semi-transparent Circle) */}
+            <div className="fixed top-16 right-6 md:right-12 z-[70] pointer-events-auto">
                 <button
                     onClick={toggleMute}
-                    className="w-10 h-10 bg-transparent flex items-center justify-center hover:text-[#FF0000] transition-all duration-300 group"
+                    className="w-10 h-10 bg-white/20 backdrop-blur-md shadow-sm rounded-full flex items-center justify-center hover:bg-white/40 hover:text-[#FF0000] transition-all duration-300 border border-white/30 group"
                     title={isMuted ? "Unmute" : "Mute"}
                 >
                     <div className="relative flex items-center justify-center">
                         {isMuted ? <VolumeX size={18} strokeWidth={1.5} /> : <Volume2 size={18} strokeWidth={1.5} />}
                         {/* Subtle indicator if muted */}
-                        {isMuted && <span className="absolute -bottom-1 text-[8px] font-bold tracking-tighter opacity-40 group-hover:opacity-100 transition-opacity uppercase">Muted</span>}
+                        {isMuted && <span className="absolute -bottom-1 text-[7px] font-bold tracking-tighter opacity-60 group-hover:opacity-100 transition-opacity uppercase">Muted</span>}
                     </div>
                 </button>
-            </motion.div>
+            </div>
 
             {/* Bottom Right Floating Instagram Button (Only when menu is open) */}
             <AnimatePresence>
