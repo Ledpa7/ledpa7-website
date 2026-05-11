@@ -130,11 +130,11 @@ export const Home: React.FC = () => {
     const text1Y = useTransform(scrollYProgress, [0, 0.25], [0, -120]);
     const bodyOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
 
-    // Backdrop & Video adjustment transforms - PINNED TO THE ABSOLUTE END
-    const heroScale = useTransform(scrollYProgress, [0, 0.4, 0.95, 1], [1, 1.02, 1.05, 1.1]); 
-    const heroGray = useTransform(scrollYProgress, [0.97, 1.0], [0, 1]); // Grayscale starts only at 97%
-    const heroOpacity = useTransform(scrollYProgress, [0.99, 1.0], [1, 0]); // Fades out only at 99%
-    const heroBlur = useTransform(scrollYProgress, [0.97, 1.0], [0, 8]); // Subtle blur starts only at 97%
+    // Backdrop & Video adjustment transforms - PINNED TO THE VERY END
+    const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]); 
+    const heroGray = useTransform(scrollYProgress, [0.98, 1.0], [0, 1]); 
+    const heroOpacity = useTransform(scrollYProgress, [0.99, 1.0], [1, 0]); 
+    const heroBlur = useTransform(scrollYProgress, [0.98, 1.0], [0, 8]); 
     const heroOverlayOpacity = useTransform(scrollYProgress, [0, 0.3], [0.1, 0]);
 
     return (
@@ -142,7 +142,7 @@ export const Home: React.FC = () => {
             <div className="w-full bg-white min-h-screen relative font-['LINE_Seed_Sans_KR']">
 
                 {/* 1. LARGE IMAGE (Hero) - Auto Playing Video with Zoom */}
-                <section ref={heroRef} className="relative h-[300vh] w-full bg-white md:bg-white">
+                <section ref={heroRef} className="relative h-[200vh] w-full bg-white md:bg-white">
 
                     {/* UNIFIED RESPONSIVE VERSION: Sticky Overlap for both Mobile and Desktop */}
                     <div
