@@ -106,16 +106,22 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                 const bottomSqueeze = 1 - (Math.max(0, cosVal) * (isMobile ? 0.20 : 0.10));
                 const tx = sinVal * radiusX * bottomSqueeze;
                 const ty = (cosVal * radiusY) + (isMobile ? 50 : 30);
-                const tz = -cosVal * (isMobile ? 300 : 500); 
+                // 모바일 원근 Z축 거리를 기존 300에서 360으로 대폭 증폭시켜, 앞쪽 카드(cosVal이 양수일 때)가 정면 눈앞으로 훌륭하고 압도적이게 돌출되도록 설계
+                const tz = -cosVal * (isMobile ? 360 : 500); 
                 const rotateY = 180 - angle;
                 const baseScale = isMobile ? 0.65 : 0.70;
                 const scale = baseScale - (cosVal * (isMobile ? 0.30 : 0.15));
+                
+                // [양옆 카드의 투명도 집중 제어 튜닝]
+                // 가장 정면에 도달한 메인 카드(cosVal = 1 부근)는 0.98(거의 100% 선명도)로 돋보이게 지탱하고,
+                // 정면에서 아주 살짝이라도 양옆으로 비껴나가는 대기용 양옆 카드들은 투명도를 확 낮추어 시선의 분산을 방지 (진폭 계수를 0.50 -> 0.70으로 상향)
                 const opacity = isMobile 
-                    ? (0.60 - (cosVal * 0.50)) 
+                    ? (0.80 - (cosVal * 0.70)) 
                     : (0.60 - (cosVal * 0.40));
 
                 card.style.transform = `translate3d(${tx}px, ${ty}px, ${tz}px) rotateY(${rotateY}deg) scale(${scale})`;
-                card.style.opacity = Math.max(0.1, Math.min(1, opacity)).toString();
+                // 지시하신 사항에 맞춰 화면 바깥 카드의 시각적 층을 충분히 인지할 수 있도록 투명도 제한 최솟값을 0.35로 원복
+                card.style.opacity = Math.max(0.35, Math.min(0.98, opacity)).toString();
                 card.style.zIndex = Math.round(tz + 2000).toString();
 
                 const video = videoRefs.current[i];

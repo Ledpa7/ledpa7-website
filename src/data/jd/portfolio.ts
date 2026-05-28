@@ -188,7 +188,8 @@ export const portfolioData = {
                             tags: ["Viral", "SNS", "Content"],
                             image: "/jd/images/microwave_card.png",
                             imageFit: "contain",
-                            imagePadding: "60px",
+                            imagePadding: "32px",
+                            imageScale: 0.55,
                             backgroundColor: "#EE5B34",
                         },
                     ],
@@ -259,21 +260,18 @@ export const portfolioData = {
                     projects: [
                         {
                             title: "농심 녹산공장",
-                            cardTitle: "09",
                             description: "HMI 디자인 및 개발",
                             period: "2020.02 ~ 2020.08",
                             tags: ["HMI", "Smart Factory"],
                         },
                         {
                             title: "한국야쿠르트 3개 공장",
-                            cardTitle: "10",
                             description: "일지 자동화 시스템",
                             period: "2021.06 ~ 2021.12",
                             tags: ["Automation", "HMI"],
                         },
                         {
                             title: "현대차 의왕연구소",
-                            cardTitle: "11",
                             description: "HMI 디자인 및 개발",
                             period: "2022.02 ~ 2022.06",
                             tags: ["Automotive", "HMI"],
@@ -285,7 +283,6 @@ export const portfolioData = {
                     projects: [
                         {
                             title: "농심 안성공장 신규 라면 라인",
-                            cardTitle: "12",
                             description: "신규 라인 PM (Project Manager)",
                             period: "2023.01 ~ 2023.10",
                             tags: ["PM", "Factory System"],

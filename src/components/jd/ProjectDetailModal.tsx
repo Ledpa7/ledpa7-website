@@ -307,21 +307,21 @@ const ProjectDetailModal = ({ project, initialRect, onClose }: Props) => {
                 title="Close (Esc)" 
                 style={{
                     position: 'fixed',
-                    top: '32px',
-                    right: '32px',
+                    top: typeof window !== 'undefined' && window.innerWidth < 768 ? '20px' : '32px',
+                    right: typeof window !== 'undefined' && window.innerWidth < 768 ? '20px' : '32px',
                     zIndex: 99999, // Ultimate priority
-                    width: '60px', // Slightly larger for easier hit
-                    height: '60px',
+                    width: typeof window !== 'undefined' && window.innerWidth < 768 ? '40px' : '50px', // 적정한 터치 영역 확보를 위해 데스크탑 50px, 모바일 40px로 조정
+                    height: typeof window !== 'undefined' && window.innerWidth < 768 ? '40px' : '50px',
                     background: 'rgba(10, 10, 10, 0.8)', // Darker for contrast
                     backdropFilter: 'blur(30px)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     borderRadius: '50%',
-                    border: '2px solid rgba(255, 255, 255, 0.4)', // Thicker border
+                    border: '1.5px solid rgba(255, 255, 255, 0.3)', // 테두리를 너무 굵지 않고 세련되게 축소
                     cursor: 'pointer',
                     color: 'white',
-                    fontSize: '40px',
+                    fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '26px' : '32px', // 그에 어울리는 적정 크기로 X 폰트 증폭
                     transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                     boxShadow: '0 10px 40px rgba(0,0,0,0.8)',
                     pointerEvents: 'auto',
@@ -336,7 +336,7 @@ const ProjectDetailModal = ({ project, initialRect, onClose }: Props) => {
                 onMouseLeave={(e) => {
                     e.currentTarget.style.background = 'rgba(10, 10, 10, 0.8)';
                     e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
                 }}
                 >
                     <span style={{ display: 'block', transform: 'translateY(-2px)', lineHeight: 1 }}>×</span>

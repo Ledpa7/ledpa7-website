@@ -194,29 +194,28 @@
 
 @media (max-width: 768px) {
     .projectCard {
-        width: 195px;
+        width: 195px; /* 지시사항에 충실히 맞춰 원래 모바일 카드 크기로 완벽 롤백 */
         height: 280px;
         left: -97.5px;
         top: -140px;
     }
 
     .mainHeader {
-        margin-bottom: 60px;
+        margin-bottom: 140px; /* 오직 소제목 Projects와 카드 간의 세로 여백 마진만 140px로 극대화 */
     }
 
     .ellipseGallery {
-        height: 50vh;
-        min-height: 350px;
+        height: 45vh;
+        min-height: 310px;
         touch-action: pan-y;
     }
 
     .cardContent {
-        padding: 20px;
+        padding: 20px; /* 원래 패딩 복원 */
     }
 
     .ellipseRow {
-        top: 75%;
-        /* 갤러리 중심축을 다시 적당히 위로 올림 */
+        top: 85%; /* 원래 카드 크기를 고수한 채 겹치지 않도록 중심축 높이만 85%로 추가 하향 조정 */
     }
 }
 
