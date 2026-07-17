@@ -269,12 +269,6 @@ export const portfolioData = {
                     title: "HMI (Human Machine Interface)",
                     projects: [
                         {
-                            title: "농심 녹산공장",
-                            description: "HMI 디자인 및 개발",
-                            period: "2020.02 ~ 2020.08",
-                            tags: ["HMI", "Smart Factory"],
-                        },
-                        {
                             title: "한국야쿠르트 3개 공장",
                             description: "일지 자동화 시스템",
                             period: "2021.06 ~ 2021.12",
