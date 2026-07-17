@@ -325,8 +325,8 @@
 }
 
 .keysorCard .keysorIcon {
-    width: 80px;
-    height: 80px;
+    width: 150px;
+    height: 150px;
     object-fit: contain;
 }
 
@@ -353,8 +353,8 @@
 
 @media (max-width: 768px) {
     .keysorCard .keysorIcon {
-        width: 60px;
-        height: 60px;
+        width: 100px;
+        height: 100px;
     }
     .keysorLogo {
         font-size: 1.2rem;
