@@ -264,13 +264,11 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                 </div>
                             ) : (proj.title === "키서" || proj.title === "Keysor") ? (
                                 <div className={styles.keysorCard}>
-                                    <div className={styles.keysorContent}>
-                                        <img src="/jd/images/keysor_logo.svg" className={styles.keysorIcon} alt="Keysor Icon" />
-                                        <div className={styles.keysorLogo}>
-                                            <span className={styles.keysorGreen}>Key</span>
-                                            <span className={styles.keysorWhite}>sor</span>
-                                        </div>
+                                    <div className={styles.keysorLogo}>
+                                        <span className={styles.keysorGreen}>Key</span>
+                                        <span className={styles.keysorWhite}>sor</span>
                                     </div>
+                                    <img src="/jd/images/keysor_logo.svg" className={styles.keysorIcon} alt="Keysor Icon" />
                                 </div>
                             ) : proj.cardVideo ? (
                                 <video
