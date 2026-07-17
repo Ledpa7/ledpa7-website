@@ -262,7 +262,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                 <div className={styles.uTeacherCard}>
                                     <div className={styles.uTeacherLogo}>유선생</div>
                                 </div>
-                            ) : (proj.title === "키서" || proj.title === "Keysor") ? (
+                            ) : (proj.title === "키서" || proj.title === "Keysor" || proj.title === "Keysor 키서") ? (
                                 <div className={styles.keysorCard}>
                                     <div className={styles.keysorLogo}>
                                         <span className={styles.keysorGreen}>Key</span>

@@ -254,8 +254,8 @@ export const portfolioData = {
                             backgroundColor: "#000000",
                         },
                         {
-                            title: "키서",
-                            cardTitle: "키서",
+                            title: "Keysor 키서",
+                            cardTitle: "Keysor 키서",
                             description: "키보드만으로 마우스를 대체하는 PC 유틸리티 입니다.",
                             period: "2026.06 ~",
                             tags: ["Utility", "System", "Rust"],
