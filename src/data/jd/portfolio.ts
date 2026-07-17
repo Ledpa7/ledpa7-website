@@ -244,9 +244,9 @@ export const portfolioData = {
                             backgroundColor: "#1a0b2e",
                         },
                         {
-                            title: "유선생",
-                            cardTitle: "유선생",
-                            description: "주제를 설정하면 유튜브 영상들로 나만의 커리큘럼이 만들어지는 서비스",
+                            title: "UT 유선생",
+                            cardTitle: "UT 유선생",
+                            description: "퀄리티 있는 유튜브 영상들로 커리큘럼을 만들어주는 AI서비스",
                             period: "2025.04 ~",
                             tags: ["AI", "Education", "Service"],
                             category: "AI Service",
