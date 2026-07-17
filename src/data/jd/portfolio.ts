@@ -256,7 +256,7 @@ export const portfolioData = {
                         {
                             title: "키서",
                             cardTitle: "키서",
-                            description: "키보드만으로 마우스 커서를 정밀하게 제어하는 유틸리티",
+                            description: "키보드만으로 마우스를 대체하는 PC 유틸리티 입니다.",
                             period: "2026.06 ~",
                             tags: ["Utility", "System", "Rust"],
                             category: "Utility",
