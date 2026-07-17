@@ -309,10 +309,10 @@
     position: absolute;
     inset: 0;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: flex-start;
     background-color: #121210;
-    padding: 20px;
+    padding-top: 28px;
     box-sizing: border-box;
 }
 
@@ -321,7 +321,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 16px;
 }
 
 .keysorIcon {
@@ -338,7 +338,6 @@
     display: flex;
     align-items: center;
     white-space: nowrap;
-    transform: translateY(-40px);
 }
 
 .keysorGreen {
@@ -352,15 +351,17 @@
 }
 
 @media (max-width: 768px) {
+    .keysorCard {
+        padding-top: 20px;
+    }
     .keysorIcon {
         width: 36px;
         height: 36px;
     }
     .keysorLogo {
         font-size: 1.2rem;
-        transform: translateY(-30px);
     }
     .keysorContent {
-        gap: 6px;
+        gap: 12px;
     }
 }
