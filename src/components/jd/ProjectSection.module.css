@@ -325,8 +325,8 @@
 }
 
 .keysorCard .keysorIcon {
-    width: 20px;
-    height: 20px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
 }
 
@@ -338,7 +338,6 @@
     display: flex;
     align-items: center;
     white-space: nowrap;
-    transform: translateY(-40px);
 }
 
 .keysorGreen {
@@ -353,12 +352,11 @@
 
 @media (max-width: 768px) {
     .keysorCard .keysorIcon {
-        width: 16px;
-        height: 16px;
+        width: 36px;
+        height: 36px;
     }
     .keysorLogo {
         font-size: 1.2rem;
-        transform: translateY(-40px);
     }
     .keysorContent {
         gap: 6px;
