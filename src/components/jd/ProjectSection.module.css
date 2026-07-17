@@ -316,17 +316,21 @@
     box-sizing: border-box;
 }
 
+.keysorContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
 .keysorIcon {
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
     object-fit: contain;
 }
 
 .keysorLogo {
-    position: absolute;
-    top: 24px;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.03em;
@@ -348,11 +352,13 @@
 
 @media (max-width: 768px) {
     .keysorIcon {
-        width: 36px;
-        height: 36px;
+        width: 28px;
+        height: 28px;
     }
     .keysorLogo {
         font-size: 1.2rem;
-        top: 18px;
+    }
+    .keysorContent {
+        gap: 6px;
     }
 }
