@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-    <rect width="100%" height="100%" fill="#121210" rx="128" />
+
     <defs>
         <linearGradient id="neon_green_grad" x1="256" y1="256" x2="431.52" y2="469.44" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stop-color="#2FFFAD" />
