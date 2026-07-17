@@ -325,8 +325,8 @@
 }
 
 .keysorIcon {
-    width: 38px;
-    height: 38px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
 }
 
@@ -353,8 +353,8 @@
 
 @media (max-width: 768px) {
     .keysorIcon {
-        width: 28px;
-        height: 28px;
+        width: 22px;
+        height: 22px;
     }
     .keysorLogo {
         font-size: 1.2rem;
