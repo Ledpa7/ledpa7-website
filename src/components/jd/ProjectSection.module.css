@@ -324,7 +324,7 @@
     gap: 8px;
 }
 
-.keysorIcon {
+.keysorCard .keysorIcon {
     width: 20px;
     height: 20px;
     object-fit: contain;
@@ -352,7 +352,7 @@
 }
 
 @media (max-width: 768px) {
-    .keysorIcon {
+    .keysorCard .keysorIcon {
         width: 16px;
         height: 16px;
     }
