@@ -320,11 +320,12 @@
     width: 150px;
     height: 150px;
     object-fit: contain;
+    transform: translateY(-20px);
 }
 
 .keysorLogo {
     position: absolute;
-    bottom: 24px;
+    bottom: 44px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 1.5rem;
@@ -360,6 +361,6 @@
     }
     .keysorLogo {
         font-size: 1.2rem;
-        bottom: 18px;
+        bottom: 38px;
     }
 }
