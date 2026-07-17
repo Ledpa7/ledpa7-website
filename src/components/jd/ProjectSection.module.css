@@ -338,6 +338,7 @@
     display: flex;
     align-items: center;
     white-space: nowrap;
+    transform: translateY(-5px);
 }
 
 .keysorGreen {
@@ -357,6 +358,7 @@
     }
     .keysorLogo {
         font-size: 1.2rem;
+        transform: translateY(-5px);
     }
     .keysorContent {
         gap: 6px;
