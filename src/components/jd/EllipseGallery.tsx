@@ -230,8 +230,8 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                 return;
                             }
                             
-                            // Block popup ONLY for numbers 11 to 15
-                            const isBlockedRange = i >= 10 && i <= 14;
+                            // Block popup ONLY for numbers 12 to 16
+                            const isBlockedRange = i >= 11 && i <= 15;
                                 
                             if (isBlockedRange) {
                                 console.log(`No content for project number ${i + 1}, blocking popup.`);
@@ -244,7 +244,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                             }
                             onProjectSelect?.(proj, e.currentTarget.getBoundingClientRect());
                         }}
-                        style={{ cursor: (i >= 10 && i <= 14) ? 'default' : 'pointer' }}
+                        style={{ cursor: (i >= 11 && i <= 15) ? 'default' : 'pointer' }}
                     >
                         <div className={styles.cardNumber}>{(i + 1).toString().padStart(2, '0')}</div>
                         <div className={styles.cardReflect} />
@@ -261,6 +261,16 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                             ) : proj.title === "유선생" ? (
                                 <div className={styles.uTeacherCard}>
                                     <div className={styles.uTeacherLogo}>유선생</div>
+                                </div>
+                            ) : (proj.title === "키서" || proj.title === "Keysor") ? (
+                                <div className={styles.keysorCard}>
+                                    <div className={styles.keysorContent}>
+                                        <img src="/jd/images/keysor_logo.svg" className={styles.keysorIcon} alt="Keysor Icon" />
+                                        <div className={styles.keysorLogo}>
+                                            <span className={styles.keysorGreen}>Key</span>
+                                            <span className={styles.keysorWhite}>sor</span>
+                                        </div>
+                                    </div>
                                 </div>
                             ) : proj.cardVideo ? (
                                 <video
@@ -279,7 +289,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                         </div>
                         <div className={styles.cardContent}>
                             <h4 className={styles.cardTitle}>
-                                {(i >= 10 && i <= 14) // Numbers 11 to 15
+                                {(i >= 11 && i <= 15) // Numbers 12 to 16
                                     ? (i + 1).toString().padStart(2, '0') 
                                     : (proj.cardTitle || proj.title)}
                             </h4>

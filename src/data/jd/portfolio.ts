@@ -253,6 +253,16 @@ export const portfolioData = {
                             externalLink: "https://ut.ledpa7.com/",
                             backgroundColor: "#000000",
                         },
+                        {
+                            title: "키서",
+                            cardTitle: "키서",
+                            description: "키보드만으로 마우스 커서를 정밀하게 제어하는 유틸리티",
+                            period: "2026.06 ~",
+                            tags: ["Utility", "System", "Rust"],
+                            category: "Utility",
+                            externalLink: "https://keysor.ledpa7.com/",
+                            backgroundColor: "#121210",
+                        },
                     ],
                 },
                 {
