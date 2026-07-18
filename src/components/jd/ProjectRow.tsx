@@ -101,10 +101,43 @@ const ProjectRow = ({ title, projects, onProjectSelect, isPaused = false, speed 
     const isPausedRef = useRef(isPaused);
     const centeringTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+    const cardWidthRef = useRef<number>(240);
+    const cardOffsetsRef = useRef<number[]>([]);
+
     const loopedProjects = useMemo(() => {
         if (!projects || projects.length === 0) return [];
         return [...projects, ...projects, ...projects];
     }, [projects]);
+
+    const measureCards = () => {
+        const slider = scrollRef.current;
+        if (!slider) return;
+        const currentCards = cardsRef.current;
+        const offsets: number[] = [];
+        let width = 240;
+        for (let i = 0; i < loopedProjects.length; i++) {
+            const card = currentCards[i];
+            if (card) {
+                offsets[i] = card.offsetLeft;
+                width = card.offsetWidth;
+            } else {
+                offsets[i] = i * (240 + 24); // fallback spacing
+            }
+        }
+        cardWidthRef.current = width;
+        cardOffsetsRef.current = offsets;
+    };
+
+    useEffect(() => {
+        if (loopedProjects.length === 0) return;
+        
+        const handleResize = () => {
+            measureCards();
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, [loopedProjects]);
 
     useEffect(() => {
         isPausedRef.current = isPaused;
@@ -127,6 +160,7 @@ const ProjectRow = ({ title, projects, onProjectSelect, isPaused = false, speed 
                 // Force a minor paint cycle before showing
                 requestAnimationFrame(() => {
                     setIsLoaded(true);
+                    measureCards();
                 });
             } else if (retryCount < maxRetries) {
                 retryCount++;
@@ -141,6 +175,7 @@ const ProjectRow = ({ title, projects, onProjectSelect, isPaused = false, speed 
             if (!isLoaded && slider.scrollWidth > 300) {
                 initScroll();
             }
+            measureCards();
         });
         ro.observe(slider);
 
@@ -191,11 +226,15 @@ const ProjectRow = ({ title, projects, onProjectSelect, isPaused = false, speed 
             const radius = Math.min(containerWidth * 1.5, 1100); // More stable radius
             const currentCards = cardsRef.current;
 
+            const offsets = cardOffsetsRef.current;
+            const cardWidth = cardWidthRef.current;
+
             for (let i = 0; i < loopedProjects.length; i++) {
                 const card = currentCards[i];
                 if (!card) continue;
 
-                const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+                const offsetLeft = offsets[i] !== undefined ? offsets[i] : card.offsetLeft;
+                const cardCenter = offsetLeft + (cardWidth / 2);
                 const signedDist = cardCenter - centerPoint;
                 const dist = Math.abs(signedDist);
 
