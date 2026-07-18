@@ -161,6 +161,8 @@ const ProjectRow = ({ title, projects, onProjectSelect, isPaused = false, speed 
                 requestAnimationFrame(() => {
                     setIsLoaded(true);
                     measureCards();
+                    // 500ms delay measurement as a fallback to ensure layout stability
+                    setTimeout(measureCards, 500);
                 });
             } else if (retryCount < maxRetries) {
                 retryCount++;
@@ -175,7 +177,6 @@ const ProjectRow = ({ title, projects, onProjectSelect, isPaused = false, speed 
             if (!isLoaded && slider.scrollWidth > 300) {
                 initScroll();
             }
-            measureCards();
         });
         ro.observe(slider);
 
