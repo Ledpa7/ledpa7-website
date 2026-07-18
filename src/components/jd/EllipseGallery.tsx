@@ -63,18 +63,51 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
         // ANIMATION TICKER - The Studio MX Engine
         // Pre-calculated values to optimize ticker performance
         let cw = gallery.offsetWidth || window.innerWidth;
-        let isMobile = cw <= 768;
+        
+        const getLayoutProps = (w: number) => {
+            const isMob = w <= 768;
+            if (isMob) {
+                return {
+                    radiusX: Math.min(w * 1.5, 500),
+                    radiusY: 120,
+                    baseScale: 0.65,
+                    isMobile: true
+                };
+            }
+            if (w > 768 && w <= 1440) {
+                // 1280 및 1024 해상도 타겟팅: 카드 순수 여백을 약 4px로 조밀하게 밀착
+                return {
+                    radiusX: 495,
+                    radiusY: 107,
+                    baseScale: 0.57,
+                    isMobile: false
+                };
+            }
+            return {
+                radiusX: Math.min(w * 0.45, 520),
+                radiusY: 115,
+                baseScale: 0.70,
+                isMobile: false
+            };
+        };
+
         const totalItems = projects.length;
         const angleStep = 360 / totalItems;
-        let radiusX = isMobile ? Math.min(cw * 1.5, 500) : Math.min(cw * 0.45, 520); // 1.5x spread as requested
-        let radiusY = isMobile ? 120 : 115; // Adjusted depth
+        
+        let layout = getLayoutProps(cw);
+        let radiusX = layout.radiusX;
+        let radiusY = layout.radiusY;
+        let baseScale = layout.baseScale;
+        let isMobile = layout.isMobile;
 
         const updateLayoutValues = () => {
             cw = gallery.offsetWidth || window.innerWidth;
-            isMobile = cw <= 768;
-            radiusX = isMobile ? Math.min(cw * 1.5, 500) : Math.min(cw * 0.45, 520);
-            radiusY = isMobile ? 120 : 115;
-            console.log("3D Gallery layout values updated");
+            layout = getLayoutProps(cw);
+            radiusX = layout.radiusX;
+            radiusY = layout.radiusY;
+            baseScale = layout.baseScale;
+            isMobile = layout.isMobile;
+            console.log("3D Gallery layout values updated:", layout);
         };
 
         window.addEventListener('resize', updateLayoutValues);
@@ -109,7 +142,6 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                 // 모바일 원근 Z축 거리를 기존 300에서 360으로 대폭 증폭시켜, 앞쪽 카드(cosVal이 양수일 때)가 정면 눈앞으로 훌륭하고 압도적이게 돌출되도록 설계
                 const tz = -cosVal * (isMobile ? 360 : 500); 
                 const rotateY = 180 - angle;
-                const baseScale = isMobile ? 0.65 : 0.70;
                 const scale = baseScale - (cosVal * (isMobile ? 0.30 : 0.15));
                 
                 // [양옆 카드의 투명도 집중 제어 튜닝]
@@ -255,8 +287,14 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                 </div>
                             )}
                             {proj.title === "DoodleLog : AI 그림일기" ? (
-                                <div className={styles.doodleLogCard}>
-                                    <div className={styles.doodleLogLogo}>Doodle Log</div>
+                                <div className={styles.doodleLogCard} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                                    <img
+                                        src="/jd/images/doodlelog_logo.png"
+                                        alt="Doodle Log Logo"
+                                        style={{ width: '80px', height: '80px', objectFit: 'contain', borderRadius: '16px' }}
+                                        draggable={false}
+                                    />
+                                    <div className={styles.doodleLogLogo} style={{ fontSize: '2.0rem', marginTop: '4px' }}>Doodle Log</div>
                                 </div>
                             ) : (proj.title === "유선생" || proj.title === "UT 유선생") ? (
                                 <div className={styles.uTeacherCard}>
