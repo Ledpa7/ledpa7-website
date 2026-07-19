@@ -103,6 +103,8 @@ const ProjectRow = ({ title, projects, onProjectSelect, isPaused = false, speed 
 
     const cardWidthRef = useRef<number>(240);
     const cardOffsetsRef = useRef<number[]>([]);
+    const hoveredIndexRef = useRef<number | null>(null);
+    const hoverScalesRef = useRef<number[]>([]);
 
     const loopedProjects = useMemo(() => {
         if (!projects || projects.length === 0) return [];
@@ -245,7 +247,14 @@ const ProjectRow = ({ title, projects, onProjectSelect, isPaused = false, speed 
 
                 // 🌑 Depth & Scale - Organic Concave Arc
                 const translateZ = -Math.pow(dist / 9, 1.35);
-                const scale = Math.max(0.8, 1.05 - (dist / (containerWidth * 1.6)));
+                
+                if (hoverScalesRef.current[i] === undefined) {
+                    hoverScalesRef.current[i] = 1.0;
+                }
+                const targetScaleMult = hoveredIndexRef.current === i ? 1.2 : 1.0;
+                hoverScalesRef.current[i] += (targetScaleMult - hoverScalesRef.current[i]) * 0.15;
+
+                const scale = Math.max(0.8, 1.05 - (dist / (containerWidth * 1.6))) * hoverScalesRef.current[i];
                 const opacity = Math.max(0.35, 1.1 - (dist / (containerWidth * 0.7)));
 
                 // 💡 Reflection Sync
@@ -376,6 +385,8 @@ const ProjectRow = ({ title, projects, onProjectSelect, isPaused = false, speed 
                         className={styles.projectCard}
                         ref={(el) => { if (el) cardsRef.current[index] = el; }}
                         onClick={(e) => handleCardClick(project, e)}
+                        onMouseEnter={() => { hoveredIndexRef.current = index; }}
+                        onMouseLeave={() => { hoveredIndexRef.current = null; }}
                     >
                         <div className={styles.cardReflect} />
 

@@ -38,6 +38,8 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
     const galleryRef = useRef<HTMLDivElement>(null);
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]); // 비디오 최적화를 위한 참조 추가
+    const hoveredIndexRef = useRef<number | null>(null);
+    const hoverScalesRef = useRef<number[]>([]);
 
     // Animation State (Degree-based rotation)
     const rotation = useRef(0);
@@ -142,7 +144,14 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                 // 모바일 원근 Z축 거리를 기존 300에서 360으로 대폭 증폭시켜, 앞쪽 카드(cosVal이 양수일 때)가 정면 눈앞으로 훌륭하고 압도적이게 돌출되도록 설계
                 const tz = -cosVal * (isMobile ? 360 : 500); 
                 const rotateY = 180 - angle;
-                const scale = baseScale - (cosVal * (isMobile ? 0.30 : 0.15));
+                
+                if (hoverScalesRef.current[i] === undefined) {
+                    hoverScalesRef.current[i] = 1.0;
+                }
+                const targetScaleMult = hoveredIndexRef.current === i ? 1.2 : 1.0;
+                hoverScalesRef.current[i] += (targetScaleMult - hoverScalesRef.current[i]) * 0.15;
+
+                const scale = (baseScale - (cosVal * (isMobile ? 0.30 : 0.15))) * hoverScalesRef.current[i];
                 
                 // [양옆 카드의 투명도 집중 제어 튜닝]
                 // 가장 정면에 도달한 메인 카드(cosVal = 1 부근)는 0.98(거의 100% 선명도)로 돋보이게 지탱하고,
@@ -253,8 +262,17 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                         className={styles.projectCard}
                         ref={el => { if (el) cardsRef.current[i] = el; }}
                         onDragStart={(e) => e.preventDefault()}
-                        onMouseEnter={() => prefetchProject(proj.title)}
-                        onTouchStart={() => prefetchProject(proj.title)}
+                        onMouseEnter={() => {
+                            hoveredIndexRef.current = i;
+                            prefetchProject(proj.title);
+                        }}
+                        onMouseLeave={() => {
+                            hoveredIndexRef.current = null;
+                        }}
+                        onTouchStart={() => {
+                            hoveredIndexRef.current = i;
+                            prefetchProject(proj.title);
+                        }}
                         onClick={(e) => {
                             if (hasDragged.current) {
                                 e.preventDefault();
