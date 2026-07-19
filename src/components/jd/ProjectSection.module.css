@@ -317,8 +317,8 @@
 }
 
 .keysorCard .keysorIcon {
-    width: 150px;
-    height: 150px;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
     transform: translateY(-20px);
 }
@@ -345,13 +345,6 @@
 .keysorWhite {
     color: #ffffff;
     font-weight: 700;
-}
-
-@media (max-width: 1440px) {
-    .keysorCard .keysorIcon {
-        width: 90px;
-        height: 90px;
-    }
 }
 
 @media (max-width: 768px) {
