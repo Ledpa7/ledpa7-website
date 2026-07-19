@@ -320,7 +320,7 @@
     width: 90px;
     height: 90px;
     object-fit: contain;
-    transform: translateY(-20px);
+    transform: translateY(-20px) !important;
 }
 
 .keysorLogo {

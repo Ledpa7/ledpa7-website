@@ -251,7 +251,7 @@ const ProjectRow = ({ title, projects, onProjectSelect, isPaused = false, speed 
                 if (hoverScalesRef.current[i] === undefined) {
                     hoverScalesRef.current[i] = 1.0;
                 }
-                const targetScaleMult = hoveredIndexRef.current === i ? 1.2 : 1.0;
+                const targetScaleMult = hoveredIndexRef.current === i ? 1.1 : 1.0;
                 hoverScalesRef.current[i] += (targetScaleMult - hoverScalesRef.current[i]) * 0.15;
 
                 const scale = Math.max(0.8, 1.05 - (dist / (containerWidth * 1.6))) * hoverScalesRef.current[i];

@@ -148,7 +148,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                 if (hoverScalesRef.current[i] === undefined) {
                     hoverScalesRef.current[i] = 1.0;
                 }
-                const targetScaleMult = hoveredIndexRef.current === i ? 1.2 : 1.0;
+                const targetScaleMult = hoveredIndexRef.current === i ? 1.1 : 1.0;
                 hoverScalesRef.current[i] += (targetScaleMult - hoverScalesRef.current[i]) * 0.15;
 
                 const scale = (baseScale - (cosVal * (isMobile ? 0.30 : 0.15))) * hoverScalesRef.current[i];
