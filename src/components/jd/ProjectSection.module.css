@@ -283,24 +283,40 @@
     position: absolute;
     inset: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #000000;
+    background-color: #050a16;
     padding: 20px;
     box-sizing: border-box;
+    gap: 10px;
+}
+
+.uTeacherCard .uTeacherIcon {
+    width: 120px !important;
+    height: 120px !important;
+    max-width: 120px !important;
+    max-height: 120px !important;
+    object-fit: contain !important;
 }
 
 .uTeacherLogo {
-    font-size: 2.8rem;
-    font-weight: 800;
+    font-size: 2.1rem;
+    font-weight: 900;
     color: #3b82f6; /* Blue color */
-    letter-spacing: -0.02em;
-    transform: translateY(10px);
+    letter-spacing: 0.04em;
 }
 
 @media (max-width: 768px) {
+    .uTeacherCard .uTeacherIcon {
+        width: 95px !important;
+        height: 95px !important;
+        max-width: 95px !important;
+        max-height: 95px !important;
+    }
+
     .uTeacherLogo {
-        font-size: 2.2rem;
+        font-size: 1.7rem;
     }
 }
 

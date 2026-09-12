@@ -314,9 +314,16 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                     />
                                     <div className={styles.doodleLogLogo} style={{ fontSize: '2.0rem', marginTop: '4px' }}>Doodle Log</div>
                                 </div>
-                            ) : (proj.title === "유선생" || proj.title === "UT 유선생") ? (
+                            ) : (proj.title === "유선생" || proj.title === "UT 유선생" || proj.title === "U-Teacher 유선생") ? (
                                 <div className={styles.uTeacherCard}>
-                                    <div className={styles.uTeacherLogo}>유선생</div>
+                                    <img
+                                        src="/jd/images/uteacher_logo.png"
+                                        alt="U-Teacher 유선생 Logo"
+                                        className={styles.uTeacherIcon}
+                                        style={{ width: '120px', height: '120px', objectFit: 'contain' }}
+                                        draggable={false}
+                                    />
+                                    <div className={styles.uTeacherLogo}>UT</div>
                                 </div>
                             ) : (proj.title === "키서" || proj.title === "Keysor" || proj.title === "Keysor 키서") ? (
                                 <div className={styles.keysorCard}>

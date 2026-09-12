@@ -244,14 +244,15 @@ export const portfolioData = {
                             backgroundColor: "#1a0b2e",
                         },
                         {
-                            title: "UT 유선생",
-                            cardTitle: "UT 유선생",
+                            title: "U-Teacher 유선생",
+                            cardTitle: "U-Teacher 유선생",
                             description: "퀄리티 있는 유튜브 영상들로 커리큘럼을 만들어주는 AI서비스",
                             period: "2025.04 ~",
                             tags: ["AI", "Education", "Service"],
                             category: "AI Service",
                             externalLink: "https://ut.ledpa7.com/",
-                            backgroundColor: "#000000",
+                            image: "/jd/images/uteacher_logo.png",
+                            backgroundColor: "#050a16",
                         },
                         {
                             title: "Keysor 키서",
