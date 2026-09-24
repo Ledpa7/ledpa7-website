@@ -244,8 +244,8 @@ export const portfolioData = {
                             backgroundColor: "#1a0b2e",
                         },
                         {
-                            title: "U-Teacher 유선생",
-                            cardTitle: "U-Teacher 유선생",
+                            title: "U-Teacher : 유선생",
+                            cardTitle: "U-Teacher : 유선생",
                             description: "퀄리티 있는 유튜브 영상들로 커리큘럼을 만들어주는 AI서비스",
                             period: "2025.04 ~",
                             tags: ["AI", "Education", "Service"],
@@ -255,8 +255,8 @@ export const portfolioData = {
                             backgroundColor: "#050a16",
                         },
                         {
-                            title: "Keysor 키서",
-                            cardTitle: "Keysor 키서",
+                            title: "Keysor : 키서",
+                            cardTitle: "Keysor : 키서",
                             description: "키보드만으로 마우스를 대체하는 PC 유틸리티",
                             period: "2026.06 ~",
                             tags: ["Utility", "System", "Rust"],
@@ -264,17 +264,22 @@ export const portfolioData = {
                             externalLink: "https://keysor.ledpa7.com/",
                             backgroundColor: "#121210",
                         },
+                        {
+                            title: "AID : Agent Identity",
+                            cardTitle: "AID : Agent Identity",
+                            description: "AI 에이전트를 위한 분산 신원 인증 및 디지털 여권 플랫폼",
+                            period: "2026.09 ~",
+                            tags: ["AI", "Identity", "Service"],
+                            category: "AI Service",
+                            externalLink: "https://aid.ledpa7.com/",
+                            image: "/jd/images/aid_logo.svg",
+                            backgroundColor: "#181508",
+                        },
                     ],
                 },
                 {
                     title: "HMI (Human Machine Interface)",
                     projects: [
-                        {
-                            title: "한국야쿠르트 3개 공장",
-                            description: "일지 자동화 시스템",
-                            period: "2021.06 ~ 2021.12",
-                            tags: ["Automation", "HMI"],
-                        },
                         {
                             title: "현대차 의왕연구소",
                             description: "HMI 디자인 및 개발",

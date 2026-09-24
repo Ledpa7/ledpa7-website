@@ -280,8 +280,8 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                 return;
                             }
                             
-                            // Block popup ONLY for numbers 12 to 15
-                            const isBlockedRange = i >= 11 && i <= 14;
+                            // Block popup ONLY for numbers 13 to 15
+                            const isBlockedRange = i >= 12 && i <= 14;
                                 
                             if (isBlockedRange) {
                                 console.log(`No content for project number ${i + 1}, blocking popup.`);
@@ -294,7 +294,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                             }
                             onProjectSelect?.(proj, e.currentTarget.getBoundingClientRect());
                         }}
-                        style={{ cursor: (i >= 11 && i <= 14) ? 'default' : 'pointer' }}
+                        style={{ cursor: (i >= 12 && i <= 14) ? 'default' : 'pointer' }}
                     >
                         <div className={styles.cardNumber}>{(i + 1).toString().padStart(2, '0')}</div>
                         <div className={styles.cardReflect} />
@@ -314,7 +314,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                     />
                                     <div className={styles.doodleLogLogo} style={{ fontSize: '2.0rem', marginTop: '4px' }}>Doodle Log</div>
                                 </div>
-                            ) : (proj.title === "유선생" || proj.title === "UT 유선생" || proj.title === "U-Teacher 유선생") ? (
+                            ) : (proj.title === "유선생" || proj.title === "UT 유선생" || proj.title === "U-Teacher 유선생" || proj.title === "U-Teacher : 유선생") ? (
                                 <div className={styles.uTeacherCard}>
                                     <img
                                         src="/jd/images/uteacher_logo.png"
@@ -325,13 +325,21 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                     />
                                     <div className={styles.uTeacherLogo}>UT</div>
                                 </div>
-                            ) : (proj.title === "키서" || proj.title === "Keysor" || proj.title === "Keysor 키서") ? (
+                            ) : (proj.title === "키서" || proj.title === "Keysor" || proj.title === "Keysor 키서" || proj.title === "Keysor : 키서") ? (
                                 <div className={styles.keysorCard}>
                                     <div className={styles.keysorLogo}>
                                         <span className={styles.keysorGreen}>Key</span>
                                         <span className={styles.keysorWhite}>sor</span>
                                     </div>
                                     <img src="/jd/images/keysor_logo.svg" className={styles.keysorIcon} alt="Keysor Icon" />
+                                </div>
+                            ) : (proj.title === "AID" || proj.title === "AID : Agent Identity") ? (
+                                <div className={styles.aidCard}>
+                                    <img src="/jd/images/aid_logo.svg" className={styles.aidIcon} alt="AID Logo" />
+                                    <div className={styles.aidLogo}>
+                                        <span className={styles.aidGold}>A</span>
+                                        <span className={styles.aidWhite}>ID</span>
+                                    </div>
                                 </div>
                             ) : proj.cardVideo ? (
                                 <video
@@ -350,7 +358,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                         </div>
                         <div className={styles.cardContent}>
                             <h4 className={styles.cardTitle}>
-                                {(i >= 11 && i <= 14) // Numbers 12 to 15
+                                {(i >= 12 && i <= 14) // Numbers 13 to 15
                                     ? (i + 1).toString().padStart(2, '0') 
                                     : (proj.cardTitle || proj.title)}
                             </h4>

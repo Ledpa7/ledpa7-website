@@ -373,3 +373,57 @@
         bottom: 38px;
     }
 }
+
+/* AID Custom Card Styles */
+.aidCard {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #181508; /* 노란빛이 감도는 깊은 웜 블랙 */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.aidCard .aidIcon {
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+    transform: translateY(-20px) !important;
+}
+
+.aidLogo {
+    position: absolute;
+    bottom: 44px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.aidGold {
+    color: #A16207; /* 진하고 검은 톤이 가미된 딥 머스타드 노랑 */
+    font-weight: 900;
+}
+
+.aidWhite {
+    color: #FACC15; /* 밝고 선명한 골드 옐로우 */
+    font-weight: 800;
+}
+
+@media (max-width: 768px) {
+    .aidCard .aidIcon {
+        width: 75px;
+        height: 75px;
+    }
+    .aidLogo {
+        font-size: 1.3rem;
+        bottom: 38px;
+    }
+}
