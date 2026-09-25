@@ -194,32 +194,72 @@
 
 @media (max-width: 768px) {
     .projectCard {
-        width: 195px; /* 지시사항에 충실히 맞춰 원래 모바일 카드 크기로 완벽 롤백 */
-        height: 280px;
-        left: -97.5px;
-        top: -140px;
+        width: 156px; /* 모바일 카드 크기 20% 축소 (195px * 0.8) */
+        height: 224px; /* (280px * 0.8) */
+        left: -78px;
+        top: -112px;
     }
 
     .mainHeader {
-        margin-bottom: 140px; /* 오직 소제목 Projects와 카드 간의 세로 여백 마진만 140px로 극대화 */
+        margin-bottom: 48px;
     }
 
     .ellipseGallery {
-        height: 45vh;
-        min-height: 310px;
+        height: 48vh;
+        min-height: 360px;
         touch-action: pan-y;
+        overflow: visible !important; /* 상단 잘림을 유발하던 mask-image를 제거하고 overflow: visible 복원 */
+    }
+
+    /* 모바일 화면 양옆 가장자리 끝부분만 부드럽게 페이드아웃시키는 오버레이 */
+    .edgeFadeLeft {
+        position: absolute;
+        top: -60px;
+        bottom: -60px;
+        left: -24px;
+        width: 60px;
+        background: linear-gradient(to right, #000000 15%, rgba(0, 0, 0, 0) 100%);
+        pointer-events: none;
+        z-index: 5000;
+    }
+
+    .edgeFadeRight {
+        position: absolute;
+        top: -60px;
+        bottom: -60px;
+        right: -24px;
+        width: 60px;
+        background: linear-gradient(to left, #000000 15%, rgba(0, 0, 0, 0) 100%);
+        pointer-events: none;
+        z-index: 5000;
     }
 
     .cardContent {
-        padding: 20px; /* 원래 패딩 복원 */
+        padding: 12px 14px; /* 축소된 카드에 맞는 패딩 */
+    }
+
+    .cardNumber {
+        top: 8px;
+        right: 10px;
+        font-size: 0.75rem;
+    }
+
+    .cardDesc {
+        font-size: 0.68rem;
+        line-height: 1.35;
     }
 
     .ellipseRow {
-        top: 85%; /* 원래 카드 크기를 고수한 채 겹치지 않도록 중심축 높이만 85%로 추가 하향 조정 */
+        top: 52%;
     }
 }
 
 @media (min-width: 768px) {
+    .edgeFadeLeft,
+    .edgeFadeRight {
+        display: none;
+    }
+
     .mainHeader {
         margin-bottom: 48px;
     }
@@ -309,14 +349,14 @@
 
 @media (max-width: 768px) {
     .uTeacherCard .uTeacherIcon {
-        width: 95px !important;
-        height: 95px !important;
-        max-width: 95px !important;
-        max-height: 95px !important;
+        width: 76px !important;
+        height: 76px !important;
+        max-width: 76px !important;
+        max-height: 76px !important;
     }
 
     .uTeacherLogo {
-        font-size: 1.7rem;
+        font-size: 1.35rem;
     }
 }
 
@@ -365,12 +405,12 @@
 
 @media (max-width: 768px) {
     .keysorCard .keysorIcon {
-        width: 70px;
-        height: 70px;
+        width: 56px;
+        height: 56px;
     }
     .keysorLogo {
-        font-size: 1.2rem;
-        bottom: 38px;
+        font-size: 1.0rem;
+        bottom: 30px;
     }
 }
 
@@ -419,11 +459,11 @@
 
 @media (max-width: 768px) {
     .aidCard .aidIcon {
-        width: 75px;
-        height: 75px;
+        width: 60px;
+        height: 60px;
     }
     .aidLogo {
-        font-size: 1.3rem;
-        bottom: 38px;
+        font-size: 1.05rem;
+        bottom: 30px;
     }
 }

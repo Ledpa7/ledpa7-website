@@ -70,8 +70,8 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
             const isMob = w <= 768;
             if (isMob) {
                 return {
-                    radiusX: Math.min(w * 1.5, 500),
-                    radiusY: 120,
+                    radiusX: Math.min(w * 1.25, 420), // 20% 축소 카드에 맞춰 가로 반경을 좁혀 카드 간격 조밀화
+                    radiusY: 110,
                     baseScale: 0.65,
                     isMobile: true
                 };
@@ -140,7 +140,7 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
 
                 const bottomSqueeze = 1 - (Math.max(0, cosVal) * (isMobile ? 0.20 : 0.10));
                 const tx = sinVal * radiusX * bottomSqueeze;
-                const ty = (cosVal * radiusY) + (isMobile ? 50 : 30);
+                const ty = (cosVal * radiusY) + (isMobile ? 100 : 30);
                 // 모바일 원근 Z축 거리를 기존 300에서 360으로 대폭 증폭시켜, 앞쪽 카드(cosVal이 양수일 때)가 정면 눈앞으로 훌륭하고 압도적이게 돌출되도록 설계
                 const tz = -cosVal * (isMobile ? 360 : 500); 
                 const rotateY = 180 - angle;
@@ -153,16 +153,14 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
 
                 const scale = (baseScale - (cosVal * (isMobile ? 0.30 : 0.15))) * hoverScalesRef.current[i];
                 
-                // [양옆 카드의 투명도 집중 제어 튜닝]
-                // 가장 정면에 도달한 메인 카드(cosVal = 1 부근)는 0.98(거의 100% 선명도)로 돋보이게 지탱하고,
-                // 정면에서 아주 살짝이라도 양옆으로 비껴나가는 대기용 양옆 카드들은 투명도를 확 낮추어 시선의 분산을 방지 (진폭 계수를 0.50 -> 0.70으로 상향)
-                const opacity = isMobile 
-                    ? (0.80 - (cosVal * 0.70)) 
+                // [카드 투명도: 카드는 선명도를 유지하고 화면 양 끝부분은 컨테이너 mask-image에 의해 자연스럽게 페이드아웃]
+                const baseOpacity = isMobile 
+                    ? (0.85 - (cosVal * 0.50)) 
                     : (0.60 - (cosVal * 0.40));
+                const finalOpacity = Math.max(0.40, Math.min(0.98, baseOpacity));
 
                 card.style.transform = `translate3d(${tx}px, ${ty}px, ${tz}px) rotateY(${rotateY}deg) scale(${scale})`;
-                // 지시하신 사항에 맞춰 화면 바깥 카드의 시각적 층을 충분히 인지할 수 있도록 투명도 제한 최솟값을 0.35로 원복
-                card.style.opacity = Math.max(0.35, Math.min(0.98, opacity)).toString();
+                card.style.opacity = finalOpacity.toFixed(2);
                 card.style.zIndex = Math.round(tz + 2000).toString();
 
                 const video = videoRefs.current[i];
@@ -255,6 +253,10 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
 
     return (
         <div className={styles.ellipseGallery} ref={galleryRef}>
+            {/* 모바일 화면 양옆 가장자리 끝부분 페이드아웃 오버레이 (상단 잘림 없는 완벽한 대안) */}
+            <div className={styles.edgeFadeLeft} />
+            <div className={styles.edgeFadeRight} />
+
             <div style={{ position: 'absolute', top: '50%', left: '50%', transformStyle: 'preserve-3d' }}>
                 {isMounted && projects.map((proj, i) => (
                     <div
@@ -305,14 +307,14 @@ const EllipseGallery = ({ projects, onProjectSelect }: EllipseGalleryProps) => {
                                 </div>
                             )}
                             {proj.title === "DoodleLog : AI 그림일기" ? (
-                                <div className={styles.doodleLogCard} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                                <div className={styles.doodleLogCard} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: isMobileRender ? '6px' : '10px' }}>
                                     <img
                                         src="/jd/images/doodlelog_logo.png"
                                         alt="Doodle Log Logo"
-                                        style={{ width: '80px', height: '80px', objectFit: 'contain', borderRadius: '16px' }}
+                                        style={{ width: isMobileRender ? '64px' : '80px', height: isMobileRender ? '64px' : '80px', objectFit: 'contain', borderRadius: '16px' }}
                                         draggable={false}
                                     />
-                                    <div className={styles.doodleLogLogo} style={{ fontSize: '2.0rem', marginTop: '4px' }}>Doodle Log</div>
+                                    <div className={styles.doodleLogLogo} style={{ fontSize: isMobileRender ? '1.6rem' : '2.0rem', marginTop: '4px' }}>Doodle Log</div>
                                 </div>
                             ) : (proj.title === "유선생" || proj.title === "UT 유선생" || proj.title === "U-Teacher 유선생" || proj.title === "U-Teacher : 유선생") ? (
                                 <div className={styles.uTeacherCard}>
